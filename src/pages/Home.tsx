@@ -1,4 +1,5 @@
 import { useGlobalStore } from "@/stores/useGlobalStore"
+import Button from "@mui/material/Button"
 
 function Home() {
     const count = useGlobalStore((state) => state.count)
@@ -15,6 +16,9 @@ function Home() {
                 >
                     Increment
                 </button>
+            </div>
+            <div>
+                <Button variant="contained">MUI Button</Button>
             </div>
         </section>
     )

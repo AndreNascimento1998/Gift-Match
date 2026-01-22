@@ -1,73 +1,62 @@
-# React + TypeScript + Vite
+# Gift Match
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Projeto React com Vite + TypeScript, rotas, estado global, testes e toolchain completa (lint, format, hooks). Este README documenta todas as tecnologias e como usar.
 
-Currently, two official plugins are available:
+## Tecnologias e bibliotecas
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Front-end
 
-## React Compiler
+- **React 19**: base da UI.
+- **React Router 7**: roteamento SPA com `createBrowserRouter`.
+- **Zustand 5**: estado global simples e performático.
+- **Material UI (MUI)**: componentes prontos (ex.: `Button`).
+- **Tailwind CSS v4**: utilitários CSS via plugin do Vite.
+- **Sass (SCSS)**: estilos globais e de app usando `.scss`.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Build e tooling
 
-## Expanding the ESLint configuration
+- **Vite 7**: dev server e build.
+- **TypeScript 5**: tipagem estática.
+- **PostCSS + Autoprefixer**: pipeline CSS.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Qualidade e formatação
 
-```js
-export default defineConfig([
-    globalIgnores(["dist"]),
-    {
-        files: ["**/*.{ts,tsx}"],
-        extends: [
-            // Other configs...
+- **ESLint 9**: linting de TS/React.
+- **Prettier**: formatação automática (sem `;` e 4 espaços).
+- **Husky**: hooks Git (pre-commit e pre-push).
 
-            // Remove tseslint.configs.recommended and replace with this
-            tseslint.configs.recommendedTypeChecked,
-            // Alternatively, use this for stricter rules
-            tseslint.configs.strictTypeChecked,
-            // Optionally, add this for stylistic rules
-            tseslint.configs.stylisticTypeChecked,
+### Testes
 
-            // Other configs...
-        ],
-        languageOptions: {
-            parserOptions: {
-                project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-                tsconfigRootDir: import.meta.dirname,
-            },
-            // other options...
-        },
-    },
-])
-```
+- **Vitest**: runner de testes.
+- **Testing Library** (`@testing-library/react` + `jest-dom`): testes de UI.
+- **jsdom**: ambiente de teste DOM.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Estrutura principal
 
-```js
-// eslint.config.js
-import reactX from "eslint-plugin-react-x"
-import reactDom from "eslint-plugin-react-dom"
+- `src/router/`: configuração do React Router.
+- `src/pages/`: páginas/rotas (ex.: `Home`, `About`).
+- `src/stores/`: stores do Zustand (estado global).
+- `src/index.scss`: estilos globais + Tailwind.
+- `src/App.scss`: estilos locais do app.
 
-export default defineConfig([
-    globalIgnores(["dist"]),
-    {
-        files: ["**/*.{ts,tsx}"],
-        extends: [
-            // Other configs...
-            // Enable lint rules for React
-            reactX.configs["recommended-typescript"],
-            // Enable lint rules for React DOM
-            reactDom.configs.recommended,
-        ],
-        languageOptions: {
-            parserOptions: {
-                project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-                tsconfigRootDir: import.meta.dirname,
-            },
-            // other options...
-        },
-    },
-])
-```
+## Scripts
+
+- `npm run dev`: servidor de desenvolvimento.
+- `npm run build`: build de produção.
+- `npm run preview`: preview do build.
+- `npm run lint`: lint.
+- `npm run lint:fix`: lint com correções.
+- `npm run format`: formata tudo com Prettier.
+- `npm run format:check`: valida formatação.
+- `npm run test`: modo watch do Vitest.
+- `npm run test:run`: roda todos os testes.
+
+## Hooks Git (Husky)
+
+- **pre-commit**: roda `npm run format` e `npm run test:run`.
+- **pre-push**: roda `npm run build` e `npm run test:run`.
+
+## Observações de estilo
+
+- Prettier configurado com 4 espaços e sem ponto-e-vírgula.
+- SCSS como padrão para estilos no projeto.

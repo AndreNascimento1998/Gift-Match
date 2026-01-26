@@ -20,7 +20,7 @@
     --color-main-text: var(--color-main);
     --color-secondary-text: var(--color-muted);
     --color-border-default: var(--color-border);
-    --color-background-default: var(--color-background);
+    --color-background-default: var(--color-background-component);
 
     --background-image-btn-primary: linear-gradient(
         90deg,
@@ -36,6 +36,9 @@
     --breakpoint-3xl: 2000px;
     --breakpoint-4xl: 2560px;
     --breakpoint-5xl: 3000px;
+    --text-h1: 2.875rem;
+    --text-h3: 1.5rem;
+    --text-h4: 1.25rem;
 }
 
 :root {
@@ -76,5 +79,19 @@
         background-color: var(--color-background);
         color: var(--color-main);
         font-family: var(--font-sans);
+    }
+}
+
+@layer utilities {
+    .text-h1 {
+        font-size: var(--text-h1);
+    }
+
+    .text-h3 {
+        font-size: var(--text-h3);
+    }
+
+    .text-h4 {
+        font-size: var(--text-h4);
     }
 }

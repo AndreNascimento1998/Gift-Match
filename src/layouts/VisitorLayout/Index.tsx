@@ -6,7 +6,7 @@ type VisitorLayoutProps = {
 
 const VisitorLayout = ({ children }: VisitorLayoutProps) => {
     return (
-        <main className="py-4 px-8">
+        <main className="flex flex-col gap-8 md:gap-0 mt-1 px-2 md:px-0">
             <HeaderVisitor />
             {children}
         </main>

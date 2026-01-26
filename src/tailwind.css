@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-    --font-sans: "Open Sans", ui-sans-serif, system-ui, sans-serif;
+    --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
     --font-oxanium: "Oxanium", ui-sans-serif, system-ui, sans-serif;
 
     /* colors */
@@ -10,6 +10,7 @@
 
     /* surfaces & text */
     --color-background: #f8fafc;
+    --color-background-component: #ffffff;
     --color-surface: #ffffff;
     --color-border: #e2e8f0;
     --color-main: #111827;
@@ -39,12 +40,16 @@
 
 :root {
     color-scheme: light;
+
+    --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+    --font-oxanium: "Oxanium", ui-sans-serif, system-ui, sans-serif;
 }
 
 :root[data-theme="dark"] {
     color-scheme: dark;
 
-    --color-background: #110f0f;
+    --color-background: #0a0909;
+    --color-background-component: #141414;
     --color-surface: #0f172a;
     --color-border: #1f2937;
     --color-main: #e5e7eb;

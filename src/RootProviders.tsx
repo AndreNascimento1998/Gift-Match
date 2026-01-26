@@ -19,6 +19,9 @@ export default function RootProviders() {
                 palette: {
                     mode: theme,
                 },
+                typography: {
+                    fontFamily: "var(--font-sans)",
+                },
                 components: {
                     MuiCssBaseline: {
                         styleOverrides: {

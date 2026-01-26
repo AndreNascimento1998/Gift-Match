@@ -8,12 +8,12 @@ const HeaderVisitor = () => {
     const { toggleTheme } = headerHook
 
     return (
-        <header className="flex justify-between items-center bg-background-default">
+        <header className="flex justify-between items-center py-4 px-8 rounded-lg bg-background-component">
             <section className="hidden md:flex items-center gap-2">
                 <h1>Amigo secreto online </h1>
                 <GiftIcon
                     onClick={toggleTheme}
-                    className="bg-background-default"
+                    className="bg-background-component"
                 />
             </section>
             <article className="hidden lg:flex gap-9">
@@ -22,7 +22,7 @@ const HeaderVisitor = () => {
             </article>
             <section
                 onClick={toggleTheme}
-                className="block md:hidden bg-background"
+                className="block md:hidden bg-background-component"
             >
                 Avatar
             </section>

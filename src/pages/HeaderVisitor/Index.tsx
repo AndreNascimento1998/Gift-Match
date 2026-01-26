@@ -1,6 +1,7 @@
 import GiftIcon from "@/components/icons/GiftIcon"
 import useHeader from "./hooks/useHeader"
 import ButtonHamburguerIcon from "@/components/icons/ButtonHamburguerIcon"
+import Dropdown from "@/components/base/Dropdown/Index"
 
 const HeaderVisitor = () => {
     const headerHook = useHeader()
@@ -18,7 +19,19 @@ const HeaderVisitor = () => {
             </section>
             <article className="hidden lg:flex gap-9">
                 <span className="text-h3">Como funciona</span>
-                <span className="text-h3">Privacidade</span>
+                <span className="text-h3">
+                    <Dropdown
+                        label="Menu"
+                        items={[
+                            { value: "como-funciona", label: "Como funciona" },
+                            { value: "regras", label: "Regras" },
+                            { value: "suporte", label: "Suporte" },
+                        ]}
+                        onSelect={(value) => {
+                            console.log("dropdown select", value)
+                        }}
+                    />
+                </span>
             </article>
             <section
                 onClick={toggleTheme}

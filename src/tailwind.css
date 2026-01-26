@@ -8,14 +8,14 @@
     --color-primary: #6d28d9;
     --color-secondary: #8b5cf6;
 
-    /* surfaces & text (prefer these short names in classnames) */
+    /* surfaces & text */
     --color-background: #f8fafc;
     --color-surface: #ffffff;
     --color-border: #e2e8f0;
     --color-main: #111827;
     --color-muted: #6b7280;
 
-    /* aliases (keep old names working) */
+    /* aliases */
     --color-main-text: var(--color-main);
     --color-secondary-text: var(--color-muted);
     --color-border-default: var(--color-border);

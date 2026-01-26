@@ -6,10 +6,10 @@ type VisitorLayoutProps = {
 
 const VisitorLayout = ({ children }: VisitorLayoutProps) => {
     return (
-        <>
+        <main className="py-4 px-8">
             <HeaderVisitor />
             {children}
-        </>
+        </main>
     )
 }
 

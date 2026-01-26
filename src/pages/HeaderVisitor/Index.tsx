@@ -8,7 +8,7 @@ const HeaderVisitor = () => {
     const { toggleTheme } = headerHook
 
     return (
-        <header className="flex justify-between bg-background-default">
+        <header className="flex justify-between items-center bg-background-default">
             <section className="hidden md:flex items-center gap-2">
                 <h1>Amigo secreto online </h1>
                 <GiftIcon

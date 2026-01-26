@@ -1,11 +1,11 @@
 import { Outlet } from "react-router-dom"
 import "./App.scss"
-import Header from "./pages/Header/Index"
+import HeaderLoggedOut from "./pages/HeaderLoggedOut/Index"
 
 function App() {
     return (
         <div className="w-full">
-            <Header />
+            <HeaderLoggedOut />
             <main>
                 <Outlet />
             </main>

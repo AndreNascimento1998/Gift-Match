@@ -2,7 +2,7 @@ import GiftIcon from "@/components/icons/GiftIcon"
 import useHeader from "./hooks/useHeader"
 import ButtonHamburguerIcon from "@/components/icons/ButtonHamburguerIcon"
 
-const Header = () => {
+const HeaderLoggedOut = () => {
     const headerHook = useHeader()
 
     const { toggleTheme } = headerHook
@@ -33,4 +33,4 @@ const Header = () => {
     )
 }
 
-export default Header
+export default HeaderLoggedOut

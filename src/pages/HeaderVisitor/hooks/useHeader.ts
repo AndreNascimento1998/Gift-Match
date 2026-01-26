@@ -13,7 +13,7 @@ const useHeader = () => {
     return {
         theme,
         toggleTheme,
-        options
+        options,
     }
 }
 

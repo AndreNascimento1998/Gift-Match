@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom"
 import "./App.scss"
-import HeaderLoggedOut from "./pages/HeaderLoggedOut/Index"
+import HeaderLoggedOut from "./pages/HeaderVisitor/Index"
 
 function App() {
     return (

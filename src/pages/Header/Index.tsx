@@ -1,19 +1,34 @@
+import GiftIcon from "@/components/icons/GiftIcon"
 import useHeader from "./hooks/useHeader"
+import ButtonHamburguerIcon from "@/components/icons/ButtonHamburguerIcon"
 
 const Header = () => {
     const headerHook = useHeader()
 
-    const { theme, toggleTheme } = headerHook
+    const { toggleTheme } = headerHook
 
     return (
-        <header>
-            <button
-                type="button"
+        <header className="flex justify-between bg-background-default">
+            <section className="hidden md:flex items-center gap-2">
+                <h1>Amigo secreto online </h1>
+                <GiftIcon
+                    onClick={toggleTheme}
+                    className="bg-background-default"
+                />
+            </section>
+            <article className="hidden lg:flex gap-9">
+                <span>Como funciona</span>
+                <span>Privacidade</span>
+            </article>
+            <section
                 onClick={toggleTheme}
-                className="ml-auto rounded-md border border-border bg-surface px-3 py-2 text-sm text-main"
+                className="block md:hidden bg-background"
             >
-                Tema: {theme === "light" ? "Light" : "Dark"}
-            </button>
+                Avatar
+            </section>
+            <article className="block md:hidden">
+                <ButtonHamburguerIcon />
+            </article>
         </header>
     )
 }

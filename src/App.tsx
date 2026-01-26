@@ -4,7 +4,7 @@ import Header from "./pages/Header/Index"
 
 function App() {
     return (
-        <div className="w-full px-6 py-8 ">
+        <div className="w-full">
             <Header />
             <main>
                 <Outlet />

@@ -6,27 +6,23 @@ import Dropdown from "@/components/base/Dropdown/Index"
 const HeaderVisitor = () => {
     const headerHook = useHeader()
 
-    const { toggleTheme } = headerHook
+    const { toggleTheme, options } = headerHook
 
     return (
         <header className="flex justify-between items-center py-4 px-8 rounded-lg bg-background-default">
             <section className="hidden md:flex items-center gap-2">
-                <h1 className="text-h3">Amigo secreto online </h1>
+                <h1 className="text-h5">Amigo secreto online </h1>
                 <GiftIcon
                     onClick={toggleTheme}
                     className="bg-background-default"
                 />
             </section>
-            <article className="hidden lg:flex gap-9">
-                <span className="text-h3">Como funciona</span>
-                <span className="text-h3">
+            <article className="hidden lg:flex lg:items-center gap-9">
+                <span className="text-h5">Como funciona</span>
+                <span className="text-h5">
                     <Dropdown
                         label="Menu"
-                        items={[
-                            { value: "como-funciona", label: "Como funciona" },
-                            { value: "regras", label: "Regras" },
-                            { value: "suporte", label: "Suporte" },
-                        ]}
+                        items={options}
                         onSelect={(value) => {
                             console.log("dropdown select", value)
                         }}

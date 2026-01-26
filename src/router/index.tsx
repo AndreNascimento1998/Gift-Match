@@ -1,31 +1,45 @@
 import { createBrowserRouter } from "react-router-dom"
 
-import App from "@/App"
-import Home from "@/pages/Home/Home"
-import About from "@/pages/About/About"
-import RegisterPage from "@/pages/RegisterPage/Index"
-import LoggedOutLayout from "@/layouts/LoggedOutLayou.tsx/Index"
-
 const router = createBrowserRouter([
     {
         path: "/register",
-        element: (
-            <LoggedOutLayout>
-                <RegisterPage />
-            </LoggedOutLayout>
-        ),
+        lazy: async () => {
+            const [{ default: LoggedOutLayout }, { default: RegisterPage }] =
+                await Promise.all([
+                    import("@/layouts/LoggedOutLayou.tsx/Index"),
+                    import("@/pages/RegisterPage/Index"),
+                ])
+
+            return {
+                element: (
+                    <LoggedOutLayout>
+                        <RegisterPage />
+                    </LoggedOutLayout>
+                ),
+            }
+        },
     },
     {
         path: "/",
-        element: <App />,
+        lazy: async () => {
+            const { default: App } = await import("@/App")
+            return { Component: App }
+        },
         children: [
             {
                 index: true,
-                element: <Home />,
+                lazy: async () => {
+                    const { default: Home } = await import("@/pages/Home/Home")
+                    return { Component: Home }
+                },
             },
             {
                 path: "about",
-                element: <About />,
+                lazy: async () => {
+                    const { default: About } =
+                        await import("@/pages/About/About")
+                    return { Component: About }
+                },
             },
         ],
     },

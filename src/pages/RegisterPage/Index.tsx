@@ -1,9 +1,5 @@
 const RegisterPage = () => {
-    return (
-        <>
-            oi
-        </>
-    )
+    return <>oi</>
 }
 
 export default RegisterPage

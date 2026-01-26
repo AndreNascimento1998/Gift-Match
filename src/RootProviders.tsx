@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react"
+import { Suspense, useEffect, useMemo } from "react"
 import { RouterProvider } from "react-router-dom"
 import CssBaseline from "@mui/material/CssBaseline"
 import { ThemeProvider, createTheme } from "@mui/material/styles"
@@ -36,7 +36,9 @@ export default function RootProviders() {
     return (
         <ThemeProvider theme={muiTheme}>
             <CssBaseline />
-            <RouterProvider router={router} />
+            <Suspense>
+                <RouterProvider router={router} />
+            </Suspense>
         </ThemeProvider>
     )
 }

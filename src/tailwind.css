@@ -1,1 +1,69 @@
 @import "tailwindcss";
+
+@theme {
+    --font-sans: "Open Sans", ui-sans-serif, system-ui, sans-serif;
+    --font-oxanium: "Oxanium", ui-sans-serif, system-ui, sans-serif;
+
+    /* colors */
+    --color-primary: #6d28d9;
+    --color-secondary: #8b5cf6;
+
+    /* surfaces & text (prefer these short names in classnames) */
+    --color-background: #f8fafc;
+    --color-surface: #ffffff;
+    --color-border: #e2e8f0;
+    --color-main: #111827;
+    --color-muted: #6b7280;
+
+    /* aliases (keep old names working) */
+    --color-main-text: var(--color-main);
+    --color-secondary-text: var(--color-muted);
+    --color-border-default: var(--color-border);
+    --color-background-default: var(--color-background);
+
+    --background-image-btn-primary: linear-gradient(
+        90deg,
+        #e54b65 3.13%,
+        #ff9a51 133.21%
+    );
+    --background-image-btn-primary-hover: linear-gradient(
+        90deg,
+        #ff9a51 3.13%,
+        #e54b65 133.21%
+    );
+
+    --breakpoint-3xl: 2000px;
+    --breakpoint-4xl: 2560px;
+    --breakpoint-5xl: 3000px;
+}
+
+:root {
+    color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+    color-scheme: dark;
+
+    --color-background: #0b1220;
+    --color-surface: #0f172a;
+    --color-border: #1f2937;
+    --color-main: #e5e7eb;
+    --color-muted: #9ca3af;
+
+    --color-primary: #a78bfa;
+    --color-secondary: #c4b5fd;
+}
+
+@layer base {
+    html,
+    body {
+        height: 100%;
+    }
+
+    body {
+        margin: 0;
+        background-color: var(--color-background);
+        color: var(--color-main);
+        font-family: var(--font-sans);
+    }
+}

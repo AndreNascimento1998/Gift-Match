@@ -50,7 +50,7 @@ const StepCount = ({
                                 active={step === currentStep + 1 ? true : false}
                             />
                         ) : (
-                            <CheckStepIcon />
+                            <CheckStepIcon className="cursor-pointer" />
                         )}
                     </span>
 

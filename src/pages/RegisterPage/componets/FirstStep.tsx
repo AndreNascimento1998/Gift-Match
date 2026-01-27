@@ -10,6 +10,9 @@ const FirstStep = ({ currentStep, setCurrentStep }: FirstStepProps) => {
     return (
         <main className="flex flex-col gap-9 lg:h-[calc(100vh-9rem)]">
             <CustomComponent
+                title="Amigo secreto online "
+                subtitle="Crie seu grupo em poucos passos e convide quem quiser. "
+                buttonText="Criar grupo"
                 currentStep={currentStep}
                 setCurrentStep={setCurrentStep}
                 section={

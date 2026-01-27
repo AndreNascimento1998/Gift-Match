@@ -6,6 +6,9 @@ type FirstStepProps = {
     setCurrentStep: React.Dispatch<React.SetStateAction<number>>
     section?: React.ReactNode
     footer?: React.ReactNode
+    title: string
+    subtitle: string
+    buttonText: string
 }
 
 const FirstStep = ({
@@ -13,14 +16,15 @@ const FirstStep = ({
     setCurrentStep,
     section,
     footer,
+    title,
+    subtitle,
+    buttonText,
 }: FirstStepProps) => {
     return (
         <main className="flex flex-col gap-9 lg:h-[calc(100vh-9rem)]">
             <section>
-                <h1 className="text-h2"> Amigo secreto online</h1>
-                <h2 className="text-secondary-text">
-                    Crie seu grupo em poucos passos e convide quem quiser.{" "}
-                </h2>
+                <h1 className="text-h2">{title}</h1>
+                <h2 className="text-secondary-text">{subtitle}</h2>
             </section>
             <StepCount
                 steps={3}
@@ -30,7 +34,7 @@ const FirstStep = ({
             <section className="flex flex-col gap-6 w-80">
                 {section}
                 <Button onClick={() => setCurrentStep(currentStep + 1)}>
-                    Criar grupo
+                    {buttonText}
                 </Button>
             </section>
             {footer}

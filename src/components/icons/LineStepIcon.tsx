@@ -1,4 +1,4 @@
-const LineStepIcon = ({...props}) => {
+const LineStepIcon = ({ ...props }) => {
     return (
         <>
             <svg

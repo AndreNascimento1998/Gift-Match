@@ -21,7 +21,12 @@ const RegisterPage = () => {
                     setCurrentStep={setCurrentStep}
                 />
             )}
-            {currentStep === 2 && <LastStep />}
+            {currentStep === 2 && (
+                <LastStep
+                    currentStep={currentStep}
+                    setCurrentStep={setCurrentStep}
+                />
+            )}
             <Details />
         </main>
     )

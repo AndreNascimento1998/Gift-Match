@@ -85,6 +85,20 @@
 }
 
 @layer utilities {
+    @keyframes fade-in {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    .animate-fade-in {
+        animation: fade-in 200ms ease-in;
+    }
+
     .text-h1 {
         font-size: var(--text-h1);
     }

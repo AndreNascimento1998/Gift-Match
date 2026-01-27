@@ -1,3 +1,5 @@
+import type * as React from "react"
+
 import CheckStepIcon from "@/components/icons/CheckStepIcon"
 import LineStepIcon from "@/components/icons/LineStepIcon"
 import NumberStepIcon from "@/components/icons/NumberStepIcon"
@@ -17,7 +19,6 @@ const StepCount = ({
 }: StepCountProps) => {
     const handleClickStep = (step: number) => {
         if (currentStep > step - 1) {
-            console.log(step)
             setCurrentStep(step)
         }
     }
@@ -37,11 +38,18 @@ const StepCount = ({
                     className="flex items-center"
                     key={`${step}-${index}`}
                 >
-                    {step > currentStep ? (
-                        <NumberStepIcon numberValue={step} />
-                    ) : (
-                        <CheckStepIcon className="cursor-pointer" />
-                    )}
+                    <span
+                        key={
+                            step > currentStep ? `num-${step}` : `check-${step}`
+                        }
+                        className="animate-fade-in"
+                    >
+                        {step > currentStep ? (
+                            <NumberStepIcon numberValue={step} />
+                        ) : (
+                            <CheckStepIcon className="cursor-pointer" />
+                        )}
+                    </span>
 
                     {index !== normalizedSteps.length - 1 ? (
                         <LineStepIcon />

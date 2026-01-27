@@ -9,6 +9,8 @@ type FirstStepProps = {
     title: string
     subtitle: string
     buttonText: string
+    /** Retorne false para bloquear o avanço do step */
+    onBeforeNextStep?: () => boolean | Promise<boolean>
 }
 
 const FirstStep = ({
@@ -19,7 +21,14 @@ const FirstStep = ({
     title,
     subtitle,
     buttonText,
+    onBeforeNextStep,
 }: FirstStepProps) => {
+    const handleNextStep = async () => {
+        const canProceed = (await onBeforeNextStep?.()) ?? true
+        if (!canProceed) return
+        setCurrentStep(currentStep + 1)
+    }
+
     return (
         <main className="flex flex-col gap-9 lg:h-[calc(100vh-9rem)]">
             <section>
@@ -33,9 +42,7 @@ const FirstStep = ({
             />
             <section className="flex flex-col gap-6 w-80">
                 {section}
-                <Button onClick={() => setCurrentStep(currentStep + 1)}>
-                    {buttonText}
-                </Button>
+                <Button onClick={handleNextStep}>{buttonText}</Button>
             </section>
             {footer}
         </main>

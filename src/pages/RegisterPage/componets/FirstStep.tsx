@@ -1,12 +1,32 @@
+import { useState } from "react"
 import Input from "@/components/base/Input/Index"
 import CustomComponent from "./CustomComponent"
 
 type FirstStepProps = {
     currentStep: number
     setCurrentStep: React.Dispatch<React.SetStateAction<number>>
+    groupName: string
+    setGroupName: React.Dispatch<React.SetStateAction<string>>
+    groupDescription: string
+    setGroupDescription: React.Dispatch<React.SetStateAction<string>>
 }
 
-const FirstStep = ({ currentStep, setCurrentStep }: FirstStepProps) => {
+const FirstStep = ({
+    currentStep,
+    setCurrentStep,
+    groupName,
+    setGroupName,
+    groupDescription,
+    setGroupDescription,
+}: FirstStepProps) => {
+    const [groupNameError, setGroupNameError] = useState(false)
+
+    const validate = () => {
+        const isValid = groupName.trim().length > 0
+        setGroupNameError(!isValid)
+        return isValid
+    }
+
     return (
         <main className="flex flex-col gap-9 lg:h-[calc(100vh-9rem)]">
             <CustomComponent
@@ -15,13 +35,27 @@ const FirstStep = ({ currentStep, setCurrentStep }: FirstStepProps) => {
                 buttonText="Criar grupo"
                 currentStep={currentStep}
                 setCurrentStep={setCurrentStep}
+                onBeforeNextStep={validate}
                 section={
                     <>
-                        <Input label="Nome do grupo:" />
+                        <Input
+                            label="Nome do grupo:"
+                            required
+                            value={groupName}
+                            onValueChange={(value) => {
+                                setGroupName(value)
+                            }}
+                            error={groupNameError}
+                            helperText={
+                                groupNameError ? "Campo obrigatório" : undefined
+                            }
+                        />
                         <Input
                             label="Descrição (opcional):"
                             textArea
                             textAreaRows={4}
+                            value={groupDescription}
+                            onValueChange={setGroupDescription}
                         />
                     </>
                 }

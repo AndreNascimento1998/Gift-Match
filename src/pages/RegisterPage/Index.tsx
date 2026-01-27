@@ -5,6 +5,8 @@ import LastStep from "./componets/LastStep"
 import SecondStep from "./componets/SecondStep"
 
 const RegisterPage = () => {
+    const [groupName, setGroupName] = useState("")
+    const [groupDescription, setGroupDescription] = useState("")
     const [currentStep, setCurrentStep] = useState(0)
 
     return (
@@ -13,6 +15,10 @@ const RegisterPage = () => {
                 <FirstStep
                     currentStep={currentStep}
                     setCurrentStep={setCurrentStep}
+                    groupName={groupName}
+                    setGroupName={setGroupName}
+                    groupDescription={groupDescription}
+                    setGroupDescription={setGroupDescription}
                 />
             )}
             {currentStep === 1 && (

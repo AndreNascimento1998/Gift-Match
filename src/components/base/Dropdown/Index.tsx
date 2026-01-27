@@ -22,6 +22,7 @@ type DropdownProps<TValue extends string = string> = {
         "onClick" | "id" | "aria-controls" | "aria-haspopup" | "aria-expanded"
     >
     menuProps?: Omit<MenuProps, "anchorEl" | "open" | "onClose">
+    variant: "text" | "outlined" | "contained"
 }
 
 const Dropdown = <TValue extends string = string>({
@@ -29,6 +30,7 @@ const Dropdown = <TValue extends string = string>({
     label = "Opções",
     items = [],
     onSelect,
+    variant = "contained",
     buttonProps,
     menuProps,
 }: DropdownProps<TValue>) => {
@@ -47,7 +49,7 @@ const Dropdown = <TValue extends string = string>({
                 aria-controls={open ? `${id}-menu` : undefined}
                 aria-haspopup="true"
                 aria-expanded={open ? "true" : undefined}
-                variant="contained"
+                variant={variant}
                 disableElevation
                 onClick={handleClick}
                 endIcon={<span aria-hidden>▾</span>}

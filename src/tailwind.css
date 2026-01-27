@@ -55,12 +55,12 @@
     --color-background: #0a0909;
     --color-background-component: #141414;
     --color-surface: #0f172a;
-    --color-border: #6d28d9;
+    --color-border: #5f12db;
     --color-main: #e5e7eb;
     --color-muted: #9ca3af;
 
-    --color-primary: #9e63fd;
-    --color-secondary: #6d28d9;
+    --color-primary: #8038f3;
+    --color-secondary: #5f12db;
 }
 
 @layer base {

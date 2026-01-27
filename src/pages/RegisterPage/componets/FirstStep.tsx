@@ -28,7 +28,7 @@ const FirstStep = ({
     }
 
     return (
-        <main className="flex flex-col gap-9 lg:h-[calc(100vh-9rem)]">
+        <main>
             <CustomComponent
                 title="Amigo secreto online "
                 subtitle="Crie seu grupo em poucos passos e convide quem quiser. "
@@ -62,7 +62,10 @@ const FirstStep = ({
                 footer={
                     <>
                         <span>
-                            Já tem um grupo? <span>Clique aqui!</span>
+                            Já tem um grupo?{" "}
+                            <span className="text-primary cursor-pointer">
+                                Clique aqui!
+                            </span>
                         </span>
                     </>
                 }

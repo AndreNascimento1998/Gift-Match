@@ -30,10 +30,12 @@ const FirstStep = ({
     }
 
     return (
-        <main className="flex flex-col gap-9 lg:h-[calc(100vh-9rem)]">
+        <main className="flex flex-col gap-9 lg:min-h-[calc(100vh-9rem)]">
             <section>
-                <h1 className="text-h2">{title}</h1>
-                <h2 className="text-secondary-text">{subtitle}</h2>
+                <h1 className="text-h2 font-bold">{title}</h1>
+                <h2 className="text-secondary-text font-semibold">
+                    {subtitle}
+                </h2>
             </section>
             <StepCount
                 steps={3}

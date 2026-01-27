@@ -23,6 +23,7 @@ const HeaderVisitor = () => {
                     <Dropdown
                         label="Menu"
                         items={options}
+                        variant="outlined"
                         onSelect={(value) => {
                             console.log("dropdown select", value)
                         }}

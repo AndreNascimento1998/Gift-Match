@@ -1,5 +1,5 @@
 import * as React from "react"
-import Button, { type ButtonProps } from "@mui/material/Button"
+import Button, { type ButtonProps } from "@/components/base/Button/Index"
 import Menu, { type MenuProps } from "@mui/material/Menu"
 import MenuItem from "@mui/material/MenuItem"
 import useDropdown from "./hooks/useDropdown"
@@ -50,6 +50,7 @@ const Dropdown = <TValue extends string = string>({
                 aria-haspopup="true"
                 aria-expanded={open ? "true" : undefined}
                 variant={variant}
+                size="small"
                 disableElevation
                 onClick={handleClick}
                 endIcon={<span aria-hidden>▾</span>}

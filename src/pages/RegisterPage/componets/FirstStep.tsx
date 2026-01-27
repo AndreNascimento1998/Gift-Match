@@ -9,7 +9,9 @@ const FirstStep = () => {
             <section className="flex flex-col gap-6 w-80">
                 <div>Input</div>
                 <div>Input</div>
-                <Button onClick={() => console.log('cliqeu')}>Criar grupo</Button>
+                <Button onClick={() => console.log("cliqeu")}>
+                    Criar grupo
+                </Button>
             </section>
             <span>
                 Já tem um grupo? <span>Clique aqui!</span>

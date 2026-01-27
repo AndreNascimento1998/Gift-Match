@@ -45,7 +45,10 @@ const StepCount = ({
                         className="animate-fade-in"
                     >
                         {step > currentStep ? (
-                            <NumberStepIcon numberValue={step} />
+                            <NumberStepIcon
+                                numberValue={step}
+                                active={step === currentStep + 1 ? true : false}
+                            />
                         ) : (
                             <CheckStepIcon className="cursor-pointer" />
                         )}

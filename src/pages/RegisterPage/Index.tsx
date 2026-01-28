@@ -12,6 +12,9 @@ const RegisterPage = () => {
     const [currentStep, setCurrentStep] = useState(0)
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
+    const [participation, setParticipation] = useState<
+        "participing" | "noParticiping" | ""
+    >("")
 
     return (
         <main className="grid grid-cols-1 lg:grid-cols-2 gap-4 bg-background-default py-6 px-8 md:px-20 rounded-lg md:rounded-none lg:border-t border-t-border shadow-2xs">
@@ -43,6 +46,8 @@ const RegisterPage = () => {
                     setName={setName}
                     email={email}
                     setEmail={setEmail}
+                    participation={participation}
+                    setParticipation={setParticipation}
                 />
             )}
             <Details />

@@ -27,9 +27,9 @@ const Details = () => {
 
     return (
         <div className="flex flex-col">
-            <img src={bannerDesktop} alt="Banner" />
+            <img src={bannerDesktop} alt="Banner" className="hidden md:block" />
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {cardsItems.map((item) => (
                     <div
                         key={item.text}

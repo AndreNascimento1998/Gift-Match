@@ -60,14 +60,14 @@ const FirstStep = ({
                     </>
                 }
                 footer={
-                    <>
+                    <div className="flex justify-center">
                         <span>
                             Já tem um grupo?{" "}
                             <span className="text-primary cursor-pointer">
                                 Clique aqui!
                             </span>
                         </span>
-                    </>
+                    </div>
                 }
             />
         </main>

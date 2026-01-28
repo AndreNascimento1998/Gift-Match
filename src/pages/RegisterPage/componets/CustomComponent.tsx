@@ -5,6 +5,7 @@ type FirstStepProps = {
     currentStep: number
     setCurrentStep: React.Dispatch<React.SetStateAction<number>>
     section?: React.ReactNode
+    buttonSection?: React.ReactNode
     footer?: React.ReactNode
     title: string
     subtitle: string
@@ -17,6 +18,7 @@ const FirstStep = ({
     currentStep,
     setCurrentStep,
     section,
+    buttonSection,
     footer,
     title,
     subtitle,
@@ -37,16 +39,22 @@ const FirstStep = ({
                     {subtitle}
                 </h2>
             </section>
-            <StepCount
-                steps={3}
-                currentStep={currentStep}
-                setCurrentStep={setCurrentStep}
-            />
             <section className="flex flex-col gap-6 w-80">
+                <div className="flex justify-center py-3">
+                    <StepCount
+                        steps={3}
+                        currentStep={currentStep}
+                        setCurrentStep={setCurrentStep}
+                    />
+                </div>
                 {section}
-                <Button onClick={handleNextStep}>{buttonText}</Button>
+                {buttonSection ? (
+                    buttonSection
+                ) : (
+                    <Button onClick={handleNextStep}>{buttonText}</Button>
+                )}
+                {footer}
             </section>
-            {footer}
         </main>
     )
 }

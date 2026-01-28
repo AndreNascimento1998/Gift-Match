@@ -19,8 +19,8 @@ const FirstStep = ({
     groupDescription,
     setGroupDescription,
 }: FirstStepProps) => {
-    const { required, validateRequired, requiredText } =
-        useValidations(groupName)
+    const { requiredFields, validateRequiredFields, requiredText } =
+        useValidations()
 
     return (
         <main>
@@ -30,7 +30,7 @@ const FirstStep = ({
                 buttonText="Criar grupo"
                 currentStep={currentStep}
                 setCurrentStep={setCurrentStep}
-                onBeforeNextStep={() => validateRequired()}
+                onBeforeNextStep={() => validateRequiredFields({ groupName })}
                 section={
                     <>
                         <Input
@@ -40,8 +40,12 @@ const FirstStep = ({
                             onValueChange={(value) => {
                                 setGroupName(value)
                             }}
-                            error={required}
-                            helperText={required ? requiredText : undefined}
+                            error={Boolean(requiredFields.groupName)}
+                            helperText={
+                                requiredFields.groupName
+                                    ? requiredText
+                                    : undefined
+                            }
                         />
                         <Input
                             label="Descrição (opcional):"

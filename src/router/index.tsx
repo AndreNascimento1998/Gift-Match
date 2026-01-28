@@ -9,17 +9,17 @@ const router = createBrowserRouter([
         path: "/register",
         hydrateFallbackElement,
         lazy: async () => {
-            const [{ default: VisitorLayout }, { default: RegisterPage }] =
+            const [{ default: CreatorGroupLayout }, { default: RegisterPage }] =
                 await Promise.all([
-                    import("@/layouts/VisitorLayout/Index"),
+                    import("@/layouts/CreatorGroupLayout/Index"),
                     import("@/pages/RegisterPage/Index"),
                 ])
 
             return {
                 element: (
-                    <VisitorLayout>
+                    <CreatorGroupLayout>
                         <RegisterPage />
-                    </VisitorLayout>
+                    </CreatorGroupLayout>
                 ),
             }
         },

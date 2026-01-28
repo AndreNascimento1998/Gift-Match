@@ -39,7 +39,7 @@ const FirstStep = ({
                     {subtitle}
                 </h2>
             </section>
-            <section className="flex flex-col gap-6 w-80">
+            <section className="flex flex-col gap-6 md:w-80">
                 <div className="flex justify-center py-3">
                     <StepCount
                         steps={3}

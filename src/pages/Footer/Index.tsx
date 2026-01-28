@@ -3,8 +3,8 @@ import FlagBrazil from "@/components/icons/FlagBrazil"
 const Footer = () => {
     return (
         <div className="flex flex-col px-20 gap-3 rounded-lg lg:rounded-none bg-background-default py-8 text-[14px]">
-            <section className="flex justify-around px-10">
-                <div>
+            <section className="flex flex-col md:flex-row md:justify-around md:px-10">
+                <div className="flex md:block flex-col items-center">
                     <h3 className="text-h3 font-bold text-primary">
                         Amigo secreto online
                     </h3>

@@ -36,11 +36,11 @@
     --breakpoint-3xl: 2000px;
     --breakpoint-4xl: 2560px;
     --breakpoint-5xl: 3000px;
-    --text-h1: 2.875rem;
-    --text-h2: 2.25rem;
-    --text-h3: 1.5rem;
+    --text-h1: 2rem;
+    --text-h2: 1.5rem;
+    --text-h3: 1rem;
     --text-h4: 0.8rem;
-    --text-h5: 1rem;
+    --text-h5: 0.6rem;
 }
 
 :root {

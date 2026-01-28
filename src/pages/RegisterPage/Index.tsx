@@ -8,6 +8,7 @@ const RegisterPage = () => {
     const [groupName, setGroupName] = useState("")
     const [groupDescription, setGroupDescription] = useState("")
     const [secretDate, setSecretDate] = useState("")
+    const [giftAmount, setGiftAmount] = useState<number | null>(null)
     const [currentStep, setCurrentStep] = useState(0)
 
     return (
@@ -28,6 +29,8 @@ const RegisterPage = () => {
                     setCurrentStep={setCurrentStep}
                     secretDate={secretDate}
                     setSecretDate={setSecretDate}
+                    giftAmount={giftAmount}
+                    setGiftAmount={setGiftAmount}
                 />
             )}
             {currentStep === 2 && (

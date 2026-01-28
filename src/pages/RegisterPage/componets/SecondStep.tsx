@@ -1,4 +1,5 @@
 import DatePicker from "@/components/base/Input/DatePicker"
+import CurrencyInput from "@/components/base/Input/CurrencyInput"
 import CustomComponent from "./CustomComponent"
 import { useMemo, useState } from "react"
 
@@ -7,6 +8,8 @@ type SecondStepProps = {
     setCurrentStep: React.Dispatch<React.SetStateAction<number>>
     secretDate: string
     setSecretDate: React.Dispatch<React.SetStateAction<string>>
+    giftAmount: number | null
+    setGiftAmount: React.Dispatch<React.SetStateAction<number | null>>
 }
 
 const SecondStep = ({
@@ -14,6 +17,8 @@ const SecondStep = ({
     setCurrentStep,
     secretDate,
     setSecretDate,
+    giftAmount,
+    setGiftAmount,
 }: SecondStepProps) => {
     const [dateErrorText, setDateErrorText] = useState<string | null>(null)
 
@@ -50,7 +55,7 @@ const SecondStep = ({
                 buttonText="Próxima etapa"
                 onBeforeNextStep={validate}
                 section={
-                    <div>
+                    <div className="flex flex-col gap-4">
                         <DatePicker
                             label="Data do amigo secreto:"
                             required
@@ -62,6 +67,11 @@ const SecondStep = ({
                             }}
                             error={Boolean(dateErrorText)}
                             helperText={dateErrorText ?? undefined}
+                        />
+                        <CurrencyInput
+                            label="Valor (opcional):"
+                            value={giftAmount}
+                            onNumberChange={setGiftAmount}
                         />
                     </div>
                 }

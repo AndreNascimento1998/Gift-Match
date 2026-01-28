@@ -10,7 +10,7 @@ const RegisterPage = () => {
     const [currentStep, setCurrentStep] = useState(0)
 
     return (
-        <main className="grid grid-cols-1 lg:grid-cols-2 gap-4 bg-background-default py-4 px-8 lg:border-t border-t-border shadow-2xs">
+        <main className="grid grid-cols-1 lg:grid-cols-2 gap-4 bg-background-default py-6 px-20 rounded-lg md:rounded-none lg:border-t border-t-border shadow-2xs">
             {currentStep === 0 && (
                 <FirstStep
                     currentStep={currentStep}

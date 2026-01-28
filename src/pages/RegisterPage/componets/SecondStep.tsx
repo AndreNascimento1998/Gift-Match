@@ -37,7 +37,6 @@ const SecondStep = ({
             return false
         }
 
-        // Como é YYYY-MM-DD, comparação lexicográfica funciona
         if (trimmed < todayYmd) {
             setDateErrorText("A data deve ser a partir de hoje")
             return false

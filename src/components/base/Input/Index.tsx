@@ -6,23 +6,13 @@ import { inputThemedSx } from "@/components/base/Input/inputThemedSx"
 export type InputProps = Omit<TextFieldProps, "onChange" | "onKeyDown"> & {
     onChange?: TextFieldProps["onChange"]
     onKeyDown?: TextFieldProps["onKeyDown"]
-
-    /** Atalho para virar textarea (equivale a multiline=true) */
     textArea?: boolean
-
-    /** Quantidade de linhas quando textArea=true (ex.: 2 ou 3) */
     textAreaRows?: number
-
-    /** Callback de conveniência: já entrega somente o valor (string) */
     onValueChange?: (
         value: string,
         event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     ) => void
-
-    /** Callback de conveniência: dispara ao pressionar Enter */
     onEnter?: (event: React.KeyboardEvent<HTMLInputElement>) => void
-
-    /** Callback de conveniência: dispara ao pressionar Escape */
     onEscape?: (event: React.KeyboardEvent<HTMLInputElement>) => void
 }
 
@@ -73,9 +63,6 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
         const effectiveMultiline = textArea ? true : multiline
 
-        // Regras:
-        // - se `rows` estiver definido, NÃO use minRows/maxRows (MUI dá warning)
-        // - `textAreaRows` é um atalho para um textarea com altura fixa
         const effectiveRows = textArea
             ? (textAreaRows ??
               rows ??

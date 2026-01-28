@@ -23,7 +23,10 @@ const SecondStep = ({ currentStep, setCurrentStep }: SecondStepProps) => {
                 buttonText="Próxima etapa"
                 section={
                     <div>
-                        <DatePicker min={dateParsed()} />
+                        <DatePicker
+                            label="Data do amigo secreto:"
+                            min={dateParsed()}
+                        />
                     </div>
                 }
                 currentStep={currentStep}

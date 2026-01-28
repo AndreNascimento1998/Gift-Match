@@ -37,6 +37,8 @@ export type DatePickerProps = Omit<
 
     /** Formato exibido (MUI X) */
     format?: string
+
+    label?: string
 }
 
 const pad2 = (n: number) => String(n).padStart(2, "0")
@@ -103,6 +105,7 @@ export default function DatePicker({
     color = "primary",
     size = "small",
     fullWidth = true,
+    label = "",
     InputLabelProps,
     ...props
 }: DatePickerProps) {
@@ -112,6 +115,7 @@ export default function DatePicker({
 
     return (
         <MuiDatePicker
+            label={label}
             value={toDayjsValue(value) as Dayjs | null | undefined}
             defaultValue={
                 toDayjsValue(defaultValue) as Dayjs | null | undefined

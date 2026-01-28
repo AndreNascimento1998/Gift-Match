@@ -10,6 +10,7 @@ type SecondStepProps = {
     setSecretDate: React.Dispatch<React.SetStateAction<string>>
     giftAmount: number | null
     setGiftAmount: React.Dispatch<React.SetStateAction<number | null>>
+    sectionStep: boolean
 }
 
 const SecondStep = ({
@@ -19,6 +20,7 @@ const SecondStep = ({
     setSecretDate,
     giftAmount,
     setGiftAmount,
+    sectionStep,
 }: SecondStepProps) => {
     const [dateErrorText, setDateErrorText] = useState<string | null>(null)
 
@@ -52,6 +54,7 @@ const SecondStep = ({
                 title="Defina os detalhes do grupo:"
                 subtitle="Essas informações ajudam todos a entenderem as regras do jogo."
                 buttonText="Próxima etapa"
+                sectionStep={sectionStep}
                 onBeforeNextStep={validate}
                 section={
                     <div className="flex flex-col gap-4">

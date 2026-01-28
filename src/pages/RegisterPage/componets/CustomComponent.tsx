@@ -9,8 +9,8 @@ type FirstStepProps = {
     footer?: React.ReactNode
     title: string
     subtitle: string
-    buttonText: string
-    /** Retorne false para bloquear o avanço do step */
+    buttonText?: string
+    sectionStep: boolean
     onBeforeNextStep?: () => boolean | Promise<boolean>
 }
 
@@ -23,6 +23,7 @@ const FirstStep = ({
     title,
     subtitle,
     buttonText,
+    sectionStep,
     onBeforeNextStep,
 }: FirstStepProps) => {
     const handleNextStep = async () => {
@@ -39,14 +40,16 @@ const FirstStep = ({
                     {subtitle}
                 </h2>
             </section>
-            <section className="flex flex-col gap-6 md:w-80">
-                <div className="flex justify-center py-3">
-                    <StepCount
-                        steps={3}
-                        currentStep={currentStep}
-                        setCurrentStep={setCurrentStep}
-                    />
-                </div>
+            <section className="flex flex-col gap-6 md:w-[70%]">
+                {sectionStep && (
+                    <div className="flex justify-center py-3">
+                        <StepCount
+                            steps={3}
+                            currentStep={currentStep}
+                            setCurrentStep={setCurrentStep}
+                        />
+                    </div>
+                )}
                 {section}
                 {buttonSection ? (
                     buttonSection

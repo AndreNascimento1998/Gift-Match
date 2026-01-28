@@ -14,6 +14,7 @@ type LastStepProps = {
     setParticipation: React.Dispatch<
         React.SetStateAction<"participing" | "noParticiping" | "">
     >
+    sectionStep: boolean
 }
 
 const LastStep = ({
@@ -25,6 +26,7 @@ const LastStep = ({
     setEmail,
     participation,
     setParticipation,
+    sectionStep,
 }: LastStepProps) => {
     const { requiredFields, validateRequiredFields, requiredText } =
         useValidations()
@@ -37,6 +39,7 @@ const LastStep = ({
                 buttonText="Finalizar grupo"
                 currentStep={currentStep}
                 setCurrentStep={setCurrentStep}
+                sectionStep={sectionStep}
                 onBeforeNextStep={() =>
                     validateRequiredFields({ participation, name, email })
                 }

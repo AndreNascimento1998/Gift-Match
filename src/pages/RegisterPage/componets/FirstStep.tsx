@@ -9,6 +9,7 @@ type FirstStepProps = {
     setGroupName: React.Dispatch<React.SetStateAction<string>>
     groupDescription: string
     setGroupDescription: React.Dispatch<React.SetStateAction<string>>
+    sectionStep: boolean
 }
 
 const FirstStep = ({
@@ -18,6 +19,7 @@ const FirstStep = ({
     setGroupName,
     groupDescription,
     setGroupDescription,
+    sectionStep,
 }: FirstStepProps) => {
     const { requiredFields, validateRequiredFields, requiredText } =
         useValidations()
@@ -30,6 +32,7 @@ const FirstStep = ({
                 buttonText="Criar grupo"
                 currentStep={currentStep}
                 setCurrentStep={setCurrentStep}
+                sectionStep={sectionStep}
                 onBeforeNextStep={() => validateRequiredFields({ groupName })}
                 section={
                     <>

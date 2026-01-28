@@ -1,5 +1,6 @@
 import Button from "@/components/base/Button/Index"
 import CustomComponent from "./CustomComponent"
+import InputClipBoard from "@/components/base/Input/InputClipBoard"
 
 type SuccessStepProps = {
     currentStep: number
@@ -12,6 +13,10 @@ const SuccessStep = ({
     setCurrentStep,
     sectionStep,
 }: SuccessStepProps) => {
+    const handleCopyText = (text: string) => {
+        console.log("Texto copiado:", text)
+    }
+
     return (
         <main>
             <CustomComponent
@@ -22,8 +27,13 @@ const SuccessStep = ({
                 sectionStep={sectionStep}
                 section={
                     <div className="flex flex-col gap-8">
-                        <div>clipboard</div>
-                        <span className="text-secondary text-h2 font-semibold">
+                        <div>
+                            <InputClipBoard
+                                handleCopy={handleCopyText}
+                                value="amigosecreto.com/groups/cmkvgvadsddfg/dsaasaasll.."
+                            />
+                        </div>
+                        <span className="text-secondary-text text-h2 font-semibold">
                             🔒 Apenas quem tiver o link pode entrar no grupo.
                         </span>
                     </div>

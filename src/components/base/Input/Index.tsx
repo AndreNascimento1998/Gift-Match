@@ -1,7 +1,7 @@
 import * as React from "react"
 import TextField, { type TextFieldProps } from "@mui/material/TextField"
-import type { SxProps, Theme } from "@mui/material/styles"
-import { alpha } from "@mui/material/styles"
+
+import { inputThemedSx } from "@/components/base/Input/inputThemedSx"
 
 export type InputProps = Omit<TextFieldProps, "onChange" | "onKeyDown"> & {
     onChange?: TextFieldProps["onChange"]
@@ -24,47 +24,6 @@ export type InputProps = Omit<TextFieldProps, "onChange" | "onKeyDown"> & {
 
     /** Callback de conveniência: dispara ao pressionar Escape */
     onEscape?: (event: React.KeyboardEvent<HTMLInputElement>) => void
-}
-
-const baseSx: SxProps<Theme> = {
-    "& .MuiInputLabel-root": {
-        color: "text.secondary",
-    },
-    "& .MuiInputLabel-root.Mui-focused": {
-        color: "primary.main",
-    },
-
-    "& .MuiOutlinedInput-root": {
-        borderRadius: 2,
-        backgroundColor: "background.paper",
-
-        "& .MuiOutlinedInput-notchedOutline": {
-            borderColor: "divider",
-        },
-        "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-            borderColor: "primary.main",
-            borderWidth: 2,
-        },
-        "&.Mui-error .MuiOutlinedInput-notchedOutline": {
-            borderColor: "error.main",
-        },
-        "&.Mui-disabled": {
-            opacity: 0.75,
-        },
-    },
-
-    "& .MuiFormHelperText-root": {
-        marginLeft: 0,
-    },
-}
-
-const resolveHoverBorderColor = (theme: Theme) => {
-    // usa divider/text para um hover consistente no light/dark
-    const base =
-        theme.palette.mode === "dark"
-            ? theme.palette.text.primary
-            : theme.palette.text.primary
-    return alpha(base, theme.palette.mode === "dark" ? 0.35 : 0.22)
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
@@ -91,18 +50,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         },
         ref,
     ) => {
-        const themedSx: SxProps<Theme> = (theme) => {
-            const hoverBorder = resolveHoverBorderColor(theme)
-            return {
-                ...baseSx,
-                "& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline":
-                    {
-                        borderColor: hoverBorder,
-                    },
-            }
-        }
-
-        const mergedSx = Array.isArray(sx) ? [themedSx, ...sx] : [themedSx, sx]
+        const mergedSx = Array.isArray(sx)
+            ? [inputThemedSx, ...sx]
+            : [inputThemedSx, sx]
 
         const handleChange: NonNullable<TextFieldProps["onChange"]> = (
             event,

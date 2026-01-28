@@ -1,4 +1,4 @@
-import bannerDesktop from "@/assets/images/DetailsImages/imagem-removebg-preview.png"
+import bannerDesktop from "@/assets/images/DetailsImages/banner.png"
 import GiftCardIcon from "@/components/icons/GiftCardIcon"
 import PeopleIcon from "@/components/icons/PeopleIcon"
 import PhoneIcon from "@/components/icons/PhoneIcon"
@@ -27,7 +27,13 @@ const Details = () => {
 
     return (
         <div className="flex flex-col">
-            <img src={bannerDesktop} alt="Banner" className="hidden md:block" />
+            <div className="w-full flex justify-center">
+                <img
+                    src={bannerDesktop}
+                    alt="Banner"
+                    className="hidden md:block w-[574px]"
+                />
+            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {cardsItems.map((item) => (

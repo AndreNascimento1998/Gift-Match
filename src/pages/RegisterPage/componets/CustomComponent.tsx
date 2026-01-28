@@ -32,10 +32,10 @@ const FirstStep = ({
     }
 
     return (
-        <main className="flex flex-col gap-9 lg:min-h-[calc(100vh-9rem)]">
+        <main className="flex flex-col gap-9">
             <section>
-                <h1 className="text-h2 font-bold">{title}</h1>
-                <h2 className="text-secondary-text font-semibold">
+                <h1 className="text-h1 font-bold">{title}</h1>
+                <h2 className="text-secondary-text text-[20px] font-semibold">
                     {subtitle}
                 </h2>
             </section>

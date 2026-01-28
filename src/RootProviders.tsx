@@ -2,6 +2,8 @@ import { Suspense, useEffect, useMemo, useState } from "react"
 import { RouterProvider } from "react-router-dom"
 import CssBaseline from "@mui/material/CssBaseline"
 import { ThemeProvider, createTheme } from "@mui/material/styles"
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider"
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs"
 
 import router from "@/router"
 import { useGlobalStore } from "@/stores/useGlobalStore"
@@ -93,9 +95,11 @@ export default function RootProviders() {
     return (
         <ThemeProvider theme={muiTheme}>
             <CssBaseline />
-            <Suspense>
-                <RouterProvider router={router} />
-            </Suspense>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <Suspense>
+                    <RouterProvider router={router} />
+                </Suspense>
+            </LocalizationProvider>
         </ThemeProvider>
     )
 }

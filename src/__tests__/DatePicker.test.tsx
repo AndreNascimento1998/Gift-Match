@@ -18,6 +18,7 @@ describe("DatePicker", () => {
             withLocalization(
                 <DatePicker
                     label="Data"
+                    readOnlyInput={false}
                     onValueChange={onValueChange}
                     onDateChange={onDateChange}
                 />,
@@ -52,5 +53,17 @@ describe("DatePicker", () => {
             selector: "input",
         }) as HTMLInputElement
         expect(input.value).toBe("09/05/2020")
+    })
+
+    it("valida required quando vazio após blur", () => {
+        render(withLocalization(<DatePicker label="Data" required />))
+
+        const input = screen.getByLabelText(/data/i, {
+            selector: "input",
+        }) as HTMLInputElement
+
+        fireEvent.blur(input)
+
+        expect(screen.getByText(/campo obrigatório/i)).toBeInTheDocument()
     })
 })

@@ -7,6 +7,7 @@ import SecondStep from "./componets/SecondStep"
 const RegisterPage = () => {
     const [groupName, setGroupName] = useState("")
     const [groupDescription, setGroupDescription] = useState("")
+    const [secretDate, setSecretDate] = useState("")
     const [currentStep, setCurrentStep] = useState(0)
 
     return (
@@ -25,6 +26,8 @@ const RegisterPage = () => {
                 <SecondStep
                     currentStep={currentStep}
                     setCurrentStep={setCurrentStep}
+                    secretDate={secretDate}
+                    setSecretDate={setSecretDate}
                 />
             )}
             {currentStep === 2 && (

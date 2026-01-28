@@ -1,6 +1,6 @@
-import { useState } from "react"
 import Input from "@/components/base/Input/Index"
 import CustomComponent from "./CustomComponent"
+import useValidations from "@/hooks/useValidation"
 
 type FirstStepProps = {
     currentStep: number
@@ -19,13 +19,8 @@ const FirstStep = ({
     groupDescription,
     setGroupDescription,
 }: FirstStepProps) => {
-    const [groupNameError, setGroupNameError] = useState(false)
-
-    const validate = () => {
-        const isValid = groupName.trim().length > 0
-        setGroupNameError(!isValid)
-        return isValid
-    }
+    const { required, validateRequired, requiredText } =
+        useValidations(groupName)
 
     return (
         <main>
@@ -35,7 +30,7 @@ const FirstStep = ({
                 buttonText="Criar grupo"
                 currentStep={currentStep}
                 setCurrentStep={setCurrentStep}
-                onBeforeNextStep={validate}
+                onBeforeNextStep={() => validateRequired()}
                 section={
                     <>
                         <Input
@@ -45,10 +40,8 @@ const FirstStep = ({
                             onValueChange={(value) => {
                                 setGroupName(value)
                             }}
-                            error={groupNameError}
-                            helperText={
-                                groupNameError ? "Campo obrigatório" : undefined
-                            }
+                            error={required}
+                            helperText={required ? requiredText : undefined}
                         />
                         <Input
                             label="Descrição (opcional):"

@@ -18,7 +18,13 @@ const HeaderDefault = () => {
         { label: "Participantes", route: "/", value: "home" },
         { label: "Dependentes", route: "/about", value: "about" },
         { label: "Presentes", route: "/contact", value: "contact" },
-        { label: "Conversas", route: "/contact", value: "chat" },
+        { label: "Conversas", route: "/contacte", value: "chat" },
+    ]
+
+    const optionsDropdown = [
+        { value: "working", label: "Como funciona" },
+        { value: "rules", label: "Regras" },
+        { value: "support", label: "Suporte" },
     ]
 
     return (
@@ -33,7 +39,11 @@ const HeaderDefault = () => {
                 A
             </Avatar>
             <div>
-                <MenuLinks options={menuOptions} />
+                <MenuLinks
+                    options={menuOptions}
+                    optionsDropdown={optionsDropdown}
+                    labelDropdown="Configurações"
+                />
             </div>
         </header>
     )

@@ -43,6 +43,7 @@ const HeaderDefault = () => {
                     options={menuOptions}
                     optionsDropdown={optionsDropdown}
                     labelDropdown="Configurações"
+                    forceWhite
                 />
             </div>
         </header>

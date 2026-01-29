@@ -1,6 +1,7 @@
 import Button from "@/components/base/Button/Index"
 import CustomComponent from "./CustomComponent"
 import InputClipBoard from "@/components/base/Input/InputClipBoard"
+import { useNavigate } from "react-router-dom"
 
 type SuccessStepProps = {
     currentStep: number
@@ -13,6 +14,8 @@ const SuccessStep = ({
     setCurrentStep,
     sectionStep,
 }: SuccessStepProps) => {
+    const navigate = useNavigate()
+
     const handleCopyText = (text: string) => {
         console.log("Texto copiado:", text)
     }
@@ -39,9 +42,7 @@ const SuccessStep = ({
                     </div>
                 }
                 buttonSection={
-                    <Button onClick={() => console.log("mandar pra dashboard")}>
-                        Ver meu grupo
-                    </Button>
+                    <Button onClick={() => navigate("/")}>Ver meu grupo</Button>
                 }
                 footer={
                     <div className="font-bold text-h2 text-primary">

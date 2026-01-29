@@ -36,8 +36,19 @@ const router = createBrowserRouter([
                 index: true,
                 hydrateFallbackElement,
                 lazy: async () => {
-                    const { default: Home } = await import("@/pages/Home/Home")
-                    return { Component: Home }
+                    const [{ default: DefaultLayout }, { default: Home }] =
+                        await Promise.all([
+                            import("@/layouts/DefaultLayout/Index"),
+                            import("@/pages/Home/Home"),
+                        ])
+
+                    return {
+                        element: (
+                            <DefaultLayout>
+                                <Home />
+                            </DefaultLayout>
+                        ),
+                    }
                 },
             },
             {

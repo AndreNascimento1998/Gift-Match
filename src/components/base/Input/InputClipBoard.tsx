@@ -25,12 +25,12 @@ const InputClipBoard = ({ value, handleCopy }: InputClipBoardProps) => {
             className={`flex relative w-full items-center overflow-hidden h-[36.5px] border ${status === "idle" ? "border-border" : "border-green-700"} p-4 rounded-lg cursor-pointer`}
             onClick={handleCopyText}
         >
-            <span className="text-[14px] overflow-hidden text-ellipsis pr-20 block w-full">
+            <span className="text-h3 overflow-hidden text-ellipsis pr-20 block w-full">
                 {value}
             </span>
 
             <div
-                className={`absolute cursor-pointer text-[14px] ${status === "idle" ? "bg-primary" : "bg-green-700"} text-white border ${status === "idle" ? "border-third" : "border-green-950"} rounded-lg px-2 py-1 right-2.5`}
+                className={`absolute cursor-pointer text-h3 ${status === "idle" ? "bg-primary" : "bg-green-700"} text-white border ${status === "idle" ? "border-third" : "border-green-950"} rounded-lg px-2 py-1 right-2.5`}
             >
                 {status === "idle" ? "Copiar" : "Copiado!"}
             </div>

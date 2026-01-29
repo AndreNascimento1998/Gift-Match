@@ -77,6 +77,7 @@ export default function RootProviders() {
                 },
                 typography: {
                     fontFamily: "var(--font-sans)",
+                    fontSize: 16,
                 },
                 components: {
                     MuiCssBaseline: {
@@ -84,6 +85,35 @@ export default function RootProviders() {
                             body: {
                                 backgroundColor: "var(--color-background)",
                                 color: "var(--color-main)",
+                                fontSize: 16,
+                            },
+                        },
+                    },
+                    MuiButton: {
+                        styleOverrides: {
+                            root: {
+                                fontSize: "1rem",
+                            },
+                        },
+                    },
+                    MuiMenuItem: {
+                        styleOverrides: {
+                            root: {
+                                fontSize: "1rem",
+                            },
+                        },
+                    },
+                    MuiInputBase: {
+                        styleOverrides: {
+                            input: {
+                                fontSize: "1rem",
+                            },
+                        },
+                    },
+                    MuiInputLabel: {
+                        styleOverrides: {
+                            root: {
+                                fontSize: "1rem",
                             },
                         },
                     },

@@ -1,5 +1,5 @@
 import Footer from "@/pages/Footer/Index"
-import CreatorGroup from "@/pages/HeaderCreatorGroup/Index"
+import CreatorGroup from "@/pages/Header/HeaderCreatorGroup"
 
 type CreatorGroupLayoutProps = {
     children: React.ReactNode

@@ -1,12 +1,12 @@
 import GiftIcon from "@/components/icons/GiftIcon"
-import useHeader from "./hooks/useHeader"
+import useHeaderCreatorGroup from "./hooks/useHeader"
 import ButtonHamburguerIcon from "@/components/icons/ButtonHamburguerIcon"
 import Dropdown from "@/components/base/Dropdown/Index"
 
 const HeaderCreatorGroup = () => {
-    const headerHook = useHeader()
+    const HeaderCreatorGroup = useHeaderCreatorGroup()
 
-    const { toggleTheme, options } = headerHook
+    const { toggleTheme, options } = HeaderCreatorGroup
 
     return (
         <header className="flex justify-between items-center py-4 px-8 md:px-20 rounded-lg lg:rounded-none bg-background-default">

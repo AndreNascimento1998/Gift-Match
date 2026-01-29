@@ -3,7 +3,7 @@ import useHeader from "./hooks/useHeader"
 import ButtonHamburguerIcon from "@/components/icons/ButtonHamburguerIcon"
 import Dropdown from "@/components/base/Dropdown/Index"
 
-const HeaderVisitor = () => {
+const HeaderCreatorGroup = () => {
     const headerHook = useHeader()
 
     const { toggleTheme, options } = headerHook
@@ -43,4 +43,4 @@ const HeaderVisitor = () => {
     )
 }
 
-export default HeaderVisitor
+export default HeaderCreatorGroup

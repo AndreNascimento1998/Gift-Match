@@ -16,12 +16,16 @@ type MenuLinksProps = {
         label: string
     }>
     labelDropdown: string
+    className?: string
+    forceWhite?: boolean
 }
 
 const MenuLinks = ({
     options,
     optionsDropdown,
     labelDropdown,
+    className,
+    forceWhite = false,
 }: React.PropsWithChildren<MenuLinksProps>) => {
     const navigate = useNavigate()
     const location = useLocation()
@@ -32,8 +36,16 @@ const MenuLinks = ({
         chat: <ChatIcon />,
     }
 
+    const containerClassName = [
+        "flex gap-6 items-center",
+        forceWhite ? "text-white" : "",
+        className ?? "",
+    ]
+        .filter(Boolean)
+        .join(" ")
+
     return (
-        <div className="flex gap-6 items-center">
+        <div className={containerClassName}>
             {options.map((options) => (
                 <div
                     key={options.route}
@@ -45,7 +57,7 @@ const MenuLinks = ({
                         <span>{options.label}</span>
                     </div>
                     <div
-                        className={`${location.pathname === options.route ? "border border-white" : ""} animate-fade-in`}
+                        className={`${location.pathname === options.route ? "border-b-2 border-current" : "border-b-2 border-transparent"} mt-1 animate-fade-in`}
                     />
                 </div>
             ))}
@@ -53,6 +65,7 @@ const MenuLinks = ({
                 label={labelDropdown}
                 items={optionsDropdown}
                 variant="outlined"
+                forceWhite={forceWhite}
                 onSelect={(value) => {
                     console.log("dropdown select", value)
                 }}

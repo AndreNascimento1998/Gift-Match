@@ -21,9 +21,9 @@ const HeaderCreatorGroup = () => {
                 <span className="text-h3">Como funciona</span>
                 <span className="text-h3">
                     <Dropdown
-                        label="Menu"
+                        label="Privacidade"
                         items={options}
-                        variant="outlined"
+                        variant="text"
                         onSelect={(value) => {
                             console.log("dropdown select", value)
                         }}

@@ -9,9 +9,11 @@ import InputAdornment from "@mui/material/InputAdornment"
 
 type ListProps = {
     participants?: Participant[]
+    filtered: string
+    setFiltered: React.Dispatch<React.SetStateAction<string>>
 }
 
-const List = ({ participants }: ListProps) => {
+const List = ({ participants, filtered, setFiltered }: ListProps) => {
     return (
         <section className="flex flex-col gap-10 border border-border p-6 rounded-lg">
             <div>
@@ -19,9 +21,14 @@ const List = ({ participants }: ListProps) => {
                     <span>Participantes</span>
                 </div>
             </div>
+            {filtered}
             <div>
                 <Input
                     label="Pesquisar participante"
+                    value={filtered}
+                    onValueChange={(value) => {
+                        setFiltered(value)
+                    }}
                     endAdornment={
                         <InputAdornment position="end">
                             <SearchIcon color="var(--color-primary)" />

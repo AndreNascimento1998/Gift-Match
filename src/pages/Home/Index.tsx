@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useMemo, useState } from "react"
 import Description from "./components/Description"
 import List from "./components/List"
 import type { Participant } from "@/types/Home/Index"
@@ -13,7 +13,6 @@ function Home() {
     // const [name, setName] = useState("André Cardoso")
     // const [participation, setParticipation] = useState("")
     const [secretDate] = useState("2026-02-12")
-
     const participationMock: Participant[] = [
         {
             id: "1",
@@ -46,6 +45,15 @@ function Home() {
             email: "dasdas@com",
         },
     ]
+    const [filtered, setFiltered] = useState("")
+
+    const participantsFiltered = useMemo(() => {
+        return participationMock.filter((participant) =>
+            participant.name
+                .toLowerCase()
+                .includes(filtered.toLocaleLowerCase()),
+        )
+    }, [filtered, participationMock])
 
     return (
         <main className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start bg-background-default py-6 px-8 md:px-20 rounded-lg md:rounded-none lg:border-t border-t-border shadow-2xs min-h-[calc(100vh-21.8rem)]">
@@ -55,7 +63,11 @@ function Home() {
                 secretDate={secretDate}
                 giftAmount={giftAmount}
             />
-            <List participants={participationMock} />
+            <List
+                participants={participantsFiltered}
+                filtered={filtered}
+                setFiltered={setFiltered}
+            />
         </main>
     )
 }

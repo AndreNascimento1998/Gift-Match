@@ -1,5 +1,6 @@
 import { useState } from "react"
 import Description from "./components/Description"
+import List from "./components/List"
 
 function Home() {
     // const [email, setEmail] = useState("andre.ncardoso@hotmail.com")
@@ -13,14 +14,14 @@ function Home() {
     const [secretDate] = useState("2026-02-12")
 
     return (
-        <main className="grid grid-cols-1 lg:grid-cols-2 gap-4 bg-background-default py-6 px-8 md:px-20 rounded-lg md:rounded-none lg:border-t border-t-border shadow-2xs min-h-[calc(100vh-20.2rem)]">
+        <main className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start bg-background-default py-6 px-8 md:px-20 rounded-lg md:rounded-none lg:border-t border-t-border shadow-2xs min-h-[calc(100vh-21.8rem)]">
             <Description
                 groupName={groupName}
                 groupDescription={groupDescription}
                 secretDate={secretDate}
                 giftAmount={giftAmount}
             />
-            <div>dsadas</div>
+            <List />
         </main>
     )
 }

@@ -2,6 +2,7 @@ import Input from "@/components/base/Input/Index"
 import RadioGroup from "@/components/base/RadioGroup/Index"
 import CustomComponent from "./CustomComponent"
 import useValidations from "@/hooks/useValidation"
+import Button from "@/components/base/Button/Index"
 
 type LastStepProps = {
     currentStep: number
@@ -15,6 +16,7 @@ type LastStepProps = {
         React.SetStateAction<"participing" | "noParticiping" | "">
     >
     sectionStep: boolean
+    finishRegister: () => void
 }
 
 const LastStep = ({
@@ -27,6 +29,7 @@ const LastStep = ({
     participation,
     setParticipation,
     sectionStep,
+    finishRegister,
 }: LastStepProps) => {
     const { requiredFields, validateRequiredFields, requiredText } =
         useValidations()
@@ -36,7 +39,6 @@ const LastStep = ({
             <CustomComponent
                 title="Última etapa:"
                 subtitle="Esses dados serão usados para criar o grupo e enviar os convites."
-                buttonText="Finalizar grupo"
                 currentStep={currentStep}
                 setCurrentStep={setCurrentStep}
                 sectionStep={sectionStep}
@@ -93,6 +95,13 @@ const LastStep = ({
                                     : undefined
                             }
                         />
+                    </>
+                }
+                buttonSection={
+                    <>
+                        <Button onClick={finishRegister}>
+                            Finalizar grupo
+                        </Button>
                     </>
                 }
             />

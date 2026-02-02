@@ -5,14 +5,26 @@ import DescriptionIcon from "@/components/icons/DescriptionIcon"
 import EditIcon from "@/components/icons/EditIcon"
 import InfoCircleIcon from "@/components/icons/InfoCircleIcon"
 import MoneyIcon from "@/components/icons/MoneyIcon"
+import { FormatDate } from "@/helpers/FormatDate"
+import { FormatMoney } from "@/helpers/FormatMoney"
 
-const Description = () => {
+type DescriptionProps = {
+    groupName: string
+    groupDescription: string
+    secretDate: string
+    giftAmount: number
+}
+
+const Description = ({
+    groupName,
+    groupDescription,
+    secretDate,
+    giftAmount,
+}: DescriptionProps) => {
     return (
         <section className="flex flex-col gap-10">
             <div className="flex flex-col gap-4">
-                <h1 className="text-h1 text-primary font-bold">
-                    Amigo secreto - Família
-                </h1>
+                <h1 className="text-h1 text-primary font-bold">{groupName}</h1>
                 <div className="border border-dashed border-primary" />
             </div>
             <Bars max={10} current={1} />
@@ -26,19 +38,23 @@ const Description = () => {
                         <DescriptionIcon />
                         <span>Descrição:</span>
                     </div>
-                    <div className="text-muted">Não pode faltar!</div>
+                    <div className="text-muted">{groupDescription}</div>
                 </div>
                 <div>
                     <div className="flex items-center gap-2">
                         <CalendarIcon /> <span>Data do amigo secreto:</span>
                     </div>
-                    <div className="text-muted">25/12/2026</div>
+                    <div className="text-muted">
+                        {FormatDate.toBrazilianFormat(secretDate)}
+                    </div>
                 </div>
                 <div>
                     <div className="flex items-center gap-2">
                         <MoneyIcon /> <span>Valor do presente:</span>
                     </div>
-                    <div className="text-muted">R$ 100,00</div>
+                    <div className="text-muted">
+                        {FormatMoney.toBrazilianFormat(giftAmount)}
+                    </div>
                 </div>
             </article>
             <div className="flex justify-center">

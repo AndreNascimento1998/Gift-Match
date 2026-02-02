@@ -17,6 +17,20 @@ const RegisterPage = () => {
         "participing" | "noParticiping" | ""
     >("")
 
+    const finishRegister = () => {
+        console.log({
+            groupName,
+            groupDescription,
+            secretDate,
+            giftAmount,
+            name,
+            email,
+            participation,
+        })
+
+        setCurrentStep(3)
+    }
+
     return (
         <main className="grid grid-cols-1 lg:grid-cols-2 gap-4 bg-background-default py-6 px-8 md:px-20 rounded-lg md:rounded-none lg:border-t border-t-border shadow-2xs">
             {currentStep === 0 && (
@@ -52,6 +66,7 @@ const RegisterPage = () => {
                     setEmail={setEmail}
                     participation={participation}
                     setParticipation={setParticipation}
+                    finishRegister={finishRegister}
                 />
             )}
             {currentStep === 3 && (

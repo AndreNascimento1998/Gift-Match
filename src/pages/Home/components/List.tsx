@@ -1,4 +1,6 @@
+import Button from "@/components/base/Button/Index"
 import Input from "@/components/base/Input/Index"
+import PlusIcon from "@/components/icons/PlusIcon"
 import SearchIcon from "@/components/icons/SearchIcon"
 import { GenerateRandomColor } from "@/helpers/GenerateRandomColor"
 import type { Participant } from "@/types/Home/Index"
@@ -55,6 +57,16 @@ const List = ({ participants }: ListProps) => {
                     <div>Não há participantes</div>
                 )}
             </div>
+            <section className="flex flex-col gap-8 w-full">
+                <Button
+                    className="w-full flex items-center gap-2"
+                    variant="outlined"
+                >
+                    <PlusIcon />
+                    <span>Adicionar participante</span>
+                </Button>
+                <Button className="w-full">Sortear</Button>
+            </section>
         </section>
     )
 }

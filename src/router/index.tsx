@@ -39,7 +39,7 @@ const router = createBrowserRouter([
                     const [{ default: DefaultLayout }, { default: Home }] =
                         await Promise.all([
                             import("@/layouts/DefaultLayout/Index"),
-                            import("@/pages/Home/Home"),
+                            import("@/pages/Home/Index"),
                         ])
 
                     return {

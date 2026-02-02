@@ -38,7 +38,9 @@ const Description = ({
                         <DescriptionIcon />
                         <span>Descrição:</span>
                     </div>
-                    <div className="text-muted">{groupDescription}</div>
+                    <div className="text-muted text-h3 line-clamp-2 w-full">
+                        {groupDescription}
+                    </div>
                 </div>
                 <div>
                     <div className="flex items-center gap-2">

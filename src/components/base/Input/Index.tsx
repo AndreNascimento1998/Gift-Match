@@ -8,6 +8,8 @@ export type InputProps = Omit<TextFieldProps, "onChange" | "onKeyDown"> & {
     onKeyDown?: TextFieldProps["onKeyDown"]
     textArea?: boolean
     textAreaRows?: number
+    startAdornment?: React.ReactNode
+    endAdornment?: React.ReactNode
     onValueChange?: (
         value: string,
         event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -29,6 +31,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             maxRows,
             textArea,
             textAreaRows,
+            startAdornment,
+            endAdornment,
             onChange,
             onKeyDown,
             onValueChange,
@@ -91,6 +95,10 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                     ...slotProps,
                     input: {
                         ...slotProps?.input,
+                        startAdornment:
+                            slotProps?.input?.startAdornment ?? startAdornment,
+                        endAdornment:
+                            slotProps?.input?.endAdornment ?? endAdornment,
                     },
                 }}
             />

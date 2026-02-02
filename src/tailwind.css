@@ -7,7 +7,7 @@
     /* colors */
     --color-primary: #6d28d9;
     --color-secondary: #8b5cf6;
-    --color-third: #680aff;
+    --color-third: #6d28d914;
 
     /* surfaces & text */
     --color-background: #f8fafc;
@@ -62,7 +62,7 @@
 
     --color-primary: #8a4af1;
     --color-secondary: #6427c6;
-    --color-third: #9e86c2;
+    --color-third: #8a4af114;
 }
 
 @layer base {

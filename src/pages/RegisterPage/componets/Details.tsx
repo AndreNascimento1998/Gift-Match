@@ -2,7 +2,7 @@ import bannerDesktop from "@/assets/images/DetailsImages/banner.png"
 import GiftCardIcon from "@/components/icons/GiftCardIcon"
 import PeopleIcon from "@/components/icons/PeopleIcon"
 import PhoneIcon from "@/components/icons/PhoneIcon"
-import PadlockIcon from "./PadlockIcon"
+import PadlockIcon from "../../../components/icons/PadlockIcon"
 import type { JSX } from "node_modules/@emotion/react/dist/declarations/src/jsx-dev-runtime"
 
 const Details = () => {

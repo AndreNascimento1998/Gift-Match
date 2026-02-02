@@ -36,7 +36,7 @@ const FirstStep = ({
         <main className="flex flex-col gap-9">
             <section>
                 <h1 className="text-h1 font-bold">{title}</h1>
-                <h2 className="text-secondary-text text-[20px] font-semibold">
+                <h2 className="text-secondary-text text-h2 font-semibold">
                     {subtitle}
                 </h2>
             </section>

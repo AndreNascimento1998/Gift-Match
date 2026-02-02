@@ -1,26 +1,11 @@
-import { useGlobalStore } from "@/stores/useGlobalStore"
-import Button from "@mui/material/Button"
+import Description from "./components/Description"
 
 function Home() {
-    const count = useGlobalStore((state) => state.count)
-    const increment = useGlobalStore((state) => state.increment)
-
     return (
-        <section className="flex flex-col gap-4">
-            <h2 className="text-xl font-semibold">Home</h2>
-            <div className="flex items-center gap-3">
-                <span>Global count: {count}</span>
-                <button
-                    className="px-3 py-1 border rounded"
-                    onClick={increment}
-                >
-                    Increment
-                </button>
-            </div>
-            <div>
-                <Button variant="contained">MUI Button</Button>
-            </div>
-        </section>
+        <main className="grid grid-cols-1 lg:grid-cols-2 gap-4 bg-background-default py-6 px-8 md:px-20 rounded-lg md:rounded-none lg:border-t border-t-border shadow-2xs">
+            <Description />
+            <div>dsadas</div>
+        </main>
     )
 }
 

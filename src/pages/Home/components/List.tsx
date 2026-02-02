@@ -25,7 +25,6 @@ const List = ({ participants, filtered, setFiltered }: ListProps) => {
                 </div>
                 <span className="text-[14px]">4 de 6 confirmados</span>
             </div>
-            {filtered}
             <div>
                 <Input
                     label="Pesquisar participante"
@@ -69,7 +68,9 @@ const List = ({ participants, filtered, setFiltered }: ListProps) => {
                         </div>
                     ))
                 ) : (
-                    <div>Não há participantes</div>
+                    <div className="flex justify-center">
+                        Não conseguimos encontrar esses participantes
+                    </div>
                 )}
             </div>
             <section className="flex flex-col gap-8 w-full">

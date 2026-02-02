@@ -95,10 +95,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                     ...slotProps,
                     input: {
                         ...slotProps?.input,
-                        startAdornment:
-                            slotProps?.input?.startAdornment ?? startAdornment,
-                        endAdornment:
-                            slotProps?.input?.endAdornment ?? endAdornment,
+                        startAdornment: startAdornment,
+                        endAdornment: endAdornment,
                     },
                 }}
             />

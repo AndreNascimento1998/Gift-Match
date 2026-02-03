@@ -1,6 +1,7 @@
 import type { ReactNode } from "react"
 import Drawer from "@mui/material/Drawer"
 import Box from "@mui/material/Box"
+import Avatar from "@mui/material/Avatar"
 import List from "@mui/material/List"
 import ListItemButton from "@mui/material/ListItemButton"
 import ListItemText from "@mui/material/ListItemText"
@@ -8,6 +9,13 @@ import Divider from "@mui/material/Divider"
 import Collapse from "@mui/material/Collapse"
 import { useLocation, useNavigate } from "react-router-dom"
 import { useMemo, useState } from "react"
+
+type DrawerMenuProfile = {
+    name: string
+    email?: string
+    avatarSrc?: string
+    avatarAlt?: string
+}
 
 type DrawerMenuItem = {
     key?: string
@@ -26,6 +34,16 @@ type DrawerMenuProps = {
     anchor?: "left" | "right"
     items: DrawerMenuItem[]
     showActiveRoute?: boolean
+    profile?: DrawerMenuProfile
+    header?: ReactNode
+    showCloseButton?: boolean
+}
+
+const getInitials = (name: string) => {
+    const parts = name.trim().split(/\s+/).filter(Boolean)
+    const first = parts[0]?.[0] ?? ""
+    const last = parts.length > 1 ? (parts[parts.length - 1]?.[0] ?? "") : ""
+    return (first + last).toUpperCase() || "U"
 }
 
 const DrawerMenu = ({
@@ -35,6 +53,9 @@ const DrawerMenu = ({
     anchor = "right",
     items,
     showActiveRoute = true,
+    profile,
+    header,
+    showCloseButton = true,
 }: DrawerMenuProps) => {
     const navigate = useNavigate()
     const location = useLocation()
@@ -86,22 +107,106 @@ const DrawerMenu = ({
                 },
             }}
         >
-            <Box
-                className="flex items-center justify-between px-5 py-4"
-                sx={{
-                    borderBottom: "1px solid var(--color-border)",
-                }}
-            >
-                <div className="font-semibold text-h3">{title ?? "Menu"}</div>
-                <button
-                    type="button"
-                    className="px-2 py-1 rounded-md hover:bg-third"
-                    onClick={onClose}
-                    aria-label="Fechar menu"
+            {header ? (
+                <Box sx={{ position: "relative" }}>
+                    {showCloseButton ? (
+                        <button
+                            type="button"
+                            className="px-2 py-1 rounded-md hover:bg-third"
+                            onClick={onClose}
+                            aria-label="Fechar menu"
+                            style={{
+                                position: "absolute",
+                                top: 12,
+                                right: 12,
+                                color: "var(--color-muted)",
+                            }}
+                        >
+                            ×
+                        </button>
+                    ) : null}
+                    {header}
+                </Box>
+            ) : profile ? (
+                <Box sx={{ position: "relative" }}>
+                    {showCloseButton ? (
+                        <button
+                            type="button"
+                            className="px-2 py-1 rounded-md hover:bg-third"
+                            onClick={onClose}
+                            aria-label="Fechar menu"
+                            style={{
+                                position: "absolute",
+                                top: 12,
+                                right: 12,
+                                color: "var(--color-muted)",
+                            }}
+                        >
+                            ×
+                        </button>
+                    ) : null}
+
+                    <Box className="px-6 pt-8 pb-4 flex flex-col items-center">
+                        <Avatar
+                            src={profile.avatarSrc}
+                            alt={profile.avatarAlt ?? profile.name}
+                            sx={{
+                                width: 88,
+                                height: 88,
+                                bgcolor: "var(--color-border)",
+                                color: "var(--color-primary)",
+                                fontWeight: 800,
+                                fontSize: 28,
+                            }}
+                        >
+                            {getInitials(profile.name)}
+                        </Avatar>
+
+                        <div
+                            className="mt-4 text-h1 font-bold text-center"
+                            style={{ color: "var(--color-main)" }}
+                        >
+                            {profile.name}
+                        </div>
+                        {profile.email ? (
+                            <div
+                                className="mt-2 text-h3 text-center"
+                                style={{ color: "var(--color-muted)" }}
+                            >
+                                {profile.email}
+                            </div>
+                        ) : null}
+
+                        <div
+                            className="mt-6 w-full"
+                            style={{
+                                borderBottom: "3px solid var(--color-primary)",
+                                borderRadius: 999,
+                            }}
+                        />
+                    </Box>
+                </Box>
+            ) : (
+                <Box
+                    className="flex items-center justify-between px-5 py-4"
+                    sx={{
+                        borderBottom: "1px solid var(--color-border)",
+                    }}
                 >
-                    ×
-                </button>
-            </Box>
+                    <div className="font-semibold text-h3">
+                        {title ?? "Menu"}
+                    </div>
+                    <button
+                        type="button"
+                        className="px-2 py-1 rounded-md hover:bg-third"
+                        onClick={onClose}
+                        aria-label="Fechar menu"
+                        style={{ color: "var(--color-muted)" }}
+                    >
+                        ×
+                    </button>
+                </Box>
+            )}
 
             <List className="px-2 py-2">
                 {items.map((item) => {

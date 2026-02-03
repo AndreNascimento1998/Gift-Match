@@ -32,9 +32,11 @@ const HeaderDefault = () => {
     ]
 
     const optionsDropdown = [
-        { value: "working", label: "Como funciona" },
-        { value: "rules", label: "Regras" },
-        { value: "support", label: "Suporte" },
+        { value: "myProfile", label: "Meu perfil" },
+        { value: "helpCenter", label: "Ajuda" },
+        { value: "privacyPolicy", label: "Políticas de privacidade" },
+        { value: "termsOfUse", label: "Termos de uso" },
+        { value: "logout", label: "Sair" },
     ]
 
     const iconsMenu = {
@@ -102,6 +104,10 @@ const HeaderDefault = () => {
                 title="Navegação"
                 items={drawerItems}
                 anchor="right"
+                profile={{
+                    name: "João Silva",
+                    email: "joaosilva@usuario.com",
+                }}
             />
         </header>
     )

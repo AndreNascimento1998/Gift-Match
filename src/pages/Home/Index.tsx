@@ -7,7 +7,7 @@ const participationMock: Participant[] = [
     {
         id: "1",
         name: "André Cardoso",
-        email: "dsaddsadsare@dfas.com",
+        email: "sanfrancisconigthfillalrigth@yahoooutlookhotmail.com",
     },
     {
         id: "2",

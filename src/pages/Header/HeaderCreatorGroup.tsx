@@ -32,11 +32,11 @@ const HeaderCreatorGroup = () => {
             </article>
             <section
                 onClick={toggleTheme}
-                className="block md:hidden bg-background-default"
+                className="block lg:hidden bg-background-default"
             >
                 Avatar
             </section>
-            <article className="block md:hidden">
+            <article className="block lg:hidden">
                 <ButtonHamburguerIcon />
             </article>
         </header>

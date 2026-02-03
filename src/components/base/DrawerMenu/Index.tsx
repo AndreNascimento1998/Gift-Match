@@ -9,6 +9,7 @@ import Divider from "@mui/material/Divider"
 import Collapse from "@mui/material/Collapse"
 import { useLocation, useNavigate } from "react-router-dom"
 import { useMemo, useState } from "react"
+import { GenerateRandomColor } from "@/helpers/GenerateRandomColor"
 
 type DrawerMenuProfile = {
     name: string
@@ -153,8 +154,9 @@ const DrawerMenu = ({
                             sx={{
                                 width: 88,
                                 height: 88,
-                                bgcolor: "var(--color-border)",
-                                color: "var(--color-primary)",
+                                bgcolor: GenerateRandomColor.generateColor(
+                                    profile.name,
+                                ),
                                 fontWeight: 800,
                                 fontSize: 28,
                             }}

@@ -79,7 +79,7 @@ const HeaderDefault = () => {
             >
                 A
             </Avatar>
-            <div className="hidden md:block">
+            <div className="hidden lg:block">
                 <MenuLinks
                     options={menuOptions}
                     optionsDropdown={optionsDropdown}
@@ -87,7 +87,7 @@ const HeaderDefault = () => {
                     forceWhite
                 />
             </div>
-            <article className="block md:hidden">
+            <article className="block lg:hidden">
                 <button
                     type="button"
                     aria-label="Abrir menu"

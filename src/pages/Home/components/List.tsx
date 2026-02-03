@@ -13,9 +13,15 @@ type ListProps = {
     participants?: Participant[]
     filtered: string
     setFiltered: React.Dispatch<React.SetStateAction<string>>
+    setShowModal: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const List = ({ participants, filtered, setFiltered }: ListProps) => {
+const List = ({
+    participants,
+    filtered,
+    setFiltered,
+    setShowModal,
+}: ListProps) => {
     return (
         <section className="flex flex-col gap-10 lg:border border-border p-0 lg:p-6 rounded-lg">
             <div className="flex items-center justify-between">
@@ -85,7 +91,9 @@ const List = ({ participants, filtered, setFiltered }: ListProps) => {
                     <PlusIcon />
                     <span>Adicionar participante</span>
                 </Button>
-                <Button className="w-full">Sortear</Button>
+                <Button onClick={() => setShowModal(true)} className="w-full">
+                    Sortear
+                </Button>
             </section>
         </section>
     )

@@ -1,6 +1,14 @@
+import { useState } from "react"
 import { Avatar } from "@mui/material"
 import useHeader from "./hooks/useHeader"
 import MenuLinks from "@/components/base/MenuLinks/Index"
+import ButtonHamburguerIcon from "@/components/icons/ButtonHamburguerIcon"
+import DrawerMenu from "@/components/base/DrawerMenu/Index"
+import ChatIcon from "@/components/icons/ChatIcon"
+import DepententIcons from "@/components/icons/DependentIcons"
+import GiftWhiteIcon from "@/components/icons/GiftWhiteIcon"
+import ParticipantIcon from "@/components/icons/ParticipantIcon"
+import ConfigurationIcon from "@/components/icons/ConfigurationIcon"
 
 type HeaderDefaultProps = {
     menuOptions?: Array<{
@@ -13,6 +21,8 @@ type HeaderDefaultProps = {
 const HeaderDefault = () => {
     const header = useHeader()
     const { toggleTheme } = header
+
+    const [drawerOpen, setDrawerOpen] = useState(false)
 
     const menuOptions: HeaderDefaultProps["menuOptions"] = [
         { label: "Participantes", route: "/", value: "home" },
@@ -27,6 +37,35 @@ const HeaderDefault = () => {
         { value: "support", label: "Suporte" },
     ]
 
+    const iconsMenu = {
+        home: <ParticipantIcon color="var(--color-primary)" />,
+        about: <DepententIcons color="var(--color-primary)" />,
+        contact: <GiftWhiteIcon color="var(--color-primary)" />,
+        chat: <ChatIcon color="var(--color-primary)" />,
+    }
+
+    const drawerItems = [
+        ...menuOptions.map((item) => ({
+            label: item.label,
+            route: item.route,
+            icon: iconsMenu[item.value],
+            key: item.value,
+        })),
+        {
+            key: "settings",
+            label: "Configurações",
+            icon: <ConfigurationIcon color="var(--color-primary)" />,
+            startExpanded: false,
+            children: optionsDropdown.map((opt) => ({
+                key: `settings:${opt.value}`,
+                label: opt.label,
+                onClick: () => {
+                    console.log("dropdown select", opt.value)
+                },
+            })),
+        },
+    ]
+
     return (
         <header className="flex justify-between items-center py-4 px-8 md:px-20 rounded-lg lg:rounded-none text-white bg-secondary">
             <Avatar
@@ -38,7 +77,7 @@ const HeaderDefault = () => {
             >
                 A
             </Avatar>
-            <div>
+            <div className="hidden md:block">
                 <MenuLinks
                     options={menuOptions}
                     optionsDropdown={optionsDropdown}
@@ -46,6 +85,24 @@ const HeaderDefault = () => {
                     forceWhite
                 />
             </div>
+            <article className="block md:hidden">
+                <button
+                    type="button"
+                    aria-label="Abrir menu"
+                    className="p-2 rounded-md hover:bg-third"
+                    onClick={() => setDrawerOpen(true)}
+                >
+                    <ButtonHamburguerIcon className="text-white" />
+                </button>
+            </article>
+
+            <DrawerMenu
+                open={drawerOpen}
+                onClose={() => setDrawerOpen(false)}
+                title="Navegação"
+                items={drawerItems}
+                anchor="right"
+            />
         </header>
     )
 }

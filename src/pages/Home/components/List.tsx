@@ -17,7 +17,7 @@ type ListProps = {
 
 const List = ({ participants, filtered, setFiltered }: ListProps) => {
     return (
-        <section className="flex flex-col gap-10 border border-border p-6 rounded-lg">
+        <section className="flex flex-col gap-10 lg:border border-border p-0 lg:p-6 rounded-lg">
             <div className="flex items-center justify-between">
                 <div className="flex gap-2 items-center">
                     <ParticipantIcon color="var(--color-primary)" />
@@ -59,8 +59,8 @@ const List = ({ participants, filtered, setFiltered }: ListProps) => {
                                 >
                                     {participant.name[0]}
                                 </Avatar>
-                                <div className="flex flex-col">
-                                    <span> {participant.name}</span>
+                                <div className="flex flex-col truncate">
+                                    <span>{participant.name}</span>
                                     <span>{participant.email}</span>
                                 </div>
                             </div>

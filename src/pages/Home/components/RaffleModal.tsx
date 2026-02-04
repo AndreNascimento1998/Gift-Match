@@ -86,7 +86,12 @@ const RaffleModalInner = ({
                         <Button variant="outlined" onClick={handleClose}>
                             Cancelar
                         </Button>
-                        <Button onClick={handleRaffle}>Sortear</Button>
+                        <Button
+                            onClick={handleRaffle}
+                            disabled={showParticipation}
+                        >
+                            Sortear
+                        </Button>
                     </>
                 }
             >

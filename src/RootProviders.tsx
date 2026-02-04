@@ -61,9 +61,11 @@ export default function RootProviders() {
                     mode: theme,
                     primary: {
                         main: muiColors.primary,
+                        contrastText: "#f8fafc",
                     },
                     secondary: {
                         main: muiColors.secondary,
+                        contrastText: "#f8fafc",
                     },
                     background: {
                         default: muiColors.background,

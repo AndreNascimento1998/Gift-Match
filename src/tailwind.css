@@ -98,8 +98,139 @@
         }
     }
 
+    .animation-translateX {
+        animation: translateX 400ms ease-in-out;
+    }
+
+    @keyframes translateX {
+        0% {
+            transform: translateX(-20px);
+            opacity: 0;
+        }
+
+        100% {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
     .animate-fade-in {
         animation: fade-in 200ms ease-in;
+    }
+
+    @keyframes gift-float {
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-6px);
+        }
+    }
+
+    @keyframes gift-wiggle {
+        0%,
+        100% {
+            transform: rotate(-2deg);
+        }
+
+        50% {
+            transform: rotate(2deg);
+        }
+    }
+
+    @keyframes gift-sparkle {
+        0%,
+        100% {
+            transform: scale(0.9);
+            opacity: 0.55;
+        }
+
+        50% {
+            transform: scale(1.2);
+            opacity: 1;
+        }
+    }
+
+    .animate-gift-float {
+        animation: gift-float 1600ms ease-in-out infinite;
+    }
+
+    .animate-gift-wiggle {
+        animation: gift-wiggle 900ms ease-in-out infinite;
+    }
+
+    .animate-gift-sparkle {
+        animation: gift-sparkle 1100ms ease-in-out infinite;
+    }
+
+    .animate-gift-sparkle-delay {
+        animation-delay: 250ms;
+    }
+
+    .animate-gift-sparkle-delay-2 {
+        animation-delay: 520ms;
+    }
+
+    @keyframes gift-lid-open {
+        0% {
+            transform: translateY(0) rotate(0deg);
+        }
+
+        60% {
+            transform: translateY(-6px) rotate(-30deg);
+        }
+
+        100% {
+            transform: translateY(-6px) rotate(-26deg);
+        }
+    }
+
+    .animate-gift-lid-open {
+        transform-origin: 32px 24px;
+        animation: gift-lid-open 520ms cubic-bezier(0.2, 0.9, 0.2, 1) forwards;
+    }
+
+    @keyframes confetti {
+        0% {
+            transform: translate(-50%, -50%) rotate(0deg);
+            opacity: 1;
+        }
+
+        70% {
+            opacity: 1;
+        }
+
+        100% {
+            transform: translate(
+                    calc(-50% + var(--dx, 0px)),
+                    calc(-50% + var(--dy, 0px))
+                )
+                rotate(var(--rot, 0deg));
+            opacity: 0;
+        }
+    }
+
+    .animate-confetti {
+        animation: confetti 900ms ease-out forwards;
+        animation-delay: var(--delay, 0ms);
+    }
+
+    @keyframes gift-disappear {
+        0% {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        100% {
+            opacity: 0;
+            transform: scale(0.92) translateY(10px);
+        }
+    }
+
+    .animate-gift-disappear {
+        animation: gift-disappear 520ms ease-in forwards;
     }
 
     .text-h1 {

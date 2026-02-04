@@ -2,8 +2,7 @@ import { useMemo, useState } from "react"
 import Description from "./components/Description"
 import List from "./components/List"
 import type { Participant } from "@/types/Home/Index"
-import BaseModal from "@/components/base/Modal/Index"
-import Button from "@/components/base/Button/Index"
+import RaffleModal from "./components/RaffleModal"
 
 const participationMock: Participant[] = [
     {
@@ -76,38 +75,11 @@ const Home = () => {
                 />
             </main>
 
-            <BaseModal
-                open={showModal}
-                onClose={() => setShowModal(false)}
-                title="Sortear"
-                footer={
-                    <>
-                        <Button
-                            variant="outlined"
-                            onClick={() => setShowModal(false)}
-                        >
-                            Cancelar
-                        </Button>
-                        <Button
-                            onClick={() => {
-                                setShowModal(false)
-                            }}
-                        >
-                            Confirmar
-                        </Button>
-                    </>
-                }
-            >
-                <div className="flex flex-col gap-3">
-                    <p className="text-muted">
-                        Use este conteúdo como slot. Você pode renderizar
-                        qualquer componente aqui dentro.
-                    </p>
-                    <div className="border border-dashed border-primary rounded-lg p-4">
-                        Seu formulário / conteúdo custom aqui.
-                    </div>
-                </div>
-            </BaseModal>
+            <RaffleModal
+                showModal={showModal}
+                setShowModal={setShowModal}
+                participations={participationMock}
+            />
         </>
     )
 }

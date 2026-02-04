@@ -49,7 +49,7 @@ const List = ({
                 {participants && participants.length > 0 ? (
                     participants.map((participant) => (
                         <div
-                            className="flex justify-between items-center gap-2 h-22.5 border border-border py-4 px-6 rounded-lg hover:bg-third cursor-pointer animate-fade-in"
+                            className="flex justify-between items-center gap-2 h-22.5 border border-border py-4 px-6 rounded-lg hover:bg-primary-hover cursor-pointer animate-fade-in"
                             key={participant.id}
                         >
                             <div className="flex items-center gap-8 truncate pr-5 text-ellipsis">

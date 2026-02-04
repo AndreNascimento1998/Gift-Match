@@ -97,7 +97,7 @@ const RaffleModalInner = ({
             >
                 <div className="flex flex-col gap-3">
                     {
-                        <p className="text-main text-h2">
+                        <p className="text-primary text-h2">
                             Meu amigo secreto é...
                         </p>
                     }
@@ -109,7 +109,7 @@ const RaffleModalInner = ({
                         />
                     </div>
                     {showParticipation && (
-                        <div className="text-main text-h2 animation-translateX">
+                        <div className="text-primary text-h2 font-bold animation-translateX">
                             {participations[0].name}
                         </div>
                     )}

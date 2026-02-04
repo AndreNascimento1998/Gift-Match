@@ -16,7 +16,7 @@
     --color-muted: #64748b;
 
     --color-primary: #06b6d4; /* cyan principal */
-    --color-primary-hover: #0891b2;
+    --color-primary-hover: #06b6b414;
     --color-primary-active: #0e7490;
 
     --color-secondary: #0891b2; /* azul/roxo suave */
@@ -68,7 +68,7 @@
     --color-muted: #94a3b8;
 
     --color-primary: #22d3ee; /* cyan vivo no dark */
-    --color-primary-hover: #06b6d4;
+    --color-primary-hover: #22d3ee14;
     --color-primary-active: #0891b2;
 
     --color-secondary: #06b6d4;

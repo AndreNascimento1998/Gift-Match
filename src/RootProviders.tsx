@@ -12,8 +12,8 @@ export default function RootProviders() {
     const theme = useGlobalStore((state) => state.theme)
 
     const [muiColors, setMuiColors] = useState(() => ({
-        primary: theme === "dark" ? "#a78bfa" : "#6d28d9",
-        secondary: theme === "dark" ? "#c4b5fd" : "#8b5cf6",
+        primary: theme === "dark" ? "#22d3ee" : "#06b6d4",
+        secondary: theme === "dark" ? "#06b6d4" : "#0891b2",
         background: theme === "dark" ? "#0a0909" : "#f8fafc",
         paper: theme === "dark" ? "#141414" : "#ffffff",
         text: theme === "dark" ? "#e5e7eb" : "#111827",

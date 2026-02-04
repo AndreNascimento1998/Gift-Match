@@ -10,7 +10,7 @@ const PlusIcon = () => {
             >
                 <path
                     d="M20 11.4286H11.4286V20H8.57143V11.4286H0V8.57143H8.57143V0H11.4286V8.57143H20V11.4286Z"
-                    fill="#6D28D9"
+                    fill="var(--color-primary)"
                 />
             </svg>
         </>

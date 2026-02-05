@@ -3,6 +3,7 @@ import Description from "./components/Description"
 import List from "./components/List"
 import type { Participant } from "@/types/Home/Index"
 import RaffleModal from "./components/RaffleModal"
+import CardRevelation from "./components/CardRevelation"
 
 const participationMock: Participant[] = [
     {
@@ -57,16 +58,27 @@ const Home = () => {
         )
     }, [filtered])
     const [showModal, setShowModal] = useState(false)
+    const [showParticipation, setShowParticipation] = useState(false)
+    const [secretFriend] = useState<Participant>({
+        id: "1",
+        name: "André Cardoso",
+        email: "andre.ncardoso@hotmail.com",
+    })
 
     return (
         <>
             <main className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start bg-background-default py-6 px-8 md:px-20 rounded-lg md:rounded-none lg:border-t border-t-border shadow-2xs min-h-[calc(100vh-21.8rem)]">
-                <Description
-                    groupName={groupName}
-                    groupDescription={groupDescription}
-                    secretDate={secretDate}
-                    giftAmount={giftAmount}
-                />
+                <div className="flex flex-col gap-10">
+                    <Description
+                        groupName={groupName}
+                        groupDescription={groupDescription}
+                        secretDate={secretDate}
+                        giftAmount={giftAmount}
+                    />
+                    {showParticipation && (
+                        <CardRevelation secretFriend={secretFriend} />
+                    )}
+                </div>
                 <List
                     participants={participantsFiltered}
                     filtered={filtered}
@@ -79,6 +91,8 @@ const Home = () => {
                 showModal={showModal}
                 setShowModal={setShowModal}
                 participations={participationMock}
+                showParticipation={showParticipation}
+                setShowParticipation={setShowParticipation}
             />
         </>
     )

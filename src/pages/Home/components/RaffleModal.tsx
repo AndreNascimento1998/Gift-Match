@@ -8,20 +8,25 @@ type RaffleModalProps = {
     showModal: boolean
     setShowModal: React.Dispatch<React.SetStateAction<boolean>>
     participations: Participant[]
+    showParticipation: boolean
+    setShowParticipation: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 type RaffleModalInnerProps = {
     showModal: boolean
     setShowModal: React.Dispatch<React.SetStateAction<boolean>>
     participations: Participant[]
+    showParticipation: boolean
+    setShowParticipation: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const RaffleModalInner = ({
     showModal,
     setShowModal,
     participations,
+    showParticipation,
+    setShowParticipation,
 }: RaffleModalInnerProps) => {
-    const [showParticipation, setShowParticipation] = useState(false)
     const [isOpening, setIsOpening] = useState(false)
     const [confettiOn, setConfettiOn] = useState(false)
     const [celebrationKey, setCelebrationKey] = useState(0)
@@ -123,6 +128,8 @@ const RaffleModal = ({
     showModal,
     setShowModal,
     participations,
+    showParticipation,
+    setShowParticipation,
 }: RaffleModalProps) => {
     return (
         <RaffleModalInner
@@ -130,6 +137,8 @@ const RaffleModal = ({
             showModal={showModal}
             setShowModal={setShowModal}
             participations={participations}
+            showParticipation={showParticipation}
+            setShowParticipation={setShowParticipation}
         />
     )
 }

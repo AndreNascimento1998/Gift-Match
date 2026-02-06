@@ -10,11 +10,9 @@ const Home = () => {
     const setMySecretFriend = useCurrentUser((state) => state.setMySecretFriend)
     const [filtered, setFiltered] = useState("")
 
-    const participantsFiltered = useMemo(() => {
-        return currentUser.group.users.filter((participant) =>
-            participant.name
-                .toLowerCase()
-                .includes(filtered.toLocaleLowerCase()),
+    const usersFiltered = useMemo(() => {
+        return currentUser.group.users.filter((user) =>
+            user.name.toLowerCase().includes(filtered.toLocaleLowerCase()),
         )
     }, [filtered, currentUser.group.users])
 
@@ -37,7 +35,7 @@ const Home = () => {
                     )}
                 </div>
                 <List
-                    participants={participantsFiltered}
+                    users={usersFiltered}
                     filtered={filtered}
                     setFiltered={setFiltered}
                     setShowModal={setShowModal}
@@ -47,7 +45,7 @@ const Home = () => {
             <RaffleModal
                 showModal={showModal}
                 setShowModal={setShowModal}
-                participations={currentUser.group.users}
+                users={currentUser.group.users}
                 secretFriend={currentUser.mySecretFriend}
                 setSecretFriend={setMySecretFriend}
             />

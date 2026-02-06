@@ -1,5 +1,2 @@
-export type Participant = {
-    id: string
-    name: string
-    email: string
-}
+import type { User } from "@/types/CurrentUser/Index"
+export type Participant = User

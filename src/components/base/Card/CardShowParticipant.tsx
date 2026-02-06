@@ -1,12 +1,12 @@
 import EyeHiddenIcon from "@/components/icons/EyeHiddenIcon"
 import EyeIcon from "@/components/icons/EyeIcon"
 import { GenerateRandomColor } from "@/helpers/GenerateRandomColor"
-import type { Participant } from "@/types/Home/Index"
+import type { User } from "@/types/CurrentUser/Index"
 import { Avatar } from "@mui/material"
 import { useState } from "react"
 
 type CardShowParticipantProps = {
-    secretFriend: Participant
+    secretFriend: User
 }
 
 const CardShowParticipant = ({ secretFriend }: CardShowParticipantProps) => {

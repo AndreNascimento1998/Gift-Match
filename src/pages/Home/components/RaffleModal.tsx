@@ -2,29 +2,28 @@ import Button from "@/components/base/Button/Index"
 import AnimatedGift from "@/components/base/Gifts/Index"
 import BaseModal from "@/components/base/Modal/Index"
 import type { User } from "@/types/CurrentUser/Index"
-import type { Participant } from "@/types/Home/Index"
 import { useEffect, useRef, useState } from "react"
 
 type RaffleModalProps = {
     showModal: boolean
     setShowModal: React.Dispatch<React.SetStateAction<boolean>>
-    participations: Participant[]
-    setSecretFriend: (name: User) => void
-    secretFriend: User
+    users: User[]
+    setSecretFriend: (user: User) => void
+    secretFriend?: User
 }
 
 type RaffleModalInnerProps = {
     showModal: boolean
     setShowModal: React.Dispatch<React.SetStateAction<boolean>>
-    participations: Participant[]
-    setSecretFriend: (name: User) => void
-    secretFriend: User
+    users: User[]
+    setSecretFriend: (user: User) => void
+    secretFriend?: User
 }
 
 const RaffleModalInner = ({
     showModal,
     setShowModal,
-    participations,
+    users,
     setSecretFriend,
     secretFriend,
 }: RaffleModalInnerProps) => {
@@ -57,6 +56,8 @@ const RaffleModalInner = ({
     const handleRaffle = () => {
         clearAllTimeouts()
 
+        if (users.length === 0) return
+
         setIsOpening(true)
         setConfettiOn(false)
         setCelebrationKey((v) => v + 1)
@@ -75,7 +76,7 @@ const RaffleModalInner = ({
 
         timeoutsRef.current.push(
             window.setTimeout(() => {
-                setSecretFriend(participations[0])
+                setSecretFriend(users[0])
             }, 900),
         )
     }
@@ -93,7 +94,9 @@ const RaffleModalInner = ({
                         </Button>
                         <Button
                             onClick={handleRaffle}
-                            disabled={!!secretFriend?.name}
+                            disabled={
+                                !!secretFriend?.name || users.length === 0
+                            }
                         >
                             Sortear
                         </Button>
@@ -127,7 +130,7 @@ const RaffleModalInner = ({
 const RaffleModal = ({
     showModal,
     setShowModal,
-    participations,
+    users,
     secretFriend,
     setSecretFriend,
 }: RaffleModalProps) => {
@@ -136,7 +139,7 @@ const RaffleModal = ({
             key={String(showModal)}
             showModal={showModal}
             setShowModal={setShowModal}
-            participations={participations}
+            users={users}
             secretFriend={secretFriend}
             setSecretFriend={setSecretFriend}
         />

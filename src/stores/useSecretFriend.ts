@@ -1,13 +1,13 @@
-import type { Participant } from "@/types/Home/Index"
+import type { User } from "@/types/CurrentUser/Index"
 import { create } from "zustand"
 
 type SecretFriendState = {
-    secretFriend: Participant
-    setSecretFriend: (name: Participant) => void
+    secretFriend: User
+    setSecretFriend: (user: User) => void
 }
 
 export const useSecretFriend = create<SecretFriendState>((set) => ({
-    secretFriend: {} as Participant,
+    secretFriend: {} as User,
 
-    setSecretFriend: (name: Participant) => set({ secretFriend: name }),
+    setSecretFriend: (user: User) => set({ secretFriend: user }),
 }))

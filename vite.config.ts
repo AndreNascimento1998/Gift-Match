@@ -11,6 +11,9 @@ export default defineConfig({
         setupFiles: ["./src/setupTests.ts"],
         css: true,
     },
+    build: {
+        chunkSizeWarningLimit: 900,
+    },
     resolve: {
         alias: {
             "@": path.resolve(__dirname, "src"),

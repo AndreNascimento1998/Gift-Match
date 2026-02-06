@@ -15,18 +15,20 @@ const CardShowParticipant = ({ secretFriend }: CardShowParticipantProps) => {
     return (
         <div className="flex justify-between items-center gap-2 h-22.5 border border-border py-4 px-6 rounded-lg animate-fade-in">
             <div className="flex items-center gap-8 truncate pr-5 text-ellipsis">
-                <Avatar
-                    sx={{
-                        width: 56,
-                        height: 56,
-                        bgcolor: GenerateRandomColor.generateColor(
-                            secretFriend.name ?? "",
-                        ),
-                    }}
-                >
-                    {secretFriend.name[0]}
-                    {secretFriend.name[1]}
-                </Avatar>
+                <div className="hidden md:block">
+                    <Avatar
+                        sx={{
+                            width: 56,
+                            height: 56,
+                            bgcolor: GenerateRandomColor.generateColor(
+                                showSecretName ? secretFriend.name : "medtlo",
+                            ),
+                        }}
+                    >
+                        {showSecretName ? secretFriend.name[0] : "*"}
+                        {showSecretName ? secretFriend.name[1] : "*"}
+                    </Avatar>
+                </div>
                 {showSecretName && (
                     <div className="flex flex-col truncate">
                         <span className="truncate text-primary font-bold animate-fade-in">

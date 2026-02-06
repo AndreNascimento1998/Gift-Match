@@ -3,9 +3,9 @@ import type { Participant } from "@/types/Home/Index"
 
 const CardRevelation = ({ secretFriend }: { secretFriend: Participant }) => {
     return (
-        <section className="flex flex-col gap-10 border border-border p-6 rounded-lg">
+        <section className="flex flex-col gap-4 md:gap-10 border border-border p-6 rounded-lg">
             <div>Meu amigo secreto</div>
-            <div className="w-[80%]">
+            <div className="lg:w-[80%]">
                 <CardShowParticipant secretFriend={secretFriend} />
             </div>
         </section>

@@ -22,7 +22,7 @@ const Description = ({
     giftAmount,
 }: DescriptionProps) => {
     return (
-        <section className="flex flex-col gap-10 lg:border border-border p-0 lg:p-6 rounded-lg">
+        <section className="flex flex-col gap-4 md:gap-10 lg:border border-border p-0 lg:p-6 rounded-lg">
             <div className="flex flex-col gap-4">
                 <h1 className="text-h1 text-primary font-bold ">{groupName}</h1>
                 <div className="border border-dashed border-primary" />

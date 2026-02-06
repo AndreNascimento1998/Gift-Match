@@ -13,6 +13,7 @@ export const useCurrentUser = create<CurrentUserState>((set) => ({
         id: "1",
         name: "André",
         email: "andre.ncardoso@hotmail.com",
+        isAdmin: true,
         mySecretFriend: {} as User,
     },
 

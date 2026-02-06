@@ -49,6 +49,7 @@ const Home = () => {
                 <List
                     users={usersFiltered}
                     filtered={filtered}
+                    isAdmin={currentUser.isAdmin}
                     setFiltered={setFiltered}
                     setShowModal={setShowModal}
                 />

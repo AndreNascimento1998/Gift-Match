@@ -17,6 +17,7 @@ export type CurrentUser = {
     id: string
     name: string
     email: string
+    isAdmin: boolean
     mySecretFriend?: User
     dependents?: CurrentUser[]
 }

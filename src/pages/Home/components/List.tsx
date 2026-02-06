@@ -14,9 +14,16 @@ type ListProps = {
     filtered: string
     setFiltered: React.Dispatch<React.SetStateAction<string>>
     setShowModal: React.Dispatch<React.SetStateAction<boolean>>
+    isAdmin: boolean
 }
 
-const List = ({ users, filtered, setFiltered, setShowModal }: ListProps) => {
+const List = ({
+    users,
+    filtered,
+    setFiltered,
+    setShowModal,
+    isAdmin,
+}: ListProps) => {
     return (
         <section className="flex flex-col gap-4 md:gap-10 lg:border border-border p-0 lg:p-6 rounded-lg">
             <div className="flex items-center justify-between">
@@ -44,7 +51,7 @@ const List = ({ users, filtered, setFiltered, setShowModal }: ListProps) => {
                 {users && users.length > 0 ? (
                     users.map((user) => (
                         <div
-                            className="flex justify-between items-center gap-2 h-22.5 border border-border py-2 px-4 md:py-4 md:px-6 rounded-lg hover:bg-primary-hover cursor-pointer animate-fade-in"
+                            className={`flex justify-between items-center gap-2 h-22.5 border border-border py-2 px-4 md:py-4 md:px-6 rounded-lg hover:bg-primary-hover ${isAdmin ? "cursor-pointer" : ""} animate-fade-in`}
                             key={user.id}
                         >
                             <div className="flex items-center gap-8 truncate pr-5 text-ellipsis">
@@ -70,7 +77,9 @@ const List = ({ users, filtered, setFiltered, setShowModal }: ListProps) => {
                                     </span>
                                 </div>
                             </div>
-                            <ArrowRightIcon className="hidden md:block" />
+                            <ArrowRightIcon
+                                className={`hidden ${isAdmin ? "md:block" : "hidden"}`}
+                            />
                         </div>
                     ))
                 ) : (

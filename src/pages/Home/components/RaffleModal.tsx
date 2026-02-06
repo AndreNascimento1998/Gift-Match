@@ -105,7 +105,7 @@ const RaffleModalInner = ({
             >
                 <div className="flex flex-col gap-3">
                     {
-                        <p className="text-primary text-h2">
+                        <p className="text-h2 text-primary">
                             Meu amigo secreto é...
                         </p>
                     }

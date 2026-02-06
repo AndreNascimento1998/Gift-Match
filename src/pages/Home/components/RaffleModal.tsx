@@ -1,6 +1,7 @@
 import Button from "@/components/base/Button/Index"
 import AnimatedGift from "@/components/base/Gifts/Index"
 import BaseModal from "@/components/base/Modal/Index"
+import type { User } from "@/types/CurrentUser/Index"
 import type { Participant } from "@/types/Home/Index"
 import { useEffect, useRef, useState } from "react"
 
@@ -8,16 +9,16 @@ type RaffleModalProps = {
     showModal: boolean
     setShowModal: React.Dispatch<React.SetStateAction<boolean>>
     participations: Participant[]
-    setSecretFriend: (name: Participant) => void
-    secretFriend: Participant
+    setSecretFriend: (name: User) => void
+    secretFriend: User
 }
 
 type RaffleModalInnerProps = {
     showModal: boolean
     setShowModal: React.Dispatch<React.SetStateAction<boolean>>
     participations: Participant[]
-    setSecretFriend: (name: Participant) => void
-    secretFriend: Participant
+    setSecretFriend: (name: User) => void
+    secretFriend: User
 }
 
 const RaffleModalInner = ({

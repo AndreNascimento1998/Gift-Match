@@ -1,79 +1,39 @@
 import { useMemo, useState } from "react"
 import Description from "./components/Description"
 import List from "./components/List"
-import type { Participant } from "@/types/Home/Index"
 import RaffleModal from "./components/RaffleModal"
 import CardRevelation from "./components/CardRevelation"
-import { useSecretFriend } from "@/stores/useSecretFriend"
-
-const participationMock: Participant[] = [
-    {
-        id: "1",
-        name: "André Cardoso",
-        email: "sanfrancisconigthfillalrigth@yahoooutlookhotmail.com",
-    },
-    {
-        id: "2",
-        name: "Maria Silva",
-        email: "maria@dsa.com",
-    },
-    {
-        id: "3",
-        name: "João Souza",
-        email: "joao@hasad.com",
-    },
-    {
-        id: "4",
-        name: "Ana Pereira",
-        email: "ana@sadas.com",
-    },
-    {
-        id: "5",
-        name: "Carlos Oliveira",
-        email: "carlos@dsad.com",
-    },
-    {
-        id: "6",
-        name: "Mariana Costa",
-        email: "dasdas@com",
-    },
-]
+import { useCurrentUser } from "@/stores/useCurrentUser"
 
 const Home = () => {
-    // const [email, setEmail] = useState("andre.ncardoso@hotmail.com")
-    const [giftAmount] = useState<number>(50)
-    const [groupDescription] = useState(
-        "Por favor, levar presente caro o mais caro possível playstation, xbox series ou pczão aquele bem caro mesmo, agradeço encarecidamente, o possível esforço de levar o que tem de mais caro!",
-    )
-    const [groupName] = useState("Amigo Secreto da Firma")
-    // const [name, setName] = useState("André Cardoso")
-    // const [participation, setParticipation] = useState("")
-    const [secretDate] = useState("2026-02-12")
+    const currentUser = useCurrentUser((state) => state.currentUser)
+    const setMySecretFriend = useCurrentUser((state) => state.setMySecretFriend)
     const [filtered, setFiltered] = useState("")
 
     const participantsFiltered = useMemo(() => {
-        return participationMock.filter((participant) =>
+        return currentUser.group.users.filter((participant) =>
             participant.name
                 .toLowerCase()
                 .includes(filtered.toLocaleLowerCase()),
         )
-    }, [filtered])
+    }, [filtered, currentUser.group.users])
+
     const [showModal, setShowModal] = useState(false)
-    const secretFriend = useSecretFriend((state) => state.secretFriend)
-    const setSecretFriend = useSecretFriend((state) => state.setSecretFriend)
 
     return (
         <>
             <main className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start bg-background-default py-6 px-8 md:px-20 rounded-lg md:rounded-none lg:border-t border-t-border shadow-2xs min-h-[calc(100vh-21.8rem)]">
                 <div className="flex flex-col gap-10">
                     <Description
-                        groupName={groupName}
-                        groupDescription={groupDescription}
-                        secretDate={secretDate}
-                        giftAmount={giftAmount}
+                        groupName={currentUser.group.title}
+                        groupDescription={currentUser.group.description}
+                        secretDate={currentUser.group.secretDate}
+                        giftAmount={currentUser.group.giftAmount}
                     />
-                    {!!secretFriend?.name && (
-                        <CardRevelation secretFriend={secretFriend} />
+                    {!!currentUser.mySecretFriend?.name && (
+                        <CardRevelation
+                            secretFriend={currentUser.mySecretFriend}
+                        />
                     )}
                 </div>
                 <List
@@ -87,9 +47,9 @@ const Home = () => {
             <RaffleModal
                 showModal={showModal}
                 setShowModal={setShowModal}
-                participations={participationMock}
-                secretFriend={secretFriend}
-                setSecretFriend={setSecretFriend}
+                participations={currentUser.group.users}
+                secretFriend={currentUser.mySecretFriend}
+                setSecretFriend={setMySecretFriend}
             />
         </>
     )

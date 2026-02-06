@@ -8,24 +8,24 @@ type RaffleModalProps = {
     showModal: boolean
     setShowModal: React.Dispatch<React.SetStateAction<boolean>>
     participations: Participant[]
-    showParticipation: boolean
-    setShowParticipation: React.Dispatch<React.SetStateAction<boolean>>
+    setSecretFriend: (name: Participant) => void
+    secretFriend: Participant
 }
 
 type RaffleModalInnerProps = {
     showModal: boolean
     setShowModal: React.Dispatch<React.SetStateAction<boolean>>
     participations: Participant[]
-    showParticipation: boolean
-    setShowParticipation: React.Dispatch<React.SetStateAction<boolean>>
+    setSecretFriend: (name: Participant) => void
+    secretFriend: Participant
 }
 
 const RaffleModalInner = ({
     showModal,
     setShowModal,
     participations,
-    showParticipation,
-    setShowParticipation,
+    setSecretFriend,
+    secretFriend,
 }: RaffleModalInnerProps) => {
     const [isOpening, setIsOpening] = useState(false)
     const [confettiOn, setConfettiOn] = useState(false)
@@ -57,7 +57,6 @@ const RaffleModalInner = ({
         clearAllTimeouts()
 
         setIsOpening(true)
-        setShowParticipation(false)
         setConfettiOn(false)
         setCelebrationKey((v) => v + 1)
 
@@ -75,7 +74,7 @@ const RaffleModalInner = ({
 
         timeoutsRef.current.push(
             window.setTimeout(() => {
-                setShowParticipation(true)
+                setSecretFriend(participations[0])
             }, 900),
         )
     }
@@ -93,7 +92,7 @@ const RaffleModalInner = ({
                         </Button>
                         <Button
                             onClick={handleRaffle}
-                            disabled={showParticipation}
+                            disabled={!!secretFriend?.name}
                         >
                             Sortear
                         </Button>
@@ -108,14 +107,14 @@ const RaffleModalInner = ({
                     }
                     <div className="flex justify-center animate-fade-in">
                         <AnimatedGift
-                            open={isOpening || showParticipation}
+                            open={isOpening || !!secretFriend?.name}
                             showConfetti={confettiOn}
                             celebrationKey={celebrationKey}
                         />
                     </div>
-                    {showParticipation && (
+                    {!!secretFriend?.name && (
                         <div className="text-primary text-h2 font-bold animation-translateX">
-                            {participations[0].name}
+                            {secretFriend.name}
                         </div>
                     )}
                 </div>
@@ -128,8 +127,8 @@ const RaffleModal = ({
     showModal,
     setShowModal,
     participations,
-    showParticipation,
-    setShowParticipation,
+    secretFriend,
+    setSecretFriend,
 }: RaffleModalProps) => {
     return (
         <RaffleModalInner
@@ -137,8 +136,8 @@ const RaffleModal = ({
             showModal={showModal}
             setShowModal={setShowModal}
             participations={participations}
-            showParticipation={showParticipation}
-            setShowParticipation={setShowParticipation}
+            secretFriend={secretFriend}
+            setSecretFriend={setSecretFriend}
         />
     )
 }

@@ -4,6 +4,7 @@ import List from "./components/List"
 import type { Participant } from "@/types/Home/Index"
 import RaffleModal from "./components/RaffleModal"
 import CardRevelation from "./components/CardRevelation"
+import { useSecretFriend } from "@/stores/useSecretFriend"
 
 const participationMock: Participant[] = [
     {
@@ -58,12 +59,8 @@ const Home = () => {
         )
     }, [filtered])
     const [showModal, setShowModal] = useState(false)
-    const [showParticipation, setShowParticipation] = useState(false)
-    const [secretFriend] = useState<Participant>({
-        id: "1",
-        name: "André Cardoso",
-        email: "andre.ncardoso@hotmail.com",
-    })
+    const secretFriend = useSecretFriend((state) => state.secretFriend)
+    const setSecretFriend = useSecretFriend((state) => state.setSecretFriend)
 
     return (
         <>
@@ -75,7 +72,7 @@ const Home = () => {
                         secretDate={secretDate}
                         giftAmount={giftAmount}
                     />
-                    {showParticipation && (
+                    {!!secretFriend?.name && (
                         <CardRevelation secretFriend={secretFriend} />
                     )}
                 </div>
@@ -91,8 +88,8 @@ const Home = () => {
                 showModal={showModal}
                 setShowModal={setShowModal}
                 participations={participationMock}
-                showParticipation={showParticipation}
-                setShowParticipation={setShowParticipation}
+                secretFriend={secretFriend}
+                setSecretFriend={setSecretFriend}
             />
         </>
     )

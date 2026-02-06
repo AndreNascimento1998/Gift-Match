@@ -7,6 +7,7 @@ import InfoCircleIcon from "@/components/icons/InfoCircleIcon"
 import MoneyIcon from "@/components/icons/MoneyIcon"
 import { FormatDate } from "@/helpers/FormatDate"
 import { FormatMoney } from "@/helpers/FormatMoney"
+import { useState } from "react"
 
 type DescriptionProps = {
     groupName: string
@@ -21,46 +22,61 @@ const Description = ({
     secretDate,
     giftAmount,
 }: DescriptionProps) => {
+    const [showInfo, setShowInfo] = useState(false)
+
     return (
-        <section className="flex flex-col gap-4 md:gap-10 lg:border border-border p-0 lg:p-6 rounded-lg">
+        <section className="flex flex-col gap-4 md:gap-10 border border-border p-4  lg:p-6 rounded-lg">
             <div className="flex flex-col gap-4">
-                <h1 className="text-h1 text-primary font-bold ">{groupName}</h1>
+                <h1 className="text-h2 lg:text-h1 text-primary font-bold ">
+                    {groupName}
+                </h1>
                 <div className="border border-dashed border-primary" />
             </div>
             <Bars max={10} current={1} />
             <article className="flex flex-col gap-4 font-semibold">
                 <div className="flex items-center gap-2">
                     <InfoCircleIcon />
-                    <span>Informações do grupo</span>
+                    <span onClick={() => setShowInfo(!showInfo)}>
+                        Informações do grupo
+                    </span>
                 </div>
-                <div>
-                    <div className="flex items-center gap-2">
-                        <DescriptionIcon />
-                        <span>Descrição:</span>
+                <div
+                    className={`flex-col gap-4 font-semibold md:flex ${showInfo ? "flex" : "hidden"}`}
+                >
+                    <div>
+                        <div className="flex items-center gap-2 animate-fade-in">
+                            <DescriptionIcon />
+                            <span>Descrição:</span>
+                        </div>
+                        <div className="text-muted text-h3 line-clamp-2 w-full animate-fade-in">
+                            {groupDescription}
+                        </div>
                     </div>
-                    <div className="text-muted text-h3 line-clamp-2 w-full">
-                        {groupDescription}
+                    <div>
+                        <div className="flex items-center gap-2 animate-fade-in">
+                            <CalendarIcon /> <span>Data do amigo secreto:</span>
+                        </div>
+                        <div className="text-muted animate-fade-in">
+                            {FormatDate.toBrazilianFormat(secretDate)}
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <div className="flex items-center gap-2">
-                        <CalendarIcon /> <span>Data do amigo secreto:</span>
-                    </div>
-                    <div className="text-muted">
-                        {FormatDate.toBrazilianFormat(secretDate)}
-                    </div>
-                </div>
-                <div>
-                    <div className="flex items-center gap-2">
-                        <MoneyIcon /> <span>Valor do presente:</span>
-                    </div>
-                    <div className="text-muted">
-                        {FormatMoney.toBrazilianFormat(giftAmount)}
+                    <div>
+                        <div className="flex items-center gap-2 animate-fade-in">
+                            <MoneyIcon /> <span>Valor do presente:</span>
+                        </div>
+                        <div className="text-muted animate-fade-in">
+                            {FormatMoney.toBrazilianFormat(giftAmount)}
+                        </div>
                     </div>
                 </div>
             </article>
-            <div className="flex justify-center">
-                <Button className="w-full md:w-[80%]" variant="outlined">
+            <div
+                className={`md:flex justify-center ${showInfo ? "flex" : "hidden"}`}
+            >
+                <Button
+                    className="w-full md:w-[80%] animate-fade-in"
+                    variant="outlined"
+                >
                     <div className="flex items-center gap-2">
                         <EditIcon /> <span>Editar informações</span>{" "}
                     </div>

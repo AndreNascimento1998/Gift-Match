@@ -13,7 +13,7 @@ const CardShowParticipant = ({ secretFriend }: CardShowParticipantProps) => {
     const [showSecretName, setShowSecretName] = useState(false)
 
     return (
-        <div className="flex justify-between items-center gap-2 h-22.5 border border-border py-4 px-6 rounded-lg animate-fade-in">
+        <div className="flex justify-between items-center gap-2 h-22.5 border border-border py-2 px-4 md:py-4 md:px-6 rounded-lg animate-fade-in ">
             <div className="flex items-center gap-8 truncate pr-5 text-ellipsis">
                 <div className="hidden md:block">
                     <Avatar
@@ -26,7 +26,9 @@ const CardShowParticipant = ({ secretFriend }: CardShowParticipantProps) => {
                         }}
                     >
                         {showSecretName ? secretFriend.name[0] : "*"}
-                        {showSecretName ? secretFriend.name[1] : "*"}
+                        {showSecretName
+                            ? (secretFriend.name.split(" ")[1]?.[0] ?? "")
+                            : "*"}
                     </Avatar>
                 </div>
                 {showSecretName && (

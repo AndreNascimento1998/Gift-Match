@@ -13,6 +13,9 @@ const Home = () => {
     const setMySecretFriend = useCurrentUser((state) => state.setMySecretFriend)
     const navigate = useNavigate()
     const [filtered, setFiltered] = useState("")
+    const [showSecretName, setShowSecretName] = useState(
+        localStorage.getItem("showSecretName") === "true" || false,
+    )
 
     const usersFiltered = useMemo(() => {
         return group.users.filter((user) =>
@@ -23,7 +26,7 @@ const Home = () => {
     const [showModal, setShowModal] = useState(false)
 
     const handleClickUser = (userId: string) => {
-        if (!currentUser.isAdmin) return
+        if (!currentUser.isAdmin || !showSecretName) return
         // TODO: se o id do amigo manda para informação do usuario, se for o meu manda para editar perfil
         navigate(`/user-information/${userId}`)
     }
@@ -52,6 +55,8 @@ const Home = () => {
                         <CardRevelation
                             secretFriend={currentUser.mySecretFriend}
                             handleClickUser={handleClickUser}
+                            showSecretName={showSecretName}
+                            setShowSecretName={setShowSecretName}
                         />
                     )}
                 </div>

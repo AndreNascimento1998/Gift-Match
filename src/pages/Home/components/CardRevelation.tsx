@@ -6,10 +6,14 @@ const CardRevelation = ({
     secretFriend,
     children,
     handleClickUser,
+    showSecretName,
+    setShowSecretName,
 }: {
     secretFriend: User
     children?: React.ReactNode
     handleClickUser: (userId: string) => void
+    showSecretName: boolean
+    setShowSecretName: React.Dispatch<React.SetStateAction<boolean>>
 }) => {
     return (
         <section
@@ -25,7 +29,11 @@ const CardRevelation = ({
                 </div>
             )}
             <div className="lg:w-[80%]">
-                <CardShowParticipant secretFriend={secretFriend} />
+                <CardShowParticipant
+                    secretFriend={secretFriend}
+                    showSecretName={showSecretName}
+                    setShowSecretName={setShowSecretName}
+                />
             </div>
         </section>
     )

@@ -3,27 +3,34 @@ import EyeIcon from "@/components/icons/EyeIcon"
 import { GenerateRandomColor } from "@/helpers/GenerateRandomColor"
 import type { User } from "@/types/CurrentUser/Index"
 import { Avatar } from "@mui/material"
-import { useState } from "react"
 
 type CardShowParticipantProps = {
     secretFriend: User
+    showSecretName: boolean
+    setShowSecretName: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const CardShowParticipant = ({ secretFriend }: CardShowParticipantProps) => {
-    const [showSecretName, setShowSecretName] = useState(false)
-
+const CardShowParticipant = ({
+    secretFriend,
+    showSecretName,
+    setShowSecretName,
+}: CardShowParticipantProps) => {
     const handleClick = (event: React.MouseEvent, value: boolean) => {
         event?.stopPropagation()
         setShowSecretName(value)
+        localStorage.setItem("showSecretName", value.toString())
     }
 
     const handleClickHidden = (event: React.MouseEvent, value: boolean) => {
         event?.stopPropagation()
         setShowSecretName(value)
+        localStorage.setItem("showSecretName", value.toString())
     }
 
     return (
-        <div className="flex justify-between items-center gap-2 h-22.5 border border-border py-2 px-4 md:py-4 md:px-6 rounded-lg animate-fade-in ">
+        <div
+            className={`flex justify-between items-center gap-2 h-22.5 border border-border py-2 px-4 md:py-4 md:px-6 rounded-lg animate-fade-in ${showSecretName ? "cursor-pointer" : ""}`}
+        >
             <div className="flex items-center gap-8 truncate pr-5 text-ellipsis">
                 <div className="hidden md:block">
                     <Avatar

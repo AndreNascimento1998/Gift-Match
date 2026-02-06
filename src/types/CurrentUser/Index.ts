@@ -17,7 +17,6 @@ export type CurrentUser = {
     id: string
     name: string
     email: string
-    group: Group
     mySecretFriend?: User
     dependents?: CurrentUser[]
 }

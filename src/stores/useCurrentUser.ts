@@ -1,8 +1,9 @@
-import type { CurrentUser, User } from "@/types/CurrentUser/Index"
+import type { CurrentUser, Group, User } from "@/types/CurrentUser/Index"
 import { create } from "zustand"
 
 type CurrentUserState = {
     currentUser: CurrentUser
+    group: Group
     setCurrentUser: (name: CurrentUser) => void
     setMySecretFriend: (mySecretFriendValue: User) => void
 }
@@ -13,46 +14,47 @@ export const useCurrentUser = create<CurrentUserState>((set) => ({
         name: "André",
         email: "andre.ncardoso@hotmail.com",
         mySecretFriend: {} as User,
-        group: {
-            id: "1",
-            title: "Amigo Secreto da Firma",
-            description: "Descrição do grupo",
-            secretDate: "2026-02-12",
-            giftAmount: 50,
-            users: [
-                {
-                    id: "1",
-                    name: "Stefanny Joareza",
-                    email: "sanfrancisconigthfillalrigth@yahoooutlookhotmail.com",
-                },
-                {
-                    id: "2",
-                    name: "Maria",
-                    email: "maria@dsa.com",
-                },
-                {
-                    id: "3",
-                    name: "João Souza",
-                    email: "joao@hasad.com",
-                },
-                {
-                    id: "4",
-                    name: "Ana Pereira",
-                    email: "ana@sadas.com",
-                },
-                {
-                    id: "5",
-                    name: "Carlos Oliveira",
-                    email: "carlos@dsad.com",
-                },
-                {
-                    id: "6",
-                    name: "Mariana Costa",
-                    email: "dasdas@com",
-                },
-            ],
-        },
     },
+
+    group: {
+        id: "1",
+        title: "Amigo Secreto da Firma",
+        description: "Descrição do grupo",
+        secretDate: "2026-02-12",
+        giftAmount: 50,
+        users: [
+            {
+                id: "1",
+                name: "Stefanny Joareza",
+                email: "sanfrancisconigthfillalrigth@yahoooutlookhotmail.com",
+            },
+            {
+                id: "2",
+                name: "Maria",
+                email: "maria@dsa.com",
+            },
+            {
+                id: "3",
+                name: "João Souza",
+                email: "joao@hasad.com",
+            },
+            {
+                id: "4",
+                name: "Ana Pereira",
+                email: "ana@sadas.com",
+            },
+            {
+                id: "5",
+                name: "Carlos Oliveira",
+                email: "carlos@dsad.com",
+            },
+            {
+                id: "6",
+                name: "Mariana Costa",
+                email: "dasdas@com",
+            },
+        ],
+    } as Group,
 
     setCurrentUser: (currentUserValue: CurrentUser) =>
         set({ currentUser: currentUserValue }),

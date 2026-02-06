@@ -12,6 +12,16 @@ type CardShowParticipantProps = {
 const CardShowParticipant = ({ secretFriend }: CardShowParticipantProps) => {
     const [showSecretName, setShowSecretName] = useState(false)
 
+    const handleClick = (event: React.MouseEvent, value: boolean) => {
+        event?.stopPropagation()
+        setShowSecretName(value)
+    }
+
+    const handleClickHidden = (event: React.MouseEvent, value: boolean) => {
+        event?.stopPropagation()
+        setShowSecretName(value)
+    }
+
     return (
         <div className="flex justify-between items-center gap-2 h-22.5 border border-border py-2 px-4 md:py-4 md:px-6 rounded-lg animate-fade-in ">
             <div className="flex items-center gap-8 truncate pr-5 text-ellipsis">
@@ -54,10 +64,12 @@ const CardShowParticipant = ({ secretFriend }: CardShowParticipantProps) => {
                 )}
             </div>
             {showSecretName && (
-                <EyeIcon onClick={() => setShowSecretName(false)} />
+                <EyeIcon onClick={(event) => handleClick(event, false)} />
             )}
             {!showSecretName && (
-                <EyeHiddenIcon onClick={() => setShowSecretName(true)} />
+                <EyeHiddenIcon
+                    onClick={(event) => handleClickHidden(event, true)}
+                />
             )}
         </div>
     )

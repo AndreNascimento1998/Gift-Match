@@ -1,10 +1,10 @@
 type EyeHiddenIconProps = {
-    onClick: () => void
+    onClick: (event: React.MouseEvent) => void
 }
 
 const EyeHiddenIcon = ({ onClick }: EyeHiddenIconProps) => {
     return (
-        <div onClick={onClick}>
+        <div onClick={(event) => onClick(event)}>
             <svg
                 width="32"
                 height="32"

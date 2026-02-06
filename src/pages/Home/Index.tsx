@@ -5,11 +5,13 @@ import RaffleModal from "./components/RaffleModal"
 import CardRevelation from "./components/CardRevelation"
 import { useCurrentUser } from "@/stores/useCurrentUser"
 import Seo from "@/seo/Seo"
+import { useNavigate } from "react-router-dom"
 
 const Home = () => {
     const currentUser = useCurrentUser((state) => state.currentUser)
     const group = useCurrentUser((state) => state.group)
     const setMySecretFriend = useCurrentUser((state) => state.setMySecretFriend)
+    const navigate = useNavigate()
     const [filtered, setFiltered] = useState("")
 
     const usersFiltered = useMemo(() => {
@@ -19,6 +21,12 @@ const Home = () => {
     }, [filtered, group.users])
 
     const [showModal, setShowModal] = useState(false)
+
+    const handleClickUser = (userId: string) => {
+        if (!currentUser.isAdmin) return
+        // TODO: se o id do amigo manda para informação do usuario, se for o meu manda para editar perfil
+        navigate(`/user-information/${userId}`)
+    }
 
     return (
         <>
@@ -43,6 +51,7 @@ const Home = () => {
                     {!!currentUser.mySecretFriend?.name && (
                         <CardRevelation
                             secretFriend={currentUser.mySecretFriend}
+                            handleClickUser={handleClickUser}
                         />
                     )}
                 </div>
@@ -51,6 +60,7 @@ const Home = () => {
                     filtered={filtered}
                     isAdmin={currentUser.isAdmin}
                     setFiltered={setFiltered}
+                    handleClickUser={handleClickUser}
                     setShowModal={setShowModal}
                 />
             </main>

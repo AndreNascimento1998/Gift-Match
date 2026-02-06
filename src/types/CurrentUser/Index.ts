@@ -11,12 +11,14 @@ export type User = {
     id: string
     name: string
     email: string
+    chosenGift?: string
 }
 
 export type CurrentUser = {
     id: string
     name: string
     email: string
+    chosenGift?: string
     isAdmin: boolean
     mySecretFriend?: User
     dependents?: CurrentUser[]

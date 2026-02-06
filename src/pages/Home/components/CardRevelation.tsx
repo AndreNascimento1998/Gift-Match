@@ -5,12 +5,17 @@ import type { User } from "@/types/CurrentUser/Index"
 const CardRevelation = ({
     secretFriend,
     children,
+    handleClickUser,
 }: {
     secretFriend: User
     children?: React.ReactNode
+    handleClickUser: (userId: string) => void
 }) => {
     return (
-        <section className="flex flex-col gap-4 md:gap-10 border border-border p-3 md:p-6 rounded-lg">
+        <section
+            onClick={() => handleClickUser(secretFriend.id)}
+            className="flex flex-col gap-4 md:gap-10 border border-border p-3 md:p-6 rounded-lg"
+        >
             {children ? (
                 children
             ) : (

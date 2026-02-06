@@ -52,12 +52,23 @@ const router = createBrowserRouter([
                 },
             },
             {
-                path: "about",
+                path: "user-information/:id",
                 hydrateFallbackElement,
                 lazy: async () => {
-                    const { default: About } =
-                        await import("@/pages/About/About")
-                    return { Component: About }
+                    const [
+                        { default: DefaultLayout },
+                        { default: UserInformation },
+                    ] = await Promise.all([
+                        import("@/layouts/DefaultLayout/Index"),
+                        import("@/pages/UserInformation/Index"),
+                    ])
+                    return {
+                        element: (
+                            <DefaultLayout>
+                                <UserInformation />
+                            </DefaultLayout>
+                        ),
+                    }
                 },
             },
         ],

@@ -11,6 +11,7 @@ import {
     validateYmdMin,
 } from "@/validation"
 import { useGlobalStore } from "@/stores/useGlobalStore"
+import Seo from "@/seo/Seo"
 
 const GroupInformation = () => {
     const theme = useGlobalStore((state) => state.theme)
@@ -75,7 +76,11 @@ const GroupInformation = () => {
     }
 
     return (
-        <main className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-20 items-start bg-background-default py-6 px-2 md:px-20 rounded-lg md:rounded-none lg:border-t border-t-border shadow-2xs min-h-[calc(100vh-21.8rem)]">
+        <main className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-20 items-start bg-background-default py-6 px-2 md:px-20 rounded-lg md:rounded-none lg:border-t border-t-border shadow-2xs min-h-[calc(100dvh-21.8rem)]">
+            <Seo
+                title="Group Information"
+                description="View and manage your group information, including group details, secret friend rules, and gift preferences. Update your group's profile, set the secret friend date, and customize your group's settings to enhance your experience on our platform."
+            />
             <EditInformations
                 groupTitle={draft.title}
                 groupDescription={draft.description}

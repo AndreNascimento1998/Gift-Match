@@ -27,7 +27,7 @@ const List = ({
     handleClickUser,
 }: ListProps) => {
     return (
-        <section className="flex flex-col gap-4 md:gap-10 lg:border border-border p-0 lg:p-6 rounded-lg">
+        <section className="flex flex-col gap-4 md:gap-10 lg:border border-border p-0 lg:p-6 rounded-lg bg-bg-card">
             <div className="flex items-center justify-between">
                 <div className="flex gap-2 items-center">
                     <ParticipantIcon color="var(--color-primary)" />

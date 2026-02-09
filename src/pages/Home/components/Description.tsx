@@ -25,7 +25,7 @@ const Description = ({
     const [showInfo, setShowInfo] = useState(false)
 
     return (
-        <section className="flex flex-col gap-4 md:gap-10 border border-border p-4  lg:p-6 rounded-lg">
+        <section className="flex flex-col gap-4 md:gap-10 border border-border p-4 bg-bg-card lg:p-6 rounded-lg">
             <div className="flex flex-col gap-4">
                 <h1 className="text-h2 lg:text-h1 text-primary font-bold ">
                     {groupName}

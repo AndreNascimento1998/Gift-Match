@@ -18,7 +18,7 @@ const CardRevelation = ({
     return (
         <section
             onClick={() => handleClickUser(secretFriend.id)}
-            className="flex flex-col gap-4 md:gap-10 border border-border p-3 md:p-6 rounded-lg"
+            className="flex flex-col gap-4 md:gap-10 bg-bg-card border border-border p-3 md:p-6 rounded-lg"
         >
             {children ? (
                 children

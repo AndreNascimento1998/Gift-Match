@@ -8,7 +8,7 @@ type DescriptionGroupProps = {
 
 const DescriptionGroup = ({ group }: DescriptionGroupProps) => {
     return (
-        <div className="flex flex-col gap-2 md:gap-10">
+        <div className="flex flex-col gap-4 md:gap-10">
             <div className="flex flex-col gap-2">
                 <span className="text-h2 lg:text-h1 font-bold text-primary">
                     Informações do grupo

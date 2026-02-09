@@ -19,7 +19,7 @@ const EditInformations = ({
     titleHelperText,
 }: EditInformationsProps) => {
     return (
-        <div className="flex flex-col gap-2 md:gap-10">
+        <div className="flex flex-col gap-4 md:gap-10">
             <div className="flex flex-col gap-1 md:gap-2 ">
                 <div className="flex items-center gap-2">
                     <EditIcon width={24} height={24} />

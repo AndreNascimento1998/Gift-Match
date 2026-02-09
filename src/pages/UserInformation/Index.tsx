@@ -26,6 +26,7 @@ const UserInformation = () => {
             <Overview
                 user={userData}
                 informationMySecretFriend={informationMySecretFriend}
+                isAdmin={currentUser.isAdmin}
             />
             <DescriptionGroup group={group} />
         </main>

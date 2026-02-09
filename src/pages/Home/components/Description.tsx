@@ -1,13 +1,9 @@
 import Bars from "@/components/base/Bars/Index"
 import Button from "@/components/base/Button/Index"
 import ArrowDownIcon from "@/components/icons/ArrowDownIcon"
-import CalendarIcon from "@/components/icons/CalendarIcon"
-import DescriptionIcon from "@/components/icons/DescriptionIcon"
 import EditIcon from "@/components/icons/EditIcon"
 import InfoCircleIcon from "@/components/icons/InfoCircleIcon"
-import MoneyIcon from "@/components/icons/MoneyIcon"
-import { FormatDate } from "@/helpers/FormatDate"
-import { FormatMoney } from "@/helpers/FormatMoney"
+import DescriptionComponent from "@/components/page/DescriptionComponent/Index"
 import { useState } from "react"
 
 type DescriptionProps = {
@@ -43,38 +39,18 @@ const Description = ({
                     >
                         <span>Informações do grupo</span>
                         <ArrowDownIcon
-                            className={`${showInfo ? "rotate-180" : ""} transition-transform`}
+                            className={`${showInfo ? "rotate-180" : ""} transition-transform md:hidden`}
                         />
                     </div>
                 </div>
                 <div
                     className={`flex-col gap-4 font-semibold md:flex ${showInfo ? "flex" : "hidden"}`}
                 >
-                    <div>
-                        <div className="flex items-center gap-2 animate-fade-in">
-                            <DescriptionIcon />
-                            <span>Descrição:</span>
-                        </div>
-                        <div className="text-muted text-h3 line-clamp-2 w-full animate-fade-in">
-                            {groupDescription}
-                        </div>
-                    </div>
-                    <div>
-                        <div className="flex items-center gap-2 animate-fade-in">
-                            <CalendarIcon /> <span>Data do amigo secreto:</span>
-                        </div>
-                        <div className="text-muted animate-fade-in">
-                            {FormatDate.toBrazilianFormat(secretDate)}
-                        </div>
-                    </div>
-                    <div>
-                        <div className="flex items-center gap-2 animate-fade-in">
-                            <MoneyIcon /> <span>Valor do presente:</span>
-                        </div>
-                        <div className="text-muted animate-fade-in">
-                            {FormatMoney.toBrazilianFormat(giftAmount)}
-                        </div>
-                    </div>
+                    <DescriptionComponent
+                        groupDescription={groupDescription}
+                        secretDate={secretDate}
+                        giftAmount={giftAmount}
+                    />
                 </div>
             </article>
             <div

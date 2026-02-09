@@ -5,6 +5,7 @@ import type { Group } from "@/types/CurrentUser/Index"
 import { useMemo } from "react"
 import { useNavigate } from "react-router-dom"
 import { getTodayYmd } from "@/validation"
+import GiftIcon from "@/components/icons/GiftIcon"
 
 type RulesProps = {
     secretDate: string
@@ -32,7 +33,10 @@ const Rules = ({
     return (
         <div className="flex flex-col gap-2 lg:gap-20 h-full">
             <div className="flex flex-col gap-2 md:gap-4 border border-primary rounded-lg p-2 lg:p-6 bg-bg-card animation-translateXLeft">
-                <div className="font-bold text-h2">Regras do sorteio</div>
+                <div className="flex gap-2 items-center">
+                    <GiftIcon />
+                    <div className="text-h2">Regras do sorteio</div>
+                </div>
                 <DatePicker
                     label="Data do amigo secreto:"
                     required

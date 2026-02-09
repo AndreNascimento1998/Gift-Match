@@ -3,18 +3,18 @@ import EditInformations from "./components/EditInformations"
 import Rules from "./components/Rules"
 import type { Group } from "@/types/CurrentUser/Index"
 import { useMemo, useState } from "react"
-import { Toaster, toast } from "sonner"
+import { toast } from "sonner"
 import useValidations from "@/hooks/useValidation"
 import {
     getTodayYmd,
     requiredText as requiredTextGlobal,
     validateYmdMin,
 } from "@/validation"
-import { useGlobalStore } from "@/stores/useGlobalStore"
 import Seo from "@/seo/Seo"
+import { useNavigate } from "react-router-dom"
 
 const GroupInformation = () => {
-    const theme = useGlobalStore((state) => state.theme)
+    const navigate = useNavigate()
     const group = useCurrentUser((state) => state.group)
     const updateGroup = useCurrentUser((state) => state.updateGroup)
 
@@ -62,17 +62,17 @@ const GroupInformation = () => {
         // TODO: Adicionar chamda para a API
         try {
             toast.success("Informações do grupo salvas com sucesso!")
+            updateGroup({
+                title: draft.title,
+                description: draft.description,
+                secretDate: draft.secretDate,
+                giftAmount: draft.giftAmount,
+            })
+            navigate("/")
         } catch (error) {
             console.error("Erro ao salvar informações do grupo:", error)
             toast.error("Ocorreu um erro ao salvar as informações do grupo.")
         }
-
-        updateGroup({
-            title: draft.title,
-            description: draft.description,
-            secretDate: draft.secretDate,
-            giftAmount: draft.giftAmount,
-        })
     }
 
     return (
@@ -96,7 +96,6 @@ const GroupInformation = () => {
                 secretDateError={secretDateError}
                 secretDateHelperText={secretDateHelperText}
             />
-            <Toaster theme={theme} richColors position="top-right" />
         </main>
     )
 }

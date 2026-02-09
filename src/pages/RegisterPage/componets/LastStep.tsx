@@ -34,6 +34,16 @@ const LastStep = ({
     const { requiredFields, validateRequiredFields, requiredText } =
         useValidations()
 
+    const handleFinishRegister = () => {
+        const canProceed = validateRequiredFields({
+            participation,
+            name,
+            email,
+        })
+        if (!canProceed) return
+        finishRegister()
+    }
+
     return (
         <div>
             <CustomComponent
@@ -99,7 +109,7 @@ const LastStep = ({
                 }
                 buttonSection={
                     <>
-                        <Button onClick={finishRegister}>
+                        <Button onClick={handleFinishRegister}>
                             Finalizar grupo
                         </Button>
                     </>

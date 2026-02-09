@@ -39,7 +39,7 @@ const Details = () => {
                 {cardsItems.map((item) => (
                     <div
                         key={item.text}
-                        className="flex items-center border border-border rounded-lg px-4 py-2 gap-2"
+                        className="flex items-center border border-border rounded-lg px-4 py-2 gap-2 bg-bg-card"
                     >
                         {item.icon}
                         {item.text}

@@ -7,12 +7,16 @@ type EditInformationsProps = {
     groupTitle: string
     groupDescription: string
     setUpdateGroup: (patch: Partial<Group>) => void
+    titleError?: boolean
+    titleHelperText?: string
 }
 
 const EditInformations = ({
     groupTitle,
     groupDescription,
     setUpdateGroup,
+    titleError,
+    titleHelperText,
 }: EditInformationsProps) => {
     return (
         <div className="flex flex-col gap-2 md:gap-10">
@@ -33,9 +37,12 @@ const EditInformations = ({
                 </div>
                 <Input
                     label="Nome do grupo"
+                    required
                     placeholder="Natal da família"
                     value={groupTitle}
                     onValueChange={(value) => setUpdateGroup({ title: value })}
+                    error={Boolean(titleError)}
+                    helperText={titleHelperText}
                 />
                 <Input
                     label="Descrição do grupo"

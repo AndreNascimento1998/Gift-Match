@@ -4,22 +4,29 @@ import DatePicker from "@/components/base/Input/DatePicker"
 import type { Group } from "@/types/CurrentUser/Index"
 import { useMemo } from "react"
 import { useNavigate } from "react-router-dom"
+import { getTodayYmd } from "@/validation"
 
 type RulesProps = {
     secretDate: string
     giftAmount: number
     setUpdateGroup: (patch: Partial<Group>) => void
+    onSave: () => void
+    secretDateError?: boolean
+    secretDateHelperText?: string
 }
 
-const Rules = ({ secretDate, giftAmount, setUpdateGroup }: RulesProps) => {
+const Rules = ({
+    secretDate,
+    giftAmount,
+    setUpdateGroup,
+    onSave,
+    secretDateError,
+    secretDateHelperText,
+}: RulesProps) => {
     const navigate = useNavigate()
 
     const todayYmd = useMemo(() => {
-        const date = new Date()
-        const day = String(date.getDate()).padStart(2, "0")
-        const month = String(date.getMonth() + 1).padStart(2, "0")
-        const year = date.getFullYear()
-        return `${year}-${month}-${day}`
+        return getTodayYmd()
     }, [])
 
     return (
@@ -31,6 +38,8 @@ const Rules = ({ secretDate, giftAmount, setUpdateGroup }: RulesProps) => {
                     required
                     value={secretDate}
                     min={todayYmd}
+                    error={Boolean(secretDateError)}
+                    helperText={secretDateHelperText}
                     onValueChange={(value) => {
                         setUpdateGroup({ secretDate: value })
                     }}
@@ -39,12 +48,14 @@ const Rules = ({ secretDate, giftAmount, setUpdateGroup }: RulesProps) => {
                     label="Valor (opcional):"
                     value={giftAmount}
                     onNumberChange={(value) =>
-                        setUpdateGroup({ giftAmount: value })
+                        setUpdateGroup({ giftAmount: value ?? 0 })
                     }
                 />
             </div>
             <div className="flex flex-col gap-2">
-                <Button className="w-full">Salvar Alterações</Button>
+                <Button className="w-full" onClick={onSave}>
+                    Salvar Alterações
+                </Button>
                 <Button variant="outlined" onClick={() => navigate("/")}>
                     Cancelar
                 </Button>

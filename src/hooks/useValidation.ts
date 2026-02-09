@@ -1,14 +1,12 @@
 import { useState } from "react"
+import {
+    isEmpty,
+    type Primitive,
+    requiredText,
+    validateRequiredFields as validateRequiredFieldsUtil,
+} from "@/validation"
 
 type RequiredFields = Record<string, boolean>
-type Primitive = string | number | null | undefined
-
-const requiredText = "Campo obrigatório"
-
-const isEmpty = (value: Primitive) => {
-    if (value == null) return true
-    return value.toString().trim().length === 0
-}
 
 const useValidations = () => {
     const [required, setRequired] = useState(false)
@@ -21,13 +19,11 @@ const useValidations = () => {
     }
 
     const validateRequiredFields = (fields: Record<string, Primitive>) => {
-        const next: RequiredFields = Object.fromEntries(
-            Object.entries(fields).map(([key, value]) => [key, isEmpty(value)]),
-        )
+        const { valid, requiredFields: next } =
+            validateRequiredFieldsUtil(fields)
         setRequiredFields(next)
-        const anyInvalid = Object.values(next).some(Boolean)
-        setRequired(anyInvalid)
-        return !anyInvalid
+        setRequired(!valid)
+        return valid
     }
 
     return {

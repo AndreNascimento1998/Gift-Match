@@ -31,7 +31,7 @@ const Details = () => {
                 <img
                     src={bannerDesktop}
                     alt="Banner"
-                    className="hidden md:block w-[574px]"
+                    className="hidden md:block w-118.5"
                 />
             </div>
 

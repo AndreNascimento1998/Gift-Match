@@ -4,6 +4,7 @@ import FirstStep from "./componets/FirstStep"
 import LastStep from "./componets/LastStep"
 import SecondStep from "./componets/SecondStep"
 import SuccessStep from "./componets/SuccessStep"
+import bannerDesktop from "@/assets/images/DetailsImages/banner.png"
 import Seo from "@/seo/Seo"
 
 const RegisterPage = () => {
@@ -38,6 +39,13 @@ const RegisterPage = () => {
                 title="Criar grupo"
                 description="Crie um grupo, defina regras e convide participantes para o amigo secreto."
             />
+            <div className="w-full flex justify-center md:hidden">
+                <img
+                    src={bannerDesktop}
+                    alt="Banner"
+                    className="block md:hidden w-100"
+                />
+            </div>
             {currentStep === 0 && (
                 <FirstStep
                     sectionStep={true}

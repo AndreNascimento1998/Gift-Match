@@ -20,7 +20,7 @@ const EditInformations = ({
 }: EditInformationsProps) => {
     return (
         <div className="flex flex-col gap-4 md:gap-10">
-            <div className="flex flex-col gap-1 md:gap-2 ">
+            <div className="flex flex-col gap-1 md:gap-2 animation-translateX">
                 <div className="flex items-center gap-2">
                     <EditIcon width={24} height={24} />
                     <h1 className="text-h2 lg:text-h1 font-bold text-primary">
@@ -30,7 +30,7 @@ const EditInformations = ({
                 <div className="border border-dashed border-primary w-full" />
                 <div className="font-bold">{groupTitle}</div>
             </div>
-            <div className="flex flex-col gap-2 md:gap-4 bg-bg-card border border-border p-2 lg:p-6 rounded-lg">
+            <div className="flex flex-col gap-2 md:gap-4 bg-bg-card border border-border p-2 lg:p-6 rounded-lg animation-translateX">
                 <div className="flex gap-2 items-center">
                     <InfoCircleIcon />
                     <span>Informações básicas</span>

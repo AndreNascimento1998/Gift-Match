@@ -17,23 +17,27 @@ const CardRevelation = ({
     setShowSecretName: React.Dispatch<React.SetStateAction<boolean>>
 }) => {
     return (
-        <Card onClick={() => handleClickUser(secretFriend.id)}>
-            {children ? (
-                children
-            ) : (
-                <div className="flex items-center gap-2">
-                    <GiftIcon color="var(--color-primary)" />
-                    <div className="text-h2 font-bold">Meu amigo secreto</div>
+        <div className="animation-translateX">
+            <Card onClick={() => handleClickUser(secretFriend.id)}>
+                {children ? (
+                    children
+                ) : (
+                    <div className="flex items-center gap-2">
+                        <GiftIcon color="var(--color-primary)" />
+                        <div className="text-h2 font-bold">
+                            Meu amigo secreto
+                        </div>
+                    </div>
+                )}
+                <div className="lg:w-[80%]">
+                    <CardShowParticipant
+                        secretFriend={secretFriend}
+                        showSecretName={showSecretName}
+                        setShowSecretName={setShowSecretName}
+                    />
                 </div>
-            )}
-            <div className="lg:w-[80%]">
-                <CardShowParticipant
-                    secretFriend={secretFriend}
-                    showSecretName={showSecretName}
-                    setShowSecretName={setShowSecretName}
-                />
-            </div>
-        </Card>
+            </Card>
+        </div>
     )
 }
 

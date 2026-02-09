@@ -31,7 +31,7 @@ const Rules = ({
 
     return (
         <div className="flex flex-col gap-2 lg:gap-20 h-full">
-            <div className="flex flex-col gap-2 md:gap-4 border border-primary rounded-lg p-2 lg:p-6 bg-bg-card">
+            <div className="flex flex-col gap-2 md:gap-4 border border-primary rounded-lg p-2 lg:p-6 bg-bg-card animation-translateXLeft">
                 <div className="font-bold text-h2">Regras do sorteio</div>
                 <DatePicker
                     label="Data do amigo secreto:"
@@ -52,7 +52,7 @@ const Rules = ({
                     }
                 />
             </div>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 animation-translateXLeft animation-translateXLeft">
                 <Button className="w-full" onClick={onSave}>
                     Salvar Alterações
                 </Button>

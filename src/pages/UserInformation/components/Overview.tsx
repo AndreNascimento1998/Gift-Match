@@ -22,15 +22,15 @@ const CardInformation = ({
     informationMySecretFriend,
 }: OverviewProps) => {
     return (
-        <>
+        <div className="flex flex-col gap-2 animation-translateX">
             <div className="flex flex-col gap-2">
                 {informationMySecretFriend && (
-                    <span className="text-h2 lg:text-h1 font-bold text-primary">
+                    <span className="text-h2 lg:text-h1 font-bold text-primary ">
                         Meu amigo secreto
                     </span>
                 )}
                 {!informationMySecretFriend && (
-                    <span className="text-h2 lg:text-h1 font-bold text-primary">
+                    <span className="text-h2 lg:text-h1 font-bold text-primary ">
                         Perfil do Participante
                     </span>
                 )}
@@ -68,13 +68,13 @@ const CardInformation = ({
                     </span>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 
 const CardGift = ({ chosenGift }: { chosenGift?: string }) => {
     return (
-        <div className="flex flex-col gap-4 border border-border rounded-lg bg-bg-card animate-fade-in p-2 md:p-4">
+        <div className="flex flex-col gap-4 border border-border rounded-lg bg-bg-card animation-translateX p-2 md:p-4">
             <div className="flex gap-2 items-center">
                 <GiftIcon color="var(--color-primary)" />
                 <span>Presentes escolhidos</span>
@@ -96,7 +96,7 @@ const CardGift = ({ chosenGift }: { chosenGift?: string }) => {
 
 const ChatMySecretFriend = () => {
     return (
-        <div className="flex gap-2 justify-between items-center cursor-pointer border border-border rounded-lg bg-bg-card animate-fade-in p-2 md:p-4">
+        <div className="flex gap-2 justify-between items-center cursor-pointer border border-border rounded-lg bg-bg-card animation-translateX p-2 md:p-4">
             <div className="flex gap-2">
                 <ChatMessageIcon />
                 <div className="flex flex-col gap-2 justify-center">
@@ -113,7 +113,7 @@ const ChatMySecretFriend = () => {
 
 const SectionEdit = () => {
     return (
-        <div className="flex flex-col gap-2 md:gap-4 border border-primary rounded-lg p-2 lg:p-6 bg-bg-card animate-fade-in">
+        <div className="flex flex-col gap-2 md:gap-4 border border-primary rounded-lg p-2 lg:p-6 bg-bg-card animation-translateX">
             <div className="flex gap-2 items-center">
                 <MarkGroupIcon />
                 <span className="text-muted">Opções</span>

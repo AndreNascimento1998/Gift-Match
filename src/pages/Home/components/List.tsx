@@ -1,4 +1,5 @@
 import Button from "@/components/base/Button/Index"
+import Card from "@/components/base/Cards/Index"
 import Input from "@/components/base/Input/Index"
 import ArrowRightIcon from "@/components/icons/ArrowRightIcon"
 import ParticipantIcon from "@/components/icons/ParticipantIcon"
@@ -27,7 +28,7 @@ const List = ({
     handleClickUser,
 }: ListProps) => {
     return (
-        <section className="flex flex-col gap-4 md:gap-10 lg:border border-border p-2 lg:p-6 rounded-lg bg-bg-card">
+        <Card>
             <div className="flex items-center justify-between">
                 <div className="flex gap-2 items-center">
                     <ParticipantIcon color="var(--color-primary)" />
@@ -103,7 +104,7 @@ const List = ({
                     Sortear
                 </Button>
             </section>
-        </section>
+        </Card>
     )
 }
 

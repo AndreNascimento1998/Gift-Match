@@ -1,5 +1,6 @@
 import Bars from "@/components/base/Bars/Index"
 import Button from "@/components/base/Button/Index"
+import Card from "@/components/base/Cards/Index"
 import ArrowDownIcon from "@/components/icons/ArrowDownIcon"
 import EditIcon from "@/components/icons/EditIcon"
 import InfoCircleIcon from "@/components/icons/InfoCircleIcon"
@@ -22,7 +23,7 @@ const Description = ({
     const [showInfo, setShowInfo] = useState(false)
 
     return (
-        <section className="flex flex-col gap-4 md:gap-10 border border-border p-4 bg-bg-card lg:p-6 rounded-lg">
+        <Card>
             <div className="flex flex-col gap-4">
                 <h1 className="text-h2 lg:text-h1 text-primary font-bold ">
                     {groupName}
@@ -65,7 +66,7 @@ const Description = ({
                     </div>
                 </Button>
             </div>
-        </section>
+        </Card>
     )
 }
 

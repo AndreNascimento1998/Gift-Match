@@ -1,6 +1,7 @@
 import CardShowParticipant from "@/components/page/Card/CardShowParticipant"
 import GiftIcon from "@/components/icons/GiftIcon"
 import type { User } from "@/types/CurrentUser/Index"
+import Card from "@/components/base/Cards/Index"
 
 const CardRevelation = ({
     secretFriend,
@@ -16,10 +17,7 @@ const CardRevelation = ({
     setShowSecretName: React.Dispatch<React.SetStateAction<boolean>>
 }) => {
     return (
-        <section
-            onClick={() => handleClickUser(secretFriend.id)}
-            className="flex flex-col gap-4 md:gap-10 bg-bg-card border border-border p-3 md:p-6 rounded-lg"
-        >
+        <Card onClick={() => handleClickUser(secretFriend.id)}>
             {children ? (
                 children
             ) : (
@@ -35,7 +33,7 @@ const CardRevelation = ({
                     setShowSecretName={setShowSecretName}
                 />
             </div>
-        </section>
+        </Card>
     )
 }
 

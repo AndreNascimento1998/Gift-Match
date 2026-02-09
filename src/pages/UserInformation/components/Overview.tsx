@@ -1,3 +1,4 @@
+import Card from "@/components/base/Cards/Index"
 import ArrowRightIcon from "@/components/icons/ArrowRightIcon"
 import ChatMessageIcon from "@/components/icons/ChatMessageIcon"
 import GiftIcon from "@/components/icons/GiftIcon"
@@ -31,7 +32,7 @@ const CardInformation = ({
                 )}
                 <div className="w-full border border-dashed border-primary" />
             </div>
-            <div className="flex flex-col gap-4 border border-border bg-bg-card rounded-lg animate-fade-in p-2 md:p-4">
+            <Card>
                 <div className="flex items-center gap-4 ">
                     <Avatar
                         sx={{
@@ -63,14 +64,14 @@ const CardInformation = ({
                         </span>
                     </div>
                 )}
-            </div>
+            </Card>
         </>
     )
 }
 
 const CardGift = ({ chosenGift }: { chosenGift?: string }) => {
     return (
-        <div className="flex flex-col gap-4 border border-border rounded-lg bg-bg-card animate-fade-in p-2 md:p-4">
+        <Card>
             <div className="flex gap-2 items-center">
                 <GiftIcon color="var(--color-primary)" />
                 <span>Presentes escolhidos</span>
@@ -86,7 +87,7 @@ const CardGift = ({ chosenGift }: { chosenGift?: string }) => {
                     </span>
                 )}
             </div>
-        </div>
+        </Card>
     )
 }
 

@@ -3,14 +3,17 @@ import EditInformations from "./components/EditInformations"
 import Rules from "./components/Rules"
 import type { Group } from "@/types/CurrentUser/Index"
 import { useMemo, useState } from "react"
+import { Toaster, toast } from "sonner"
 import useValidations from "@/hooks/useValidation"
 import {
     getTodayYmd,
     requiredText as requiredTextGlobal,
     validateYmdMin,
 } from "@/validation"
+import { useGlobalStore } from "@/stores/useGlobalStore"
 
 const GroupInformation = () => {
+    const theme = useGlobalStore((state) => state.theme)
     const group = useCurrentUser((state) => state.group)
     const updateGroup = useCurrentUser((state) => state.updateGroup)
 
@@ -55,6 +58,13 @@ const GroupInformation = () => {
         if (secretDateMinErrorText) return
 
         console.log("Saving with values:", draft)
+        // TODO: Adicionar chamda para a API
+        try {
+            toast.success("Informações do grupo salvas com sucesso!")
+        } catch (error) {
+            console.error("Erro ao salvar informações do grupo:", error)
+            toast.error("Ocorreu um erro ao salvar as informações do grupo.")
+        }
 
         updateGroup({
             title: draft.title,
@@ -81,6 +91,7 @@ const GroupInformation = () => {
                 secretDateError={secretDateError}
                 secretDateHelperText={secretDateHelperText}
             />
+            <Toaster theme={theme} richColors position="top-right" />
         </main>
     )
 }

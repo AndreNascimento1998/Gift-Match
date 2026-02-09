@@ -6,8 +6,11 @@ import SecondStep from "./componets/SecondStep"
 import SuccessStep from "./componets/SuccessStep"
 import bannerDesktop from "@/assets/images/DetailsImages/banner.png"
 import Seo from "@/seo/Seo"
+import { Toaster, toast } from "sonner"
+import { useGlobalStore } from "@/stores/useGlobalStore"
 
 const RegisterPage = () => {
+    const theme = useGlobalStore((state) => state.theme)
     const [groupName, setGroupName] = useState("")
     const [groupDescription, setGroupDescription] = useState("")
     const [secretDate, setSecretDate] = useState("")
@@ -31,6 +34,13 @@ const RegisterPage = () => {
         })
 
         setCurrentStep(3)
+
+        try {
+            toast.success("Cadastro finalizado com sucesso!")
+        } catch (error) {
+            console.error("Erro ao finalizar registro:", error)
+            toast.error("Ocorreu um erro ao finalizar o registro.")
+        }
     }
 
     return (
@@ -91,6 +101,7 @@ const RegisterPage = () => {
             )}
 
             <Details />
+            <Toaster theme={theme} richColors position="top-right" />
         </main>
     )
 }

@@ -10,14 +10,16 @@ const HeaderCreatorGroup = () => {
 
     return (
         <header className="flex justify-between items-center py-4 px-8 md:px-20 rounded-lg lg:rounded-none bg-background-default">
-            <section className="hidden md:flex items-center gap-2">
-                <h1 className="text-h3">Amigo secreto online </h1>
+            <section className="hidden md:flex items-center gap-2 animation-translateBottom">
+                <h1 className="text-h3 animation-translateBottom">
+                    Amigo secreto online{" "}
+                </h1>
                 <GiftIcon
                     onClick={toggleTheme}
                     className="bg-background-default"
                 />
             </section>
-            <article className="hidden lg:flex lg:items-center gap-9">
+            <article className="hidden lg:flex lg:items-center gap-9 animation-translateBottom">
                 <span className="text-h3">Como funciona</span>
                 <span className="text-h3">
                     <Dropdown
@@ -32,11 +34,11 @@ const HeaderCreatorGroup = () => {
             </article>
             <section
                 onClick={toggleTheme}
-                className="block lg:hidden bg-background-default"
+                className="block lg:hidden bg-background-default animation-translateBottom"
             >
                 Avatar
             </section>
-            <article className="block lg:hidden">
+            <article className="block lg:hidden animation-translateBottom">
                 <ButtonHamburguerIcon />
             </article>
         </header>

@@ -118,6 +118,40 @@
         animation: translateXLeft 400ms ease-in-out;
     }
 
+    .animation-translateBottom {
+        animation: translateBottom 400ms ease-in-out;
+        overflow: hidden;
+    }
+
+    .animation-translateTop {
+        animation: translateTop 400ms ease-in-out;
+        overflow: hidden;
+    }
+
+    @keyframes translateTop {
+        0% {
+            transform: translateY(40px);
+            opacity: 0;
+        }
+
+        100% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes translateBottom {
+        0% {
+            transform: translateY(-40px);
+            opacity: 0;
+        }
+
+        100% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
     @keyframes translateXLeft {
         0% {
             transform: translateX(40px);

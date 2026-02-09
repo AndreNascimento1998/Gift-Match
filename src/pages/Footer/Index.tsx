@@ -3,7 +3,7 @@ import FlagBrazil from "@/components/icons/FlagBrazil"
 const Footer = () => {
     return (
         <div className="flex flex-col px-8 md:px-20 gap-3 rounded-lg lg:rounded-none bg-background-default pb-8 pt-14 text-h3">
-            <section className="flex flex-col md:flex-row md:justify-around md:px-10">
+            <section className="flex flex-col md:flex-row md:justify-around md:px-10 animation-translateTop">
                 <div className="flex md:block flex-col items-center">
                     <h3 className="text-h3 font-bold text-primary">
                         Amigo secreto online
@@ -39,8 +39,10 @@ const Footer = () => {
                     </span>
                 </div>
             </section>
-            <div className="border border-primary w-full" />
-            <span className="flex justify-center">Copyright © 2026</span>
+            <div className="border border-primary w-full animation-translateTop" />
+            <span className="flex justify-center animation-translateTop">
+                Copyright © 2026
+            </span>
         </div>
     )
 }

@@ -71,6 +71,7 @@ const HeaderDefault = () => {
     return (
         <header className="flex justify-between items-center py-4 px-8 md:px-20 rounded-lg lg:rounded-none text-white bg-secondary">
             <Avatar
+                className="animation-translateBottom"
                 sx={{
                     bgcolor: "third.main",
                     cursor: "pointer",
@@ -79,7 +80,7 @@ const HeaderDefault = () => {
             >
                 A
             </Avatar>
-            <div className="hidden lg:block">
+            <div className="hidden lg:block animation-translateBottom">
                 <MenuLinks
                     options={menuOptions}
                     optionsDropdown={optionsDropdown}

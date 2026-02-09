@@ -1,3 +1,4 @@
+import ArrowDownIcon from "@/components/icons/ArrowDownIcon"
 import ArrowRightIcon from "@/components/icons/ArrowRightIcon"
 import ChatMessageIcon from "@/components/icons/ChatMessageIcon"
 import CopyIcon from "@/components/icons/CopyIcon"
@@ -10,6 +11,7 @@ import TrashIcon from "@/components/icons/TrashIcon"
 import { GenerateRandomColor } from "@/helpers/GenerateRandomColor"
 import type { User } from "@/types/CurrentUser/Index"
 import { Avatar } from "@mui/material"
+import { useState } from "react"
 
 type OverviewProps = {
     user: User
@@ -112,23 +114,37 @@ const ChatMySecretFriend = () => {
 }
 
 const SectionEdit = () => {
+    const [showOptions, setShowOptions] = useState(false)
+
     return (
         <div className="flex flex-col gap-2 md:gap-4 border border-primary rounded-lg p-2 lg:p-6 bg-bg-card animation-translateX">
-            <div className="flex gap-2 items-center">
+            <div
+                onClick={() => setShowOptions(!showOptions)}
+                className="flex gap-2 items-center"
+            >
                 <MarkGroupIcon />
-                <span className="text-muted">Opções</span>
+                <div className="flex justify-between w-full">
+                    <span className="text-muted font-bold">Opções</span>
+                    <ArrowDownIcon
+                        className={`${showOptions ? "rotate-180" : ""} transition-transform md:hidden`}
+                    />
+                </div>
             </div>
-            <div className="flex gap-2 items-center border border-primary rounded-lg p-2 cursor-pointer hover:bg-primary-hover">
-                <EditIcon />
-                <span>Editar dados</span>
-            </div>
-            <div className="flex gap-2 items-center border border-primary rounded-lg p-2 cursor-pointer hover:bg-primary-hover">
-                <CopyIcon />
-                <span>Copiar link de convite</span>
-            </div>
-            <div className="flex gap-2 items-center border border-primary rounded-lg p-2 cursor-pointer hover:bg-primary-hover">
-                <TrashIcon />
-                <span>Remover participante</span>
+            <div
+                className={`${showOptions ? "flex" : "hidden"} flex-col gap-2 md:flex`}
+            >
+                <div className="flex gap-2 items-center border border-primary rounded-lg p-2 cursor-pointer hover:bg-primary-hover animate-fade-in">
+                    <EditIcon />
+                    <span>Editar dados</span>
+                </div>
+                <div className="flex gap-2 items-center border border-primary rounded-lg p-2 cursor-pointer hover:bg-primary-hover animate-fade-in">
+                    <CopyIcon />
+                    <span>Copiar link de convite</span>
+                </div>
+                <div className="flex gap-2 items-center border border-primary rounded-lg p-2 cursor-pointer hover:bg-primary-hover animate-fade-in">
+                    <TrashIcon />
+                    <span>Remover participante</span>
+                </div>
             </div>
         </div>
     )

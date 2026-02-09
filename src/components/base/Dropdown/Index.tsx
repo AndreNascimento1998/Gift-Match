@@ -93,6 +93,7 @@ const Dropdown = <TValue extends string = string>({
 
     const mergedMenuProps: Omit<MenuProps, "anchorEl" | "open" | "onClose"> = {
         ...menuProps,
+        disableScrollLock: menuProps?.disableScrollLock ?? true,
         slotProps: {
             ...userSlotProps,
             paper: {

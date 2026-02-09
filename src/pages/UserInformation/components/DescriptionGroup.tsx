@@ -13,7 +13,12 @@ const DescriptionGroup = ({ group }: DescriptionGroupProps) => {
                     Informações do grupo
                 </span>
                 <div className="w-full border border-dashed border-primary" />
-                <span>{group.title}</span>
+                <div className="flex gap-1">
+                    <span>Título do grupo:</span>
+                    <span className="font-bold text-primary">
+                        {group.title}
+                    </span>
+                </div>
             </div>
             <div className="flex flex-col gap-2">
                 <DescriptionComponent

@@ -1,4 +1,4 @@
-import CardShowParticipant from "@/components/base/Card/CardShowParticipant"
+import CardShowParticipant from "@/components/page/Card/CardShowParticipant"
 import GiftIcon from "@/components/icons/GiftIcon"
 import type { User } from "@/types/CurrentUser/Index"
 

@@ -15,14 +15,12 @@ const DescriptionGroup = ({ group }: DescriptionGroupProps) => {
                 </span>
                 <div className="w-full border border-dashed border-primary" />
             </div>
-            <Card>
-                <div className="flex gap-1">
-                    <span>Título do grupo:</span>
-                    <span className="font-bold text-primary">
-                        {group.title}
-                    </span>
-                </div>
-            </Card>
+
+            <div className="flex gap-1">
+                <span className="font-bold">Título do grupo:</span>
+                <span className="font-bold text-primary">{group.title}</span>
+            </div>
+
             <Card>
                 <div className="flex flex-col gap-3">
                     <DescriptionComponent

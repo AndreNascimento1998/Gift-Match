@@ -117,7 +117,7 @@ const RaffleModalInner = ({
                         />
                     </div>
                     {!!secretFriend?.name && (
-                        <div className="text-primary text-h2 font-bold animation-translateX">
+                        <div className="text-primary text-center text-h2 font-bold animation-translateX">
                             {secretFriend.name}
                         </div>
                     )}

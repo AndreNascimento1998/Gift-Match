@@ -1,5 +1,6 @@
 import Bars from "@/components/base/Bars/Index"
 import Button from "@/components/base/Button/Index"
+import ArrowDownIcon from "@/components/icons/ArrowDownIcon"
 import CalendarIcon from "@/components/icons/CalendarIcon"
 import DescriptionIcon from "@/components/icons/DescriptionIcon"
 import EditIcon from "@/components/icons/EditIcon"
@@ -36,9 +37,15 @@ const Description = ({
             <article className="flex flex-col gap-4 font-semibold">
                 <div className="flex items-center gap-2">
                     <InfoCircleIcon />
-                    <span onClick={() => setShowInfo(!showInfo)}>
-                        Informações do grupo
-                    </span>
+                    <div
+                        onClick={() => setShowInfo(!showInfo)}
+                        className="flex justify-between items-center w-full"
+                    >
+                        <span>Informações do grupo</span>
+                        <ArrowDownIcon
+                            className={`${showInfo ? "rotate-180" : ""} transition-transform`}
+                        />
+                    </div>
                 </div>
                 <div
                     className={`flex-col gap-4 font-semibold md:flex ${showInfo ? "flex" : "hidden"}`}

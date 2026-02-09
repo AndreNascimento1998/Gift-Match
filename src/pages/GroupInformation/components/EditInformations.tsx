@@ -1,12 +1,19 @@
 import Input from "@/components/base/Input/Index"
 import EditIcon from "@/components/icons/EditIcon"
 import InfoCircleIcon from "@/components/icons/InfoCircleIcon"
+import type { Group } from "@/types/CurrentUser/Index"
 
 type EditInformationsProps = {
     groupTitle: string
+    groupDescription: string
+    setUpdateGroup: (patch: Partial<Group>) => void
 }
 
-const EditInformations = ({ groupTitle }: EditInformationsProps) => {
+const EditInformations = ({
+    groupTitle,
+    groupDescription,
+    setUpdateGroup,
+}: EditInformationsProps) => {
     return (
         <div className="flex flex-col gap-2 md:gap-10">
             <div className="flex flex-col gap-1 md:gap-2 ">
@@ -19,21 +26,26 @@ const EditInformations = ({ groupTitle }: EditInformationsProps) => {
                 <div className="border border-dashed border-primary w-full" />
                 <div className="font-bold">{groupTitle}</div>
             </div>
-            <div className="flex flex-col gap-2 md:gap-4 bg-bg-card  p-4 lg:p-6 rounded-lg">
+            <div className="flex flex-col gap-2 md:gap-4 bg-bg-card border border-border p-2 lg:p-6 rounded-lg">
                 <div className="flex gap-2 items-center">
                     <InfoCircleIcon />
                     <span>Informações básicas</span>
                 </div>
                 <Input
                     label="Nome do grupo"
-                    defaultValue={groupTitle}
                     placeholder="Natal da família"
+                    value={groupTitle}
+                    onValueChange={(value) => setUpdateGroup({ title: value })}
                 />
                 <Input
                     label="Descrição do grupo"
                     textArea
                     minRows={3}
-                    placeholder="Uma breve descrição do grupo"
+                    value={groupDescription}
+                    onValueChange={(value) =>
+                        setUpdateGroup({ description: value })
+                    }
+                    placeholder="Descrição do grupo"
                 />
             </div>
         </div>

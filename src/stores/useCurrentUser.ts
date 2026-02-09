@@ -6,6 +6,7 @@ type CurrentUserState = {
     group: Group
     setCurrentUser: (name: CurrentUser) => void
     setMySecretFriend: (mySecretFriendValue: User) => void
+    updateGroup: (patch: Partial<Group>) => void
 }
 
 export const useCurrentUser = create<CurrentUserState>((set) => ({
@@ -65,6 +66,14 @@ export const useCurrentUser = create<CurrentUserState>((set) => ({
             currentUser: {
                 ...state.currentUser,
                 mySecretFriend: mySecretFriendValue,
+            },
+        })),
+
+    updateGroup: (patch: Partial<Group>) =>
+        set((state) => ({
+            group: {
+                ...state.group,
+                ...patch,
             },
         })),
 }))

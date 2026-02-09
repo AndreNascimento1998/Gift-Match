@@ -57,7 +57,7 @@ const SecondStep = ({
                 sectionStep={sectionStep}
                 onBeforeNextStep={validate}
                 section={
-                    <div className="flex flex-col gap-4">
+                    <div className="flex flex-col gap-4 animation-translateX">
                         <DatePicker
                             label="Data do amigo secreto:"
                             required

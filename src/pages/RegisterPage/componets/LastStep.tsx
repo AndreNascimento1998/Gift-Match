@@ -59,6 +59,7 @@ const LastStep = ({
                     <>
                         <Input
                             label="Qual seu nome?"
+                            className="animation-translateX"
                             required
                             value={name}
                             onValueChange={(value) => {
@@ -71,6 +72,7 @@ const LastStep = ({
                         />
                         <Input
                             label="Qual seu e-mail?"
+                            className="animation-translateX"
                             required
                             value={email}
                             onValueChange={(value) => {
@@ -82,6 +84,7 @@ const LastStep = ({
                             }
                         />
                         <RadioGroup<"participing" | "noParticiping">
+                            className="animation-translateX"
                             label="Você vai participar?"
                             required
                             value={participation}
@@ -109,7 +112,10 @@ const LastStep = ({
                 }
                 buttonSection={
                     <>
-                        <Button onClick={handleFinishRegister}>
+                        <Button
+                            className="animation-translateX"
+                            onClick={handleFinishRegister}
+                        >
                             Finalizar grupo
                         </Button>
                     </>

@@ -30,22 +30,27 @@ const SuccessStep = ({
                 sectionStep={sectionStep}
                 section={
                     <div className="flex flex-col gap-8">
-                        <div>
+                        <div className="animation-translateX">
                             <InputClipBoard
                                 handleCopy={handleCopyText}
                                 value="amigosecreto.com/groups/cmkvgvadsddfg/dsaasaasll.."
                             />
                         </div>
-                        <span className="text-secondary-text text-h2 font-semibold">
+                        <span className="text-secondary-text text-h2 font-semibold animation-translateX">
                             🔒 Apenas quem tiver o link pode entrar no grupo.
                         </span>
                     </div>
                 }
                 buttonSection={
-                    <Button onClick={() => navigate("/")}>Ver meu grupo</Button>
+                    <Button
+                        className="animation-translateX"
+                        onClick={() => navigate("/")}
+                    >
+                        Ver meu grupo
+                    </Button>
                 }
                 footer={
-                    <div className="font-bold text-h2 text-primary">
+                    <div className="font-bold text-h2 text-primary animation-translateX">
                         Você poderá adicionar participantes, definir regras e
                         realizar o sorteio no painel.
                     </div>

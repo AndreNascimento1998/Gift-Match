@@ -31,7 +31,7 @@ const Details = () => {
                 <img
                     src={bannerDesktop}
                     alt="Banner"
-                    className="hidden md:block w-118.5"
+                    className="hidden md:block w-118.5 animation-translateXLeft"
                 />
             </div>
 
@@ -39,7 +39,7 @@ const Details = () => {
                 {cardsItems.map((item) => (
                     <div
                         key={item.text}
-                        className="flex items-center border border-border rounded-lg px-4 py-2 gap-2 bg-bg-card"
+                        className="flex items-center border border-border rounded-lg px-4 py-2 gap-2 bg-bg-card animation-translateXLeft"
                     >
                         {item.icon}
                         {item.text}

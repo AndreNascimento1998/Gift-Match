@@ -31,7 +31,7 @@ const StepCount = ({
           )
 
     return (
-        <div className="flex items-center">
+        <div className="flex items-center animation-translateX">
             {normalizedSteps.map((step, index) => (
                 <div
                     onClick={() => handleClickStep(step - 1)}

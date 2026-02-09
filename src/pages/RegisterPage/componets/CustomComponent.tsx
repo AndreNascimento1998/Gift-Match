@@ -34,7 +34,7 @@ const FirstStep = ({
 
     return (
         <main className="flex flex-col gap-9">
-            <section>
+            <section className="animation-translateX">
                 <h1 className="text-h1 font-bold">{title}</h1>
                 <h2 className="text-secondary-text text-h2 font-semibold">
                     {subtitle}
@@ -54,7 +54,12 @@ const FirstStep = ({
                 {buttonSection ? (
                     buttonSection
                 ) : (
-                    <Button onClick={handleNextStep}>{buttonText}</Button>
+                    <Button
+                        onClick={handleNextStep}
+                        className="animation-translateX"
+                    >
+                        {buttonText}
+                    </Button>
                 )}
                 {footer}
             </section>

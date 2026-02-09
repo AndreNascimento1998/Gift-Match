@@ -37,6 +37,7 @@ const FirstStep = ({
                 section={
                     <>
                         <Input
+                            className="animation-translateX"
                             label="Nome do grupo:"
                             required
                             value={groupName}
@@ -51,6 +52,7 @@ const FirstStep = ({
                             }
                         />
                         <Input
+                            className="animation-translateX"
                             label="Descrição (opcional):"
                             textArea
                             textAreaRows={4}
@@ -60,7 +62,7 @@ const FirstStep = ({
                     </>
                 }
                 footer={
-                    <div className="flex justify-center">
+                    <div className="flex justify-center animation-translateX">
                         <span>
                             Já tem um grupo?{" "}
                             <span className="text-primary cursor-pointer">

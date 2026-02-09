@@ -71,6 +71,26 @@ const router = createBrowserRouter([
                     }
                 },
             },
+            {
+                path: "group-information",
+                hydrateFallbackElement,
+                lazy: async () => {
+                    const [
+                        { default: DefaultLayout },
+                        { default: GroupInformation },
+                    ] = await Promise.all([
+                        import("@/layouts/DefaultLayout/Index"),
+                        import("@/pages/GroupInformation/Index"),
+                    ])
+                    return {
+                        element: (
+                            <DefaultLayout>
+                                <GroupInformation />
+                            </DefaultLayout>
+                        ),
+                    }
+                },
+            },
         ],
     },
 ])

@@ -6,6 +6,7 @@ import EditIcon from "@/components/icons/EditIcon"
 import InfoCircleIcon from "@/components/icons/InfoCircleIcon"
 import DescriptionComponent from "@/components/page/DescriptionComponent/Index"
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 type DescriptionProps = {
     groupName: string
@@ -20,6 +21,7 @@ const Description = ({
     secretDate,
     giftAmount,
 }: DescriptionProps) => {
+    const navigate = useNavigate()
     const [showInfo, setShowInfo] = useState(false)
 
     return (
@@ -60,6 +62,7 @@ const Description = ({
                 <Button
                     className="w-full md:w-[80%] animate-fade-in"
                     variant="outlined"
+                    onClick={() => navigate("/group-information")}
                 >
                     <div className="flex items-center gap-2">
                         <EditIcon /> <span>Editar informações</span>{" "}

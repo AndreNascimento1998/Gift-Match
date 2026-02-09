@@ -1,3 +1,5 @@
+import ArrowRightIcon from "@/components/icons/ArrowRightIcon"
+import ChatMessageIcon from "@/components/icons/ChatMessageIcon"
 import GiftIcon from "@/components/icons/GiftIcon"
 import InfoCircleIcon from "@/components/icons/InfoCircleIcon"
 import MessageIcon from "@/components/icons/MessageIcon"
@@ -7,18 +9,29 @@ import { Avatar } from "@mui/material"
 
 type OverviewProps = {
     user: User
+    informationMySecretFriend: boolean
 }
 
-const CardInformation = ({ user }: OverviewProps) => {
+const CardInformation = ({
+    user,
+    informationMySecretFriend,
+}: OverviewProps) => {
     return (
         <>
             <div className="flex flex-col gap-2">
-                <span className="text-h2 lg:text-h1 font-bold text-primary">
-                    Meu amigo secreto
-                </span>
+                {informationMySecretFriend && (
+                    <span className="text-h2 lg:text-h1 font-bold text-primary">
+                        Meu amigo secreto
+                    </span>
+                )}
+                {!informationMySecretFriend && (
+                    <span className="text-h2 lg:text-h1 font-bold text-primary">
+                        Perfil do Participante
+                    </span>
+                )}
                 <div className="w-full border border-dashed border-primary" />
             </div>
-            <div className="flex flex-col gap-4 border border-border rounded-lg animate-fade-in p-4">
+            <div className="flex flex-col gap-4 border border-border rounded-lg animate-fade-in p-2 md:p-4">
                 <div className="flex items-center gap-4 ">
                     <Avatar
                         sx={{
@@ -32,18 +45,24 @@ const CardInformation = ({ user }: OverviewProps) => {
                         {user.name ? user.name[0] : "*"}
                         {user.name ? (user.name.split(" ")[1]?.[0] ?? "") : "*"}
                     </Avatar>
-                    <div className="flex flex-col">
-                        <span className="font-bold">{user.name}</span>
-                        <span>{user.email}</span>
+                    <div className="flex flex-col overflow-hidden">
+                        <span className="font-bold text-ellipsis truncate">
+                            {user.name}
+                        </span>
+                        <span className="text-ellipsis truncate">
+                            {user.email}
+                        </span>
                     </div>
                 </div>
-                <div className="flex gap-2 items-center italic border border-border rounded-lg p-2">
-                    <MessageIcon />
-                    {/*TODO: Colocar aqui um recado para o participante quando tiver */}
-                    <span className="text-muted">
-                        Este participante ainda não tem nenhum recado.
-                    </span>
-                </div>
+                {informationMySecretFriend && (
+                    <div className="flex gap-2 items-center italic border border-border rounded-lg p-2">
+                        <MessageIcon />
+                        {/*TODO: Colocar aqui um recado para o participante quando tiver */}
+                        <span className="text-muted">
+                            Este participante ainda não tem nenhum recado.
+                        </span>
+                    </div>
+                )}
             </div>
         </>
     )
@@ -51,7 +70,7 @@ const CardInformation = ({ user }: OverviewProps) => {
 
 const CardGift = ({ chosenGift }: { chosenGift?: string }) => {
     return (
-        <div className="flex flex-col gap-4 border border-border rounded-lg animate-fade-in p-4">
+        <div className="flex flex-col gap-4 border border-border rounded-lg animate-fade-in p-2 md:p-4">
             <div className="flex gap-2 items-center">
                 <GiftIcon color="var(--color-primary)" />
                 <span>Presentes escolhidos</span>
@@ -71,11 +90,32 @@ const CardGift = ({ chosenGift }: { chosenGift?: string }) => {
     )
 }
 
-const Overview = ({ user }: OverviewProps) => {
+const ChatMySecretFriend = () => {
+    return (
+        <div className="flex gap-2 justify-between items-center border border-border rounded-lg animate-fade-in p-2">
+            <div className="flex gap-2">
+                <ChatMessageIcon />
+                <div className="flex flex-col gap-2 justify-center">
+                    <span className="font-bold">Conversar</span>
+                    <span className="text-[14px] text-muted">
+                        Amigo secreto
+                    </span>
+                </div>
+            </div>
+            <ArrowRightIcon />
+        </div>
+    )
+}
+
+const Overview = ({ user, informationMySecretFriend }: OverviewProps) => {
     return (
         <div className="flex flex-col gap-2 md:gap-10">
-            <CardInformation user={user} />
+            <CardInformation
+                user={user}
+                informationMySecretFriend={informationMySecretFriend}
+            />
             <CardGift chosenGift={user.chosenGift} />
+            {informationMySecretFriend && <ChatMySecretFriend />}
         </div>
     )
 }

@@ -26,6 +26,12 @@ const Home = () => {
     const [showModal, setShowModal] = useState(false)
 
     const handleClickUser = (userId: string) => {
+        if (!currentUser.isAdmin) return
+        // TODO: se o id do amigo manda para informação do usuario, se for o meu manda para editar perfil
+        navigate(`/user-information/${userId}`)
+    }
+
+    const handleClickMySecretFriend = (userId: string) => {
         if (!currentUser.isAdmin || !showSecretName) return
         // TODO: se o id do amigo manda para informação do usuario, se for o meu manda para editar perfil
         navigate(`/user-information/${userId}`)
@@ -43,7 +49,7 @@ const Home = () => {
                     description: group.description,
                 }}
             />
-            <main className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start bg-background-default py-6 px-8 md:px-20 rounded-lg md:rounded-none lg:border-t border-t-border shadow-2xs min-h-[calc(100vh-21.8rem)]">
+            <main className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start bg-background-default py-6 px-2 md:px-20 rounded-lg md:rounded-none lg:border-t border-t-border shadow-2xs min-h-[calc(100vh-21.8rem)]">
                 <div className="flex flex-col gap-10">
                     <Description
                         groupName={group.title}
@@ -54,7 +60,7 @@ const Home = () => {
                     {!!currentUser.mySecretFriend?.name && (
                         <CardRevelation
                             secretFriend={currentUser.mySecretFriend}
-                            handleClickUser={handleClickUser}
+                            handleClickUser={handleClickMySecretFriend}
                             showSecretName={showSecretName}
                             setShowSecretName={setShowSecretName}
                         />

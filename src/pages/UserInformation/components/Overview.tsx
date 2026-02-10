@@ -248,50 +248,17 @@ const SectionEdit = ({
                     <span>Remover participante</span>
                 </div>
             </div>
-            <BaseModal
-                open={showModal}
-                onClose={() => setShowModal(false)}
-                onSubmit={() => handleSave()}
-                title={
-                    <div className="flex gap-2 items-center">
-                        <EditIcon />
-                        <span>Editar informações</span>
-                    </div>
-                }
-                footer={
-                    <div className="w-full">
-                        <Button type="submit" className="w-full">
-                            Salvar
-                        </Button>
-                    </div>
-                }
-            >
-                <div className="flex flex-col gap-4">
-                    <div className="text-h2 text-primary">
-                        Edite as informações do participante
-                    </div>
-                    <div className="flex flex-col gap-4">
-                        <Input
-                            label="Nome"
-                            value={userName}
-                            onValueChange={(value) => setUserName(value)}
-                            error={Boolean(requiredFields.name)}
-                            helperText={
-                                requiredFields.name ? requiredText : undefined
-                            }
-                        />
-                        <Input
-                            label="Email"
-                            value={userEmail}
-                            onValueChange={(value) => setUserEmail(value)}
-                            error={Boolean(requiredFields.email)}
-                            helperText={
-                                requiredFields.email ? requiredText : undefined
-                            }
-                        />
-                    </div>
-                </div>
-            </BaseModal>
+            <ModalEditUser
+                showModal={showModal}
+                setShowModal={setShowModal}
+                handleSave={handleSave}
+                userName={userName}
+                setUserName={setUserName}
+                userEmail={userEmail}
+                setUserEmail={setUserEmail}
+                requiredFields={requiredFields}
+                requiredText={requiredText}
+            />
             <ModalRemoveItem
                 title="Remover participante"
                 showModal={showModalRemove}
@@ -300,6 +267,78 @@ const SectionEdit = ({
                 handleClickConfirm={() => handleDeleteItem()}
             />
         </div>
+    )
+}
+
+const ModalEditUser = ({
+    showModal,
+    setShowModal,
+    handleSave,
+    userName,
+    setUserName,
+    userEmail,
+    setUserEmail,
+    requiredFields,
+    requiredText,
+}: {
+    showModal: boolean
+    setShowModal: (value: boolean) => void
+    handleSave: () => void
+    userName: string
+    setUserName: (value: string) => void
+    userEmail: string
+    setUserEmail: (value: string) => void
+    requiredFields: {
+        name?: boolean
+        email?: boolean
+    }
+    requiredText: string
+}) => {
+    return (
+        <BaseModal
+            open={showModal}
+            onClose={() => setShowModal(false)}
+            onSubmit={() => handleSave()}
+            title={
+                <div className="flex gap-2 items-center">
+                    <EditIcon />
+                    <span>Editar informações</span>
+                </div>
+            }
+            footer={
+                <div className="w-full">
+                    <Button type="submit" className="w-full">
+                        Salvar
+                    </Button>
+                </div>
+            }
+        >
+            <div className="flex flex-col gap-4">
+                <div className="text-h2 text-primary">
+                    Edite as informações do participante
+                </div>
+                <div className="flex flex-col gap-4">
+                    <Input
+                        label="Nome"
+                        value={userName}
+                        onValueChange={(value) => setUserName(value)}
+                        error={Boolean(requiredFields.name)}
+                        helperText={
+                            requiredFields.name ? requiredText : undefined
+                        }
+                    />
+                    <Input
+                        label="Email"
+                        value={userEmail}
+                        onValueChange={(value) => setUserEmail(value)}
+                        error={Boolean(requiredFields.email)}
+                        helperText={
+                            requiredFields.email ? requiredText : undefined
+                        }
+                    />
+                </div>
+            </div>
+        </BaseModal>
     )
 }
 

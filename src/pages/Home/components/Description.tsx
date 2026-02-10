@@ -4,7 +4,7 @@ import Card from "@/components/base/Cards/Index"
 import ArrowDownIcon from "@/components/icons/ArrowDownIcon"
 import EditIcon from "@/components/icons/EditIcon"
 import InfoCircleIcon from "@/components/icons/InfoCircleIcon"
-import DescriptionComponent from "@/components/page/DescriptionComponent/Index"
+import DescriptionGroup from "@/components/page/DescriptionComponent/components/DescriptionGroup"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
@@ -50,7 +50,7 @@ const Description = ({
                     <div
                         className={`flex-col gap-4 font-semibold md:flex ${showInfo ? "flex" : "hidden"}`}
                     >
-                        <DescriptionComponent
+                        <DescriptionGroup
                             groupDescription={groupDescription}
                             secretDate={secretDate}
                             giftAmount={giftAmount}

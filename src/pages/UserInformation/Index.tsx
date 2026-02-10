@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom"
 import Overview from "./components/Overview"
 import type { User } from "@/types/CurrentUser/Index"
 import { useState } from "react"
-import DescriptionGroup from "./components/DescriptionGroup"
+import DescriptionComponent from "@/components/page/DescriptionComponent/Index"
 
 const UserInformation = () => {
     const { id } = useParams()
@@ -32,7 +32,7 @@ const UserInformation = () => {
                 setUserGroup={setUserGroup}
                 deleteUserGroup={deleteUserGroup}
             />
-            <DescriptionGroup group={group} />
+            <DescriptionComponent group={group} />
         </main>
     )
 }

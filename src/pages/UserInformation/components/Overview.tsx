@@ -12,6 +12,7 @@ import MarkGroupIcon from "@/components/icons/MarkGroupIcon"
 import MessageIcon from "@/components/icons/MessageIcon"
 import TrashIcon from "@/components/icons/TrashIcon"
 import { GenerateRandomColor } from "@/helpers/GenerateRandomColor"
+import useValidations from "@/hooks/useValidation"
 import type { User } from "@/types/CurrentUser/Index"
 import { Avatar } from "@mui/material"
 import { useEffect, useState } from "react"
@@ -134,6 +135,8 @@ const SectionEdit = ({
     const [animateSucessCopy, setAnimateSucessCopy] = useState(false)
     const [userName, setUserName] = useState(user.name)
     const [userEmail, setUserEmail] = useState(user.email)
+    const { requiredFields, validateRequiredFields, requiredText } =
+        useValidations()
 
     useEffect(() => {
         if (!animateSucessCopy) return
@@ -160,11 +163,19 @@ const SectionEdit = ({
     }
 
     const handleSave = () => {
+        const canProceed = validateRequiredFields({
+            name: userName,
+            email: userEmail,
+        })
+
+        if (!canProceed) return
+
         setUserGroup({
             id: user.id,
             name: userName,
             email: userEmail,
         })
+
         toast.success("Informações do participante atualizadas com sucesso!")
         setShowModal(false)
     }
@@ -235,11 +246,19 @@ const SectionEdit = ({
                             label="Nome"
                             value={userName}
                             onValueChange={(value) => setUserName(value)}
+                            error={Boolean(requiredFields.name)}
+                            helperText={
+                                requiredFields.name ? requiredText : undefined
+                            }
                         />
                         <Input
                             label="Email"
                             value={userEmail}
                             onValueChange={(value) => setUserEmail(value)}
+                            error={Boolean(requiredFields.email)}
+                            helperText={
+                                requiredFields.email ? requiredText : undefined
+                            }
                         />
                     </div>
                 </div>

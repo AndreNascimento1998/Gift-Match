@@ -223,6 +223,7 @@ const SectionEdit = ({
             <BaseModal
                 open={showModal}
                 onClose={() => setShowModal(false)}
+                onSubmit={() => handleSave()}
                 title={
                     <div className="flex gap-2 items-center">
                         <EditIcon />
@@ -231,7 +232,7 @@ const SectionEdit = ({
                 }
                 footer={
                     <div className="w-full">
-                        <Button onClick={handleSave} className="w-full">
+                        <Button type="submit" className="w-full">
                             Salvar
                         </Button>
                     </div>

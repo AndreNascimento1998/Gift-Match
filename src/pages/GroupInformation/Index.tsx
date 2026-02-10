@@ -76,7 +76,14 @@ const GroupInformation = () => {
     }
 
     return (
-        <main className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-20 items-start bg-background-default py-6 px-2 md:px-20 rounded-lg md:rounded-none lg:border-t border-t-border shadow-2xs min-h-[calc(100dvh-21.8rem)]">
+        <form
+            className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-20 items-start bg-background-default py-6 px-2 md:px-20 rounded-lg md:rounded-none lg:border-t border-t-border shadow-2xs min-h-[calc(100dvh-21.8rem)]"
+            onSubmit={(event) => {
+                event.preventDefault()
+                handleSave()
+            }}
+            noValidate
+        >
             <Seo
                 title="Group Information"
                 description="View and manage your group information, including group details, secret friend rules, and gift preferences. Update your group's profile, set the secret friend date, and customize your group's settings to enhance your experience on our platform."
@@ -92,11 +99,10 @@ const GroupInformation = () => {
                 secretDate={draft.secretDate}
                 giftAmount={draft.giftAmount}
                 setUpdateGroup={setUpdateGroup}
-                onSave={handleSave}
                 secretDateError={secretDateError}
                 secretDateHelperText={secretDateHelperText}
             />
-        </main>
+        </form>
     )
 }
 

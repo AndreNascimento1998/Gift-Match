@@ -11,7 +11,6 @@ type RulesProps = {
     secretDate: string
     giftAmount: number
     setUpdateGroup: (patch: Partial<Group>) => void
-    onSave: () => void
     secretDateError?: boolean
     secretDateHelperText?: string
 }
@@ -20,7 +19,6 @@ const Rules = ({
     secretDate,
     giftAmount,
     setUpdateGroup,
-    onSave,
     secretDateError,
     secretDateHelperText,
 }: RulesProps) => {
@@ -57,10 +55,14 @@ const Rules = ({
                 />
             </div>
             <div className="flex flex-col gap-2 animation-translateXLeft animation-translateXLeft">
-                <Button className="w-full" onClick={onSave}>
+                <Button className="w-full" type="submit">
                     Salvar Alterações
                 </Button>
-                <Button variant="outlined" onClick={() => navigate("/")}>
+                <Button
+                    type="button"
+                    variant="outlined"
+                    onClick={() => navigate("/")}
+                >
                     Cancelar
                 </Button>
             </div>

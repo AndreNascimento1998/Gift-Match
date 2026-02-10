@@ -12,6 +12,7 @@ type FirstStepProps = {
     buttonText?: string
     sectionStep: boolean
     onBeforeNextStep?: () => boolean | Promise<boolean>
+    onSubmit?: () => void | Promise<void>
 }
 
 const FirstStep = ({
@@ -25,11 +26,21 @@ const FirstStep = ({
     buttonText,
     sectionStep,
     onBeforeNextStep,
+    onSubmit,
 }: FirstStepProps) => {
     const handleNextStep = async () => {
         const canProceed = (await onBeforeNextStep?.()) ?? true
         if (!canProceed) return
         setCurrentStep(currentStep + 1)
+    }
+
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
+        if (onSubmit) {
+            await onSubmit()
+            return
+        }
+        await handleNextStep()
     }
 
     return (
@@ -40,7 +51,11 @@ const FirstStep = ({
                     {subtitle}
                 </h2>
             </section>
-            <section className="flex flex-col gap-6 md:w-[70%]">
+            <form
+                className="flex flex-col gap-6 md:w-[70%]"
+                onSubmit={handleSubmit}
+                noValidate
+            >
                 {sectionStep && (
                     <div className="flex justify-center py-3">
                         <StepCount
@@ -54,15 +69,12 @@ const FirstStep = ({
                 {buttonSection ? (
                     buttonSection
                 ) : (
-                    <Button
-                        onClick={handleNextStep}
-                        className="animation-translateX"
-                    >
+                    <Button type="submit" className="animation-translateX">
                         {buttonText}
                     </Button>
                 )}
                 {footer}
-            </section>
+            </form>
         </main>
     )
 }

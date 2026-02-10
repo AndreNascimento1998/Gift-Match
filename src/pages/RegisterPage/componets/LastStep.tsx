@@ -52,9 +52,7 @@ const LastStep = ({
                 currentStep={currentStep}
                 setCurrentStep={setCurrentStep}
                 sectionStep={sectionStep}
-                onBeforeNextStep={() =>
-                    validateRequiredFields({ participation, name, email })
-                }
+                onSubmit={handleFinishRegister}
                 section={
                     <>
                         <Input
@@ -112,10 +110,7 @@ const LastStep = ({
                 }
                 buttonSection={
                     <>
-                        <Button
-                            className="animation-translateX"
-                            onClick={handleFinishRegister}
-                        >
+                        <Button className="animation-translateX" type="submit">
                             Finalizar grupo
                         </Button>
                     </>

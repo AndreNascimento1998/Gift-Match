@@ -1,4 +1,4 @@
-import type { ReactNode } from "react"
+import type { FormEvent, ReactNode } from "react"
 import Dialog, { type DialogProps } from "@mui/material/Dialog"
 import DialogContent from "@mui/material/DialogContent"
 import DialogActions from "@mui/material/DialogActions"
@@ -8,6 +8,8 @@ export type BaseModalProps = {
     onClose: () => void
     title?: ReactNode
     children?: ReactNode
+
+    onSubmit?: (event: FormEvent<HTMLFormElement>) => void
 
     header?: ReactNode
     footer?: ReactNode
@@ -24,6 +26,7 @@ const BaseModal = ({
     onClose,
     title,
     children,
+    onSubmit,
     header,
     footer,
     maxWidth = "sm",
@@ -96,27 +99,61 @@ const BaseModal = ({
                 </div>
             ) : null}
 
-            <DialogContent
-                sx={{
-                    paddingX: 3,
-                    paddingY: 3,
-                    color: "var(--color-main)",
-                }}
-            >
-                {children}
-            </DialogContent>
-
-            {footer ? (
-                <DialogActions
-                    sx={{
-                        paddingX: 3,
-                        paddingY: 2,
-                        borderTop: "1px solid var(--color-border)",
+            {onSubmit ? (
+                <form
+                    onSubmit={(event) => {
+                        event.preventDefault()
+                        onSubmit(event)
                     }}
+                    noValidate
                 >
-                    {footer}
-                </DialogActions>
-            ) : null}
+                    <DialogContent
+                        sx={{
+                            paddingX: 3,
+                            paddingY: 3,
+                            color: "var(--color-main)",
+                        }}
+                    >
+                        {children}
+                    </DialogContent>
+
+                    {footer ? (
+                        <DialogActions
+                            sx={{
+                                paddingX: 3,
+                                paddingY: 2,
+                                borderTop: "1px solid var(--color-border)",
+                            }}
+                        >
+                            {footer}
+                        </DialogActions>
+                    ) : null}
+                </form>
+            ) : (
+                <>
+                    <DialogContent
+                        sx={{
+                            paddingX: 3,
+                            paddingY: 3,
+                            color: "var(--color-main)",
+                        }}
+                    >
+                        {children}
+                    </DialogContent>
+
+                    {footer ? (
+                        <DialogActions
+                            sx={{
+                                paddingX: 3,
+                                paddingY: 2,
+                                borderTop: "1px solid var(--color-border)",
+                            }}
+                        >
+                            {footer}
+                        </DialogActions>
+                    ) : null}
+                </>
+            )}
         </Dialog>
     )
 }

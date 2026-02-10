@@ -17,7 +17,9 @@ const UserInformation = () => {
 
     const [informationMySecretFriend] = useState<boolean>(
         currentUser.mySecretFriend?.id === id ||
-            currentUser.dependents.some((dependent) => dependent.id === id),
+            currentUser.dependents.some(
+                (dependent) => dependent.mySecretFriend?.id === id,
+            ),
     )
 
     return (

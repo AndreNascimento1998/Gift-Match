@@ -1,4 +1,9 @@
-import type { CurrentUser, Group, User } from "@/types/CurrentUser/Index"
+import type {
+    CurrentUser,
+    Dependent,
+    Group,
+    User,
+} from "@/types/CurrentUser/Index"
 import { create } from "zustand"
 
 type CurrentUserState = {
@@ -7,8 +12,9 @@ type CurrentUserState = {
     setCurrentUser: (currentUserValue: CurrentUser) => void
     setMySecretFriend: (mySecretFriendValue: User) => void
     updateGroup: (patch: Partial<Group>) => void
-    setUserGroup: (userGroup: User) => void
+    setUserGroup: (userGroup: User | Dependent) => void
     deleteUserGroup: (userId: string) => void
+    setDependent: (dependent: Dependent) => void
 }
 
 export const useCurrentUser = create<CurrentUserState>((set) => ({
@@ -100,7 +106,17 @@ export const useCurrentUser = create<CurrentUserState>((set) => ({
             },
         })),
 
-    setUserGroup: (userGroup: User) =>
+    setDependent: (dependent: Dependent) =>
+        set((state) => ({
+            currentUser: {
+                ...state.currentUser,
+                dependents: state.currentUser.dependents.map((d) =>
+                    d.id === dependent.id ? dependent : d,
+                ),
+            },
+        })),
+
+    setUserGroup: (userGroup: User | Dependent) =>
         set((state) => ({
             group: {
                 ...state.group,

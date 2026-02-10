@@ -1,6 +1,7 @@
 import Button from "@/components/base/Button/Index"
 import Dropdown from "@/components/base/Dropdown/Index"
 import Input from "@/components/base/Input/Index"
+import BaseModal from "@/components/base/Modal/Index"
 import CopyIcon from "@/components/icons/CopyIcon"
 import DepententIcons from "@/components/icons/DependentIcons"
 import DropdownPoints from "@/components/icons/DropdownPoints"
@@ -8,20 +9,104 @@ import EditIcon from "@/components/icons/EditIcon"
 import InterrogationIcon from "@/components/icons/InterrogationIcon"
 import PlusIcon from "@/components/icons/PlusIcon"
 import ProfileIcon from "@/components/icons/ProfileIcon"
-import SearchIcon from "@/components/icons/SearchIcon"
 import TrashIcon from "@/components/icons/TrashIcon"
 import { GenerateRandomColor } from "@/helpers/GenerateRandomColor"
-import type { User } from "@/types/CurrentUser/Index"
-import { Avatar, InputAdornment } from "@mui/material"
+import type { Dependent } from "@/types/CurrentUser/Index"
+import { Avatar } from "@mui/material"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { toast } from "sonner"
 
-const InfoDependents = ({ dependents }: { dependents: User[] }) => {
+type ModalEditNameDependentProps = {
+    showModal: boolean
+    setShowModal: (show: boolean) => void
+    secretFriendClicked: Dependent
+    setDependent: (dependent: Dependent) => void
+    setUserGroup: (userGroup: Dependent) => void
+}
+
+const ModalEditNameDependent = ({
+    showModal,
+    setShowModal,
+    secretFriendClicked,
+    setDependent,
+    setUserGroup,
+}: ModalEditNameDependentProps) => {
+    const [nameDependent, setNameDependent] = useState(
+        secretFriendClicked?.name || "",
+    )
+
+    const setDefault = () => {
+        setNameDependent(secretFriendClicked?.name || "")
+        setShowModal(false)
+    }
+
+    const handleSave = () => {
+        console.log(secretFriendClicked, "das")
+        try {
+            setDependent({
+                ...secretFriendClicked,
+                name: nameDependent,
+            })
+            setUserGroup({
+                ...secretFriendClicked,
+                name: nameDependent,
+            })
+            toast.success("Nome do dependente atualizado com sucesso!")
+        } catch (error) {
+            console.error("Erro ao atualizar o nome do dependente:", error)
+            toast.error("Erro ao atualizar o nome do dependente.")
+        }
+    }
+
+    return (
+        <BaseModal
+            open={showModal}
+            onClose={setDefault}
+            title={
+                <div className="flex items-center gap-2">
+                    <EditIcon />
+                    <span>Editar nome do dependente</span>
+                </div>
+            }
+            footer={
+                <div className="w-full">
+                    <Button className="w-full" onClick={handleSave}>
+                        Salvar
+                    </Button>
+                </div>
+            }
+        >
+            <div className="flex flex-col gap-2">
+                <span className="font-bold ">Editar o nome do dependente</span>
+                <Input
+                    label="Nome"
+                    value={nameDependent}
+                    onValueChange={(value) => setNameDependent(value)}
+                />
+            </div>
+        </BaseModal>
+    )
+}
+
+const InfoDependents = ({
+    dependents,
+    setDependent,
+    setUserGroup,
+}: {
+    dependents: Dependent[]
+    setDependent: (dependent: Dependent) => void
+    setUserGroup: (userGroup: Dependent) => void
+}) => {
     const navigate = useNavigate()
+    const [showModalEditName, setShowModalEditName] = useState(false)
+    const [secretFriendClicked, setSecretFriendClicked] = useState<Dependent>(
+        {} as Dependent,
+    )
     const [showSecretFriend, setShowSecretFriend] = useState<boolean[]>(
         new Array(dependents.length).fill(false),
     )
-    const itemsDropdown = (id: string) => {
+    const itemsDropdown = (dependent: Dependent) => {
         return [
             {
                 value: "view",
@@ -32,7 +117,7 @@ const InfoDependents = ({ dependents }: { dependents: User[] }) => {
                     </div>
                 ),
                 // TODO: trocar pela página de perfil do dependente quando existir
-                onClick: () => navigate(`/user-information/${id}`),
+                onClick: () => navigate(`/user-information/${dependent.id}`),
             },
             {
                 value: "edit",
@@ -43,7 +128,9 @@ const InfoDependents = ({ dependents }: { dependents: User[] }) => {
                     </div>
                 ),
                 onClick: () => {
-                    // TODO: abrir modal/fluxo de edição
+                    const newDependent = dependent
+                    setSecretFriendClicked(newDependent)
+                    setShowModalEditName(true)
                 },
             },
             {
@@ -54,7 +141,10 @@ const InfoDependents = ({ dependents }: { dependents: User[] }) => {
                         <span className="text-primary">Ver amigo secreto</span>
                     </div>
                 ),
-                onClick: () => navigate(`/user-information/${id}`),
+                onClick: () =>
+                    navigate(
+                        `/user-information/${dependent.mySecretFriend?.id}`,
+                    ),
             },
             {
                 value: "remove",
@@ -70,10 +160,9 @@ const InfoDependents = ({ dependents }: { dependents: User[] }) => {
             },
         ]
     }
-    const [filtered, setFiltered] = useState<string>("")
 
     return (
-        <div className="flex flex-col gap-4 md:gap-10">
+        <div className="flex flex-col gap-4 md:gap-10 animation-translateX">
             <div className="flex flex-col gap-2">
                 <div className="flex items-center gap-2">
                     <DepententIcons
@@ -96,20 +185,7 @@ const InfoDependents = ({ dependents }: { dependents: User[] }) => {
                     sorteio e as informações deles.
                 </span>
             </div>
-            <div>
-                <Input
-                    label="Pesquisar participante"
-                    value={filtered}
-                    onValueChange={(value) => {
-                        setFiltered(value)
-                    }}
-                    endAdornment={
-                        <InputAdornment position="end">
-                            <SearchIcon color="var(--color-primary)" />
-                        </InputAdornment>
-                    }
-                />
-            </div>
+
             <div className="flex flex-col gap-2">
                 {dependents &&
                     dependents.map((dependent, index) => (
@@ -163,8 +239,10 @@ const InfoDependents = ({ dependents }: { dependents: User[] }) => {
                                 </div>
                             </div>
 
-                            <Dropdown items={itemsDropdown(dependent.id)}>
-                                <DropdownPoints />
+                            <Dropdown items={itemsDropdown(dependent)}>
+                                <div className="flex justify-center w-10 cursor-pointer">
+                                    <DropdownPoints />
+                                </div>
                             </Dropdown>
                         </div>
                     ))}
@@ -178,6 +256,14 @@ const InfoDependents = ({ dependents }: { dependents: User[] }) => {
                     <span>Adicionar dependente</span>
                 </div>
             </Button>
+            <ModalEditNameDependent
+                key={secretFriendClicked?.id ?? "no-dependent"}
+                showModal={showModalEditName}
+                setShowModal={setShowModalEditName}
+                secretFriendClicked={secretFriendClicked}
+                setDependent={setDependent}
+                setUserGroup={setUserGroup}
+            />
         </div>
     )
 }

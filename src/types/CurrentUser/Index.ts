@@ -7,6 +7,14 @@ export type Group = {
     users: User[]
 }
 
+export type Dependent = {
+    id: string
+    name: string
+    groupId?: string
+    mySecretFriend?: User
+    chosenGift?: string
+}
+
 export type User = {
     id: string
     name: string
@@ -24,5 +32,5 @@ export type CurrentUser = {
     groupId: string
     isAdmin: boolean
     mySecretFriend?: User
-    dependents: CurrentUser[]
+    dependents: Dependent[]
 }

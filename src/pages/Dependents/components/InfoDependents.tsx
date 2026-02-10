@@ -11,14 +11,16 @@ import ProfileIcon from "@/components/icons/ProfileIcon"
 import SearchIcon from "@/components/icons/SearchIcon"
 import TrashIcon from "@/components/icons/TrashIcon"
 import { GenerateRandomColor } from "@/helpers/GenerateRandomColor"
-import type { CurrentUser } from "@/types/CurrentUser/Index"
+import type { User } from "@/types/CurrentUser/Index"
 import { Avatar, InputAdornment } from "@mui/material"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
-const InfoDependents = ({ dependents }: { dependents: CurrentUser[] }) => {
+const InfoDependents = ({ dependents }: { dependents: User[] }) => {
     const navigate = useNavigate()
-
+    const [showSecretFriend, setShowSecretFriend] = useState<boolean[]>(
+        new Array(dependents.length).fill(false),
+    )
     const itemsDropdown = (id: string) => {
         return [
             {
@@ -110,9 +112,9 @@ const InfoDependents = ({ dependents }: { dependents: CurrentUser[] }) => {
             </div>
             <div className="flex flex-col gap-2">
                 {dependents &&
-                    dependents.map((dependent) => (
+                    dependents.map((dependent, index) => (
                         <div
-                            className={`flex justify-between items-center gap-2 h-22.5 border border-border py-2 px-4 md:py-4 md:px-6 rounded-lg hover:bg-primary-hover "cursor-pointer" animate-fade-in`}
+                            className={`flex justify-between items-center gap-2 h-22.5 border border-border py-2 px-4 md:py-4 md:px-6 rounded-lg hover:bg-primary-hover cursor-pointer bg-bg-card animate-fade-in`}
                             key={dependent.id}
                         >
                             <div className="flex items-center gap-8 truncate pr-5 text-ellipsis">
@@ -133,9 +135,31 @@ const InfoDependents = ({ dependents }: { dependents: CurrentUser[] }) => {
                                     <span className="truncate">
                                         {dependent.name}
                                     </span>
-                                    <span className="truncate">
-                                        {dependent.email}
-                                    </span>
+
+                                    <div className="flex gap-2">
+                                        <span>Amigo sorteado:</span>
+                                        {showSecretFriend[index] && (
+                                            <span className="truncate text-primary">
+                                                {dependent.mySecretFriend?.name}
+                                            </span>
+                                        )}
+                                        {!showSecretFriend[index] && (
+                                            <span
+                                                onClick={() => {
+                                                    const newShowSecretFriend =
+                                                        [...showSecretFriend]
+                                                    newShowSecretFriend[index] =
+                                                        true
+                                                    setShowSecretFriend(
+                                                        newShowSecretFriend,
+                                                    )
+                                                }}
+                                                className="truncate text-primary"
+                                            >
+                                                Oculto
+                                            </span>
+                                        )}
+                                    </div>
                                 </div>
                             </div>
 
@@ -144,6 +168,9 @@ const InfoDependents = ({ dependents }: { dependents: CurrentUser[] }) => {
                             </Dropdown>
                         </div>
                     ))}
+                {!dependents.length && (
+                    <div>Você não tem dependentes cadastrados.</div>
+                )}
             </div>
             <Button variant="outlined">
                 <div className="flex items-center gap-2">

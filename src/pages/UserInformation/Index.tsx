@@ -16,7 +16,8 @@ const UserInformation = () => {
         group.users.find((user: User) => user.id === id) || ({} as User)
 
     const [informationMySecretFriend] = useState<boolean>(
-        currentUser.mySecretFriend?.id === id,
+        currentUser.mySecretFriend?.id === id ||
+            currentUser.dependents.some((dependent) => dependent.id === id),
     )
 
     return (

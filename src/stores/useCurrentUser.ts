@@ -23,18 +23,15 @@ export const useCurrentUser = create<CurrentUserState>((set) => ({
             {
                 id: "4",
                 name: "Ana Pereira",
-                email: "ana@sadas.com",
                 groupId: "1",
                 mySecretFriend: {
-                    id: "4",
-                    name: "Ana Pereira",
-                    email: "ana@sadas.com",
+                    id: "5",
+                    name: "Carlos Oliveira",
                 },
             },
             {
                 id: "5",
                 name: "Carlos Oliveira",
-                email: "dasdas@dsa.com",
                 groupId: "1",
                 mySecretFriend: {
                     id: "2",
@@ -75,7 +72,6 @@ export const useCurrentUser = create<CurrentUserState>((set) => ({
             {
                 id: "5",
                 name: "Carlos Oliveira",
-                email: "carlos@dsad.com",
             },
             {
                 id: "6",

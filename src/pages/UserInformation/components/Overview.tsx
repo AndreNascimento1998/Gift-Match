@@ -286,7 +286,7 @@ const ModalEditUser = ({
     handleSave: () => void
     userName: string
     setUserName: (value: string) => void
-    userEmail: string
+    userEmail: string | undefined
     setUserEmail: (value: string) => void
     requiredFields: {
         name?: boolean

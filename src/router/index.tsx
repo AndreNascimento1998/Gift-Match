@@ -91,6 +91,26 @@ const router = createBrowserRouter([
                     }
                 },
             },
+            {
+                path: "dependents",
+                hydrateFallbackElement,
+                lazy: async () => {
+                    const [
+                        { default: DefaultLayout },
+                        { default: Dependents },
+                    ] = await Promise.all([
+                        import("@/layouts/DefaultLayout/Index"),
+                        import("@/pages/Dependents/Index"),
+                    ])
+                    return {
+                        element: (
+                            <DefaultLayout>
+                                <Dependents />
+                            </DefaultLayout>
+                        ),
+                    }
+                },
+            },
         ],
     },
 ])

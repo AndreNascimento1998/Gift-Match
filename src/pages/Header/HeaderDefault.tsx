@@ -14,7 +14,7 @@ type HeaderDefaultProps = {
     menuOptions?: Array<{
         label: string
         route: string
-        value: "home" | "about" | "contact" | "chat"
+        value: "home" | "dependents" | "contact" | "chat"
     }>
 }
 
@@ -26,7 +26,7 @@ const HeaderDefault = () => {
 
     const menuOptions: HeaderDefaultProps["menuOptions"] = [
         { label: "Participantes", route: "/", value: "home" },
-        { label: "Dependentes", route: "/about", value: "about" },
+        { label: "Dependentes", route: "/dependents", value: "dependents" },
         { label: "Presentes", route: "/contact", value: "contact" },
         { label: "Conversas", route: "/contacte", value: "chat" },
     ]
@@ -41,7 +41,7 @@ const HeaderDefault = () => {
 
     const iconsMenu = {
         home: <ParticipantIcon color="var(--color-primary)" />,
-        about: <DepententIcons color="var(--color-primary)" />,
+        dependents: <DepententIcons color="var(--color-primary)" />,
         contact: <GiftWhiteIcon color="var(--color-primary)" />,
         chat: <ChatIcon color="var(--color-primary)" />,
     }

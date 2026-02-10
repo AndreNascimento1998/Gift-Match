@@ -89,7 +89,8 @@ const List = ({
                         ))
                     ) : (
                         <div className="flex justify-center">
-                            Não conseguimos encontrar esses participantes
+                            Adicione participantes para começar a montar seu
+                            grupo!
                         </div>
                     )}
                 </div>

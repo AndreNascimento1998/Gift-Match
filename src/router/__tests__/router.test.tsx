@@ -12,8 +12,8 @@ describe("react-router", () => {
                     element: <div>Home</div>,
                 },
                 {
-                    path: "/about",
-                    element: <div>About</div>,
+                    path: "/dependents",
+                    element: <div>Dependents</div>,
                 },
             ],
             { initialEntries: ["/"] },
@@ -24,11 +24,11 @@ describe("react-router", () => {
         expect(screen.getByText("Home")).toBeInTheDocument()
 
         await act(async () => {
-            await router.navigate("/about")
+            await router.navigate("/dependents")
         })
 
         await waitFor(() => {
-            expect(screen.getByText("About")).toBeInTheDocument()
+            expect(screen.getByText("Dependents")).toBeInTheDocument()
         })
     })
 })

@@ -10,7 +10,7 @@ type MenuLinksProps = {
     options: Array<{
         label: string
         route: string
-        value: "home" | "about" | "contact" | "chat"
+        value: "home" | "dependents" | "contact" | "chat"
     }>
     optionsDropdown: Array<{
         value: string
@@ -32,7 +32,7 @@ const MenuLinks = ({
     const location = useLocation()
     const iconsMenu = {
         home: <ParticipantIcon />,
-        about: <DepententIcons />,
+        dependents: <DepententIcons />,
         contact: <GiftWhiteIcon />,
         chat: <ChatIcon />,
     }

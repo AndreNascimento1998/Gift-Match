@@ -2,7 +2,7 @@ import * as React from "react"
 import Button, { type ButtonProps } from "@/components/base/Button/Index"
 import Menu, { type MenuProps } from "@mui/material/Menu"
 import MenuItem from "@mui/material/MenuItem"
-import type { SxProps, Theme } from "@mui/material/styles"
+import { alpha, type SxProps, type Theme } from "@mui/material/styles"
 import useDropdown from "./hooks/useDropdown"
 
 export type DropdownItem<TValue extends string = string> = {
@@ -19,12 +19,24 @@ type DropdownProps<TValue extends string = string> = {
     items?: Array<DropdownItem<TValue>>
     onSelect?: (value: TValue, item: DropdownItem<TValue>) => void
     forceWhite?: boolean
+    dropdown?: ReturnType<typeof useDropdown>
     buttonProps?: Omit<
         ButtonProps,
         "onClick" | "id" | "aria-controls" | "aria-haspopup" | "aria-expanded"
     >
     menuProps?: Omit<MenuProps, "anchorEl" | "open" | "onClose">
-    variant: "text" | "outlined" | "contained"
+    variant?: "text" | "outlined" | "contained"
+    /**
+     * - `undefined`: render default trigger button
+     * - `null`: render no trigger (use `dropdown` from parent)
+     * - React element: rendered as trigger and receives aria + onClick injection
+     */
+    buttonAction?: React.ReactNode | null
+    /**
+     * Optional trigger node (alias for `buttonAction`).
+     * If provided and `buttonAction` is `undefined`, children will be used as the trigger.
+     */
+    children?: React.ReactNode
 }
 
 const Dropdown = <TValue extends string = string>({
@@ -33,35 +45,57 @@ const Dropdown = <TValue extends string = string>({
     items = [],
     onSelect,
     forceWhite = false,
+    dropdown,
     variant = "contained",
     buttonProps,
     menuProps,
+    buttonAction,
+    children,
 }: DropdownProps<TValue>) => {
-    const { anchorEl, open, handleClick, handleClose } = useDropdown()
+    const internalDropdown = useDropdown()
+    const { anchorEl, open, handleClick, handleClose } =
+        dropdown ?? internalDropdown
 
     const isRecord = (value: unknown): value is Record<string, unknown> =>
         typeof value === "object" && value !== null
 
-    const forceWhiteButtonSx = forceWhite
-        ? {
-              color: "common.white",
-              borderColor: "rgba(255,255,255,0.65)",
+    const defaultButtonTextSx: SxProps<Theme> = {
+        color: "common.white",
+    }
+
+    const forceWhiteButtonSx: SxProps<Theme> | undefined = forceWhite
+        ? (theme) => ({
+              color: "primary.contrastText",
+              borderColor: alpha(theme.palette.primary.contrastText, 0.55),
               "&:hover": {
-                  borderColor: "rgba(255,255,255,0.9)",
-                  backgroundColor: "rgba(255,255,255,0.08)",
+                  borderColor: alpha(theme.palette.primary.contrastText, 0.85),
+                  backgroundColor: alpha(
+                      theme.palette.primary.contrastText,
+                      0.12,
+                  ),
               },
-          }
+          })
         : undefined
 
-    const mergedButtonProps = forceWhite
-        ? {
-              ...buttonProps,
-              color: buttonProps?.color ?? "inherit",
-              sx: Array.isArray(buttonProps?.sx)
-                  ? [forceWhiteButtonSx, ...buttonProps.sx]
-                  : [forceWhiteButtonSx, buttonProps?.sx],
-          }
-        : buttonProps
+    const mergedButtonProps: DropdownProps<TValue>["buttonProps"] = {
+        ...buttonProps,
+        ...(forceWhite
+            ? {
+                  color: buttonProps?.color ?? "inherit",
+              }
+            : null),
+        sx: Array.isArray(buttonProps?.sx)
+            ? [
+                  defaultButtonTextSx,
+                  ...(forceWhite ? [forceWhiteButtonSx] : []),
+                  ...buttonProps.sx,
+              ]
+            : [
+                  defaultButtonTextSx,
+                  ...(forceWhite ? [forceWhiteButtonSx] : []),
+                  buttonProps?.sx,
+              ].filter(Boolean),
+    }
 
     const userSlotPropsRaw: unknown = menuProps?.slotProps
     const userSlotProps = isRecord(userSlotPropsRaw)
@@ -78,22 +112,26 @@ const Dropdown = <TValue extends string = string>({
     const userPaperSx = userPaper?.sx as SxProps<Theme> | undefined
     const userListSx = userList?.sx as SxProps<Theme> | undefined
 
-    const basePaperSx = {
+    const basePaperSx: SxProps<Theme> = (theme) => ({
         borderRadius: 2,
         mt: 1,
         minWidth: 180,
-        bgcolor: forceWhite ? "rgba(0,0,0,0.85)" : "background.paper",
-        color: forceWhite ? "common.white" : "text.primary",
+        bgcolor: forceWhite ? "primary.main" : "background.paper",
+        color: forceWhite ? "primary.contrastText" : "text.primary",
         border: "1px solid",
-        borderColor: forceWhite ? "rgba(255,255,255,0.18)" : "divider",
-        boxShadow: "rgba(0,0,0,0.08) 0px 8px 24px",
-    }
+        borderColor: forceWhite
+            ? alpha(theme.palette.primary.contrastText, 0.22)
+            : "divider",
+        boxShadow: theme.shadows[6],
+        overflow: "hidden",
+    })
 
     const baseListSx = { py: 0.5 }
 
     const mergedMenuProps: Omit<MenuProps, "anchorEl" | "open" | "onClose"> = {
         ...menuProps,
         disableScrollLock: menuProps?.disableScrollLock ?? true,
+        disableAutoFocusItem: menuProps?.disableAutoFocusItem ?? true,
         slotProps: {
             ...userSlotProps,
             paper: {
@@ -118,23 +156,58 @@ const Dropdown = <TValue extends string = string>({
         handleClose()
     }
 
-    return (
-        <div>
+    const triggerProps = {
+        id: `${id}-button`,
+        "aria-controls": open ? `${id}-menu` : undefined,
+        "aria-haspopup": "true" as const,
+        "aria-expanded": open ? ("true" as const) : undefined,
+        onClick: handleClick,
+    }
+
+    const effectiveButtonAction =
+        buttonAction === undefined ? children : buttonAction
+
+    const renderTrigger = () => {
+        if (effectiveButtonAction === null) return null
+
+        if (effectiveButtonAction !== undefined) {
+            if (React.isValidElement(effectiveButtonAction)) {
+                const element = effectiveButtonAction as React.ReactElement<{
+                    onClick?: React.MouseEventHandler<HTMLElement>
+                }>
+
+                const originalOnClick = element.props.onClick
+
+                return React.cloneElement(element, {
+                    ...triggerProps,
+                    onClick: (event: React.MouseEvent<HTMLElement>) => {
+                        originalOnClick?.(event)
+                        handleClick(event)
+                    },
+                })
+            }
+
+            return effectiveButtonAction
+        }
+
+        return (
             <Button
-                id={`${id}-button`}
-                aria-controls={open ? `${id}-menu` : undefined}
-                aria-haspopup="true"
-                aria-expanded={open ? "true" : undefined}
                 variant={variant}
                 size="small"
                 disableElevation
-                onClick={handleClick}
                 endIcon={<span aria-hidden>▾</span>}
                 color={forceWhite ? "inherit" : "primary"}
+                {...triggerProps}
                 {...mergedButtonProps}
             >
                 {label}
             </Button>
+        )
+    }
+
+    return (
+        <div>
+            {renderTrigger()}
             <Menu
                 id={`${id}-menu`}
                 anchorEl={anchorEl}
@@ -153,23 +226,42 @@ const Dropdown = <TValue extends string = string>({
                             key={item.value}
                             disabled={item.disabled}
                             onClick={() => handleSelect(item)}
-                            sx={{
+                            sx={(theme) => ({
                                 gap: 1,
-                                color: forceWhite ? "common.white" : undefined,
-                                "&:hover": forceWhite
-                                    ? { bgcolor: "rgba(255,255,255,0.08)" }
+                                borderRadius: 1,
+                                mx: 0.5,
+                                my: 0.25,
+                                color: forceWhite
+                                    ? theme.palette.primary.contrastText
                                     : undefined,
+                                "&:hover": {
+                                    bgcolor: forceWhite
+                                        ? alpha(
+                                              theme.palette.primary
+                                                  .contrastText,
+                                              0.12,
+                                          )
+                                        : theme.palette.action.hover,
+                                },
                                 "&:active": {
                                     bgcolor: forceWhite
-                                        ? "rgba(255,255,255,0.12)"
-                                        : "action.selected",
+                                        ? alpha(
+                                              theme.palette.primary
+                                                  .contrastText,
+                                              0.18,
+                                          )
+                                        : theme.palette.action.selected,
                                 },
                                 "&.Mui-focusVisible": {
                                     bgcolor: forceWhite
-                                        ? "rgba(255,255,255,0.08)"
-                                        : "action.hover",
+                                        ? alpha(
+                                              theme.palette.primary
+                                                  .contrastText,
+                                              0.14,
+                                          )
+                                        : theme.palette.action.hover,
                                 },
-                            }}
+                            })}
                         >
                             {item.icon}
                             {item.label}

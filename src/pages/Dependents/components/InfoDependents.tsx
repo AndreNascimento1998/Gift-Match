@@ -1,16 +1,73 @@
 import Button from "@/components/base/Button/Index"
+import Dropdown from "@/components/base/Dropdown/Index"
 import Input from "@/components/base/Input/Index"
+import CopyIcon from "@/components/icons/CopyIcon"
 import DepententIcons from "@/components/icons/DependentIcons"
 import DropdownPoints from "@/components/icons/DropdownPoints"
+import EditIcon from "@/components/icons/EditIcon"
 import InterrogationIcon from "@/components/icons/InterrogationIcon"
 import PlusIcon from "@/components/icons/PlusIcon"
+import ProfileIcon from "@/components/icons/ProfileIcon"
 import SearchIcon from "@/components/icons/SearchIcon"
+import TrashIcon from "@/components/icons/TrashIcon"
 import { GenerateRandomColor } from "@/helpers/GenerateRandomColor"
 import type { CurrentUser } from "@/types/CurrentUser/Index"
 import { Avatar, InputAdornment } from "@mui/material"
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 const InfoDependents = ({ dependents }: { dependents: CurrentUser[] }) => {
+    const navigate = useNavigate()
+
+    const itemsDropdown = (id: string) => {
+        return [
+            {
+                value: "view",
+                label: (
+                    <div className="flex gap-2 items-center">
+                        <ProfileIcon />
+                        <span className="text-primary">Perfil</span>
+                    </div>
+                ),
+                // TODO: trocar pela página de perfil do dependente quando existir
+                onClick: () => navigate(`/user-information/${id}`),
+            },
+            {
+                value: "edit",
+                label: (
+                    <div className="flex gap-2 items-center">
+                        <EditIcon />
+                        <span className="text-primary">Editar Nome</span>
+                    </div>
+                ),
+                onClick: () => {
+                    // TODO: abrir modal/fluxo de edição
+                },
+            },
+            {
+                value: "secret",
+                label: (
+                    <div className="flex gap-1 items-center">
+                        <CopyIcon />
+                        <span className="text-primary">Ver amigo secreto</span>
+                    </div>
+                ),
+                onClick: () => navigate(`/user-information/${id}`),
+            },
+            {
+                value: "remove",
+                label: (
+                    <div className="flex gap-1 items-center">
+                        <TrashIcon />
+                        <span className="text-primary">Remover dependente</span>
+                    </div>
+                ),
+                onClick: () => {
+                    // TODO: remover dependente
+                },
+            },
+        ]
+    }
     const [filtered, setFiltered] = useState<string>("")
 
     return (
@@ -81,7 +138,10 @@ const InfoDependents = ({ dependents }: { dependents: CurrentUser[] }) => {
                                     </span>
                                 </div>
                             </div>
-                            <DropdownPoints />
+
+                            <Dropdown items={itemsDropdown(dependent.id)}>
+                                <DropdownPoints />
+                            </Dropdown>
                         </div>
                     ))}
             </div>

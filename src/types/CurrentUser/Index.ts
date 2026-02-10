@@ -12,6 +12,8 @@ export type User = {
     name: string
     email: string
     chosenGift?: string
+    groupId?: string
+    mySecretFriend?: User
 }
 
 export type CurrentUser = {
@@ -22,5 +24,5 @@ export type CurrentUser = {
     groupId: string
     isAdmin: boolean
     mySecretFriend?: User
-    dependents?: CurrentUser[]
+    dependents: CurrentUser[]
 }

@@ -19,6 +19,22 @@ export const useCurrentUser = create<CurrentUserState>((set) => ({
         isAdmin: true,
         groupId: "1",
         mySecretFriend: {} as User,
+        dependents: [
+            {
+                id: "4",
+                name: "Ana Pereira",
+                email: "ana@sadas.com",
+                groupId: "1",
+                mySecretFriend: {} as User,
+            },
+            {
+                id: "5",
+                name: "Carlos Oliveira",
+                email: "dasdas@dsa.com",
+                groupId: "1",
+                mySecretFriend: {} as User,
+            },
+        ] as CurrentUser[],
     },
 
     group: {

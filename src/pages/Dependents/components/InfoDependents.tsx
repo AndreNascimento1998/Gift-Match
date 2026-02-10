@@ -35,24 +35,32 @@ const ModalEditNameDependent = ({
     const [nameDependent, setNameDependent] = useState(
         secretFriendClicked?.name || "",
     )
+    const [nameError, setNameError] = useState(false)
 
     const setDefault = () => {
         setNameDependent(secretFriendClicked?.name || "")
+        setNameError(false)
         setShowModal(false)
     }
 
     const handleSave = () => {
-        console.log(secretFriendClicked, "das")
+        const nextName = nameDependent.trim()
+        if (!nextName) {
+            setNameError(true)
+            return
+        }
+
         try {
             setDependent({
                 ...secretFriendClicked,
-                name: nameDependent,
+                name: nextName,
             })
             setUserGroup({
                 ...secretFriendClicked,
-                name: nameDependent,
+                name: nextName,
             })
             toast.success("Nome do dependente atualizado com sucesso!")
+            setShowModal(false)
         } catch (error) {
             console.error("Erro ao atualizar o nome do dependente:", error)
             toast.error("Erro ao atualizar o nome do dependente.")
@@ -82,7 +90,17 @@ const ModalEditNameDependent = ({
                 <Input
                     label="Nome"
                     value={nameDependent}
-                    onValueChange={(value) => setNameDependent(value)}
+                    required
+                    error={nameError}
+                    helperText={nameError ? "Campo obrigatório" : undefined}
+                    onValueChange={(value) => {
+                        setNameDependent(value)
+                        if (nameError && value.trim()) setNameError(false)
+                    }}
+                    onEnter={(event) => {
+                        event.preventDefault()
+                        handleSave()
+                    }}
                 />
             </div>
         </BaseModal>

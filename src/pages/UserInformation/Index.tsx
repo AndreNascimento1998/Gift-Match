@@ -10,6 +10,7 @@ const UserInformation = () => {
     const { id } = useParams()
     const group = useCurrentUser((state) => state.group)
     const currentUser = useCurrentUser((state) => state.currentUser)
+    const setUserGroup = useCurrentUser((state) => state.setUserGroup)
     const userData =
         group.users.find((user: User) => user.id === id) || ({} as User)
 
@@ -27,6 +28,7 @@ const UserInformation = () => {
                 user={userData}
                 informationMySecretFriend={informationMySecretFriend}
                 isAdmin={currentUser.isAdmin}
+                setUserGroup={setUserGroup}
             />
             <DescriptionGroup group={group} />
         </main>

@@ -89,7 +89,7 @@ const BaseModal = ({
                 >
                     <div
                         className="text-h2 font-bold"
-                        style={{ color: "var(--color-main)" }}
+                        style={{ color: "var(--color-primary)" }}
                     >
                         {title}
                     </div>

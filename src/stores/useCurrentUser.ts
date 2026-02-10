@@ -4,9 +4,10 @@ import { create } from "zustand"
 type CurrentUserState = {
     currentUser: CurrentUser
     group: Group
-    setCurrentUser: (name: CurrentUser) => void
+    setCurrentUser: (currentUserValue: CurrentUser) => void
     setMySecretFriend: (mySecretFriendValue: User) => void
     updateGroup: (patch: Partial<Group>) => void
+    setUserGroup: (userGroup: User) => void
 }
 
 export const useCurrentUser = create<CurrentUserState>((set) => ({
@@ -15,6 +16,7 @@ export const useCurrentUser = create<CurrentUserState>((set) => ({
         name: "André",
         email: "andre.ncardoso@hotmail.com",
         isAdmin: true,
+        groupId: "1",
         mySecretFriend: {} as User,
     },
 
@@ -74,6 +76,16 @@ export const useCurrentUser = create<CurrentUserState>((set) => ({
             group: {
                 ...state.group,
                 ...patch,
+            },
+        })),
+
+    setUserGroup: (userGroup: User) =>
+        set((state) => ({
+            group: {
+                ...state.group,
+                users: state.group.users.map((user) =>
+                    user.id === userGroup.id ? userGroup : user,
+                ),
             },
         })),
 }))

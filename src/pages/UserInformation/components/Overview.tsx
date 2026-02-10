@@ -1,3 +1,6 @@
+import Button from "@/components/base/Button/Index"
+import Input from "@/components/base/Input/Index"
+import BaseModal from "@/components/base/Modal/Index"
 import ArrowDownIcon from "@/components/icons/ArrowDownIcon"
 import ArrowRightIcon from "@/components/icons/ArrowRightIcon"
 import ChatMessageIcon from "@/components/icons/ChatMessageIcon"
@@ -11,18 +14,23 @@ import TrashIcon from "@/components/icons/TrashIcon"
 import { GenerateRandomColor } from "@/helpers/GenerateRandomColor"
 import type { User } from "@/types/CurrentUser/Index"
 import { Avatar } from "@mui/material"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { toast } from "sonner"
 
 type OverviewProps = {
     user: User
     informationMySecretFriend: boolean
     isAdmin?: boolean
+    setUserGroup: (userGroup: User) => void
 }
 
 const CardInformation = ({
     user,
     informationMySecretFriend,
-}: OverviewProps) => {
+}: {
+    user: User
+    informationMySecretFriend: boolean
+}) => {
     return (
         <div className="flex flex-col gap-2 animation-translateX">
             <div className="flex flex-col gap-2">
@@ -113,8 +121,53 @@ const ChatMySecretFriend = () => {
     )
 }
 
-const SectionEdit = () => {
+const SectionEdit = ({
+    user,
+    setUserGroup,
+}: {
+    user: User
+    setUserGroup: (userGroup: User) => void
+}) => {
     const [showOptions, setShowOptions] = useState(false)
+    const [codeGroup] = useState("ABCD1234")
+    const [showModal, setShowModal] = useState(false)
+    const [animateSucessCopy, setAnimateSucessCopy] = useState(false)
+    const [userName, setUserName] = useState(user.name)
+    const [userEmail, setUserEmail] = useState(user.email)
+
+    useEffect(() => {
+        if (!animateSucessCopy) return
+
+        setTimeout(() => {
+            setAnimateSucessCopy(false)
+        }, 2000)
+    }, [animateSucessCopy])
+
+    const handleCopyInviteLink = async () => {
+        // Montado com base na url
+        // const inviteLink = `${window.location.origin}/join/${codeGroup}`
+        try {
+            await navigator.clipboard.writeText(codeGroup)
+
+            toast.success(
+                "Link de convite copiado para a área de transferência!",
+            )
+
+            setAnimateSucessCopy(true)
+        } catch (error) {
+            toast.error("Falha ao copiar o link de convite. " + error)
+        }
+    }
+
+    const handleSave = () => {
+        setUserGroup({
+            id: user.id,
+            name: userName,
+            email: userEmail,
+        })
+        toast.success("Informações do participante atualizadas com sucesso!")
+        setShowModal(false)
+    }
 
     return (
         <div className="flex flex-col gap-2 md:gap-4 border border-primary rounded-lg p-2 lg:p-6 bg-bg-card animation-translateX">
@@ -133,19 +186,64 @@ const SectionEdit = () => {
             <div
                 className={`${showOptions ? "flex" : "hidden"} flex-col gap-2 md:flex`}
             >
-                <div className="flex gap-2 items-center border border-primary rounded-lg p-2 cursor-pointer hover:bg-primary-hover animate-fade-in">
+                <div
+                    onClick={handleCopyInviteLink}
+                    className={`flex gap-2 items-center border rounded-lg p-2 cursor-pointer hover:bg-primary-hover animate-fade-in ${animateSucessCopy ? "border-success" : "border-primary"}`}
+                >
+                    <CopyIcon
+                        color={`${animateSucessCopy ? "var(--color-success)" : "var(--color-primary)"}`}
+                    />
+                    <span className={animateSucessCopy ? "text-success" : ""}>
+                        Copiar link de convite
+                    </span>
+                </div>
+                <div
+                    onClick={() => setShowModal(true)}
+                    className="flex gap-2 items-center border border-primary rounded-lg p-2 cursor-pointer hover:bg-primary-hover animate-fade-in"
+                >
                     <EditIcon />
                     <span>Editar dados</span>
-                </div>
-                <div className="flex gap-2 items-center border border-primary rounded-lg p-2 cursor-pointer hover:bg-primary-hover animate-fade-in">
-                    <CopyIcon />
-                    <span>Copiar link de convite</span>
                 </div>
                 <div className="flex gap-2 items-center border border-primary rounded-lg p-2 cursor-pointer hover:bg-primary-hover animate-fade-in">
                     <TrashIcon />
                     <span>Remover participante</span>
                 </div>
             </div>
+            <BaseModal
+                open={showModal}
+                onClose={() => setShowModal(false)}
+                title={
+                    <div className="flex gap-2 items-center">
+                        <EditIcon />
+                        <span>Editar informações</span>
+                    </div>
+                }
+                footer={
+                    <div className="w-full">
+                        <Button onClick={handleSave} className="w-full">
+                            Salvar
+                        </Button>
+                    </div>
+                }
+            >
+                <div className="flex flex-col gap-4">
+                    <div className="text-h2 text-primary">
+                        Edite as informações do participante
+                    </div>
+                    <div className="flex flex-col gap-4">
+                        <Input
+                            label="Nome"
+                            value={userName}
+                            onValueChange={(value) => setUserName(value)}
+                        />
+                        <Input
+                            label="Email"
+                            value={userEmail}
+                            onValueChange={(value) => setUserEmail(value)}
+                        />
+                    </div>
+                </div>
+            </BaseModal>
         </div>
     )
 }
@@ -154,6 +252,7 @@ const Overview = ({
     user,
     informationMySecretFriend,
     isAdmin,
+    setUserGroup,
 }: OverviewProps) => {
     return (
         <div className="flex flex-col gap-4 md:gap-10">
@@ -163,7 +262,7 @@ const Overview = ({
             />
             <CardGift chosenGift={user.chosenGift} />
             {informationMySecretFriend && <ChatMySecretFriend />}
-            {isAdmin && <SectionEdit />}
+            {isAdmin && <SectionEdit user={user} setUserGroup={setUserGroup} />}
         </div>
     )
 }

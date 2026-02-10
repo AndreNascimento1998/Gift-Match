@@ -22,6 +22,7 @@
     --color-secondary: #0891b2; /* azul/roxo suave */
     --color-third: #0e7490; /* cyan transparente */
     --color-bg-card: #f8feff; /* cinza claro para cartões */
+    --color-success: #22c55e; /* verde para sucesso */
 
     /* aliases */
     --color-main-text: var(--color-main);
@@ -75,6 +76,7 @@
     --color-secondary: #06b6d4;
     --color-third: #0891b2;
     --color-bg-card: #111b33;
+    --color-success: #22c55e;
 }
 
 @layer base {

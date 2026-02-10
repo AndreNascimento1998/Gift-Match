@@ -11,6 +11,7 @@ const UserInformation = () => {
     const group = useCurrentUser((state) => state.group)
     const currentUser = useCurrentUser((state) => state.currentUser)
     const setUserGroup = useCurrentUser((state) => state.setUserGroup)
+    const deleteUserGroup = useCurrentUser((state) => state.deleteUserGroup)
     const userData =
         group.users.find((user: User) => user.id === id) || ({} as User)
 
@@ -29,6 +30,7 @@ const UserInformation = () => {
                 informationMySecretFriend={informationMySecretFriend}
                 isAdmin={currentUser.isAdmin}
                 setUserGroup={setUserGroup}
+                deleteUserGroup={deleteUserGroup}
             />
             <DescriptionGroup group={group} />
         </main>

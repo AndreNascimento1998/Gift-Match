@@ -8,6 +8,7 @@ type CurrentUserState = {
     setMySecretFriend: (mySecretFriendValue: User) => void
     updateGroup: (patch: Partial<Group>) => void
     setUserGroup: (userGroup: User) => void
+    deleteUserGroup: (userId: string) => void
 }
 
 export const useCurrentUser = create<CurrentUserState>((set) => ({
@@ -86,6 +87,14 @@ export const useCurrentUser = create<CurrentUserState>((set) => ({
                 users: state.group.users.map((user) =>
                     user.id === userGroup.id ? userGroup : user,
                 ),
+            },
+        })),
+
+    deleteUserGroup: (userId: string) =>
+        set((state) => ({
+            group: {
+                ...state.group,
+                users: state.group.users.filter((user) => user.id !== userId),
             },
         })),
 }))

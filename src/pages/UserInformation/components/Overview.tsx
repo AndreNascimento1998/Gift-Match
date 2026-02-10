@@ -11,11 +11,13 @@ import InfoCircleIcon from "@/components/icons/InfoCircleIcon"
 import MarkGroupIcon from "@/components/icons/MarkGroupIcon"
 import MessageIcon from "@/components/icons/MessageIcon"
 import TrashIcon from "@/components/icons/TrashIcon"
+import ModalRemoveItem from "@/components/page/ModalRemoveItem/Index"
 import { GenerateRandomColor } from "@/helpers/GenerateRandomColor"
 import useValidations from "@/hooks/useValidation"
 import type { User } from "@/types/CurrentUser/Index"
 import { Avatar } from "@mui/material"
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { toast } from "sonner"
 
 type OverviewProps = {
@@ -23,6 +25,7 @@ type OverviewProps = {
     informationMySecretFriend: boolean
     isAdmin?: boolean
     setUserGroup: (userGroup: User) => void
+    deleteUserGroup: (userId: string) => void
 }
 
 const CardInformation = ({
@@ -125,16 +128,23 @@ const ChatMySecretFriend = () => {
 const SectionEdit = ({
     user,
     setUserGroup,
+    deleteUserGroup,
 }: {
     user: User
     setUserGroup: (userGroup: User) => void
+    deleteUserGroup: (userId: string) => void
 }) => {
     const [showOptions, setShowOptions] = useState(false)
     const [codeGroup] = useState("ABCD1234")
     const [showModal, setShowModal] = useState(false)
+    const [showModalRemove, setShowModalRemove] = useState(false)
     const [animateSucessCopy, setAnimateSucessCopy] = useState(false)
     const [userName, setUserName] = useState(user.name)
     const [userEmail, setUserEmail] = useState(user.email)
+    const navigate = useNavigate()
+    const [stepsRemoveItem, setStepsRemoveItem] = useState<
+        "default" | "success" | "error" | "process"
+    >("default")
     const { requiredFields, validateRequiredFields, requiredText } =
         useValidations()
 
@@ -180,6 +190,21 @@ const SectionEdit = ({
         setShowModal(false)
     }
 
+    const handleDeleteItem = () => {
+        // TODO: Colocar junto com load para informar que está removendo o participante
+        setStepsRemoveItem("process")
+
+        try {
+            deleteUserGroup(user.id)
+            toast.success("Participante removido com sucesso!")
+            setStepsRemoveItem("success")
+            navigate("/")
+        } catch (error) {
+            toast.error("Falha ao remover o participante. " + error)
+            setStepsRemoveItem("error")
+        }
+    }
+
     return (
         <div className="flex flex-col gap-2 md:gap-4 border border-primary rounded-lg p-2 lg:p-6 bg-bg-card animation-translateX">
             <div
@@ -215,7 +240,10 @@ const SectionEdit = ({
                     <EditIcon />
                     <span>Editar dados</span>
                 </div>
-                <div className="flex gap-2 items-center border border-primary rounded-lg p-2 cursor-pointer hover:bg-primary-hover animate-fade-in">
+                <div
+                    onClick={() => setShowModalRemove(true)}
+                    className="flex gap-2 items-center border border-primary rounded-lg p-2 cursor-pointer hover:bg-primary-hover animate-fade-in"
+                >
                     <TrashIcon />
                     <span>Remover participante</span>
                 </div>
@@ -264,6 +292,13 @@ const SectionEdit = ({
                     </div>
                 </div>
             </BaseModal>
+            <ModalRemoveItem
+                title="Remover participante"
+                showModal={showModalRemove}
+                setShowModal={setShowModalRemove}
+                steps={stepsRemoveItem}
+                handleClickConfirm={() => handleDeleteItem()}
+            />
         </div>
     )
 }
@@ -273,6 +308,7 @@ const Overview = ({
     informationMySecretFriend,
     isAdmin,
     setUserGroup,
+    deleteUserGroup,
 }: OverviewProps) => {
     return (
         <div className="flex flex-col gap-4 md:gap-10">
@@ -282,7 +318,13 @@ const Overview = ({
             />
             <CardGift chosenGift={user.chosenGift} />
             {informationMySecretFriend && <ChatMySecretFriend />}
-            {isAdmin && <SectionEdit user={user} setUserGroup={setUserGroup} />}
+            {isAdmin && (
+                <SectionEdit
+                    user={user}
+                    setUserGroup={setUserGroup}
+                    deleteUserGroup={deleteUserGroup}
+                />
+            )}
         </div>
     )
 }

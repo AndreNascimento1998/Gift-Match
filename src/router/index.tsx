@@ -1,21 +1,115 @@
 import { createBrowserRouter } from "react-router-dom"
 
-import App from "@/App"
-import Home from "@/pages/Home/Home"
-import About from "@/pages/About/About"
+const hydrateFallbackElement = (
+    <div className="p-6 text-main">Carregando...</div>
+)
 
 const router = createBrowserRouter([
     {
+        path: "/register",
+        hydrateFallbackElement,
+        lazy: async () => {
+            const [{ default: CreatorGroupLayout }, { default: RegisterPage }] =
+                await Promise.all([
+                    import("@/layouts/CreatorGroupLayout/Index"),
+                    import("@/pages/RegisterPage/Index"),
+                ])
+
+            return {
+                element: (
+                    <CreatorGroupLayout>
+                        <RegisterPage />
+                    </CreatorGroupLayout>
+                ),
+            }
+        },
+    },
+    {
         path: "/",
-        element: <App />,
+        hydrateFallbackElement,
+        lazy: async () => {
+            const { default: App } = await import("@/App")
+            return { Component: App }
+        },
         children: [
             {
                 index: true,
-                element: <Home />,
+                hydrateFallbackElement,
+                lazy: async () => {
+                    const [{ default: DefaultLayout }, { default: Home }] =
+                        await Promise.all([
+                            import("@/layouts/DefaultLayout/Index"),
+                            import("@/pages/Home/Index"),
+                        ])
+
+                    return {
+                        element: (
+                            <DefaultLayout>
+                                <Home />
+                            </DefaultLayout>
+                        ),
+                    }
+                },
             },
             {
-                path: "about",
-                element: <About />,
+                path: "user-information/:id",
+                hydrateFallbackElement,
+                lazy: async () => {
+                    const [
+                        { default: DefaultLayout },
+                        { default: UserInformation },
+                    ] = await Promise.all([
+                        import("@/layouts/DefaultLayout/Index"),
+                        import("@/pages/UserInformation/Index"),
+                    ])
+                    return {
+                        element: (
+                            <DefaultLayout>
+                                <UserInformation />
+                            </DefaultLayout>
+                        ),
+                    }
+                },
+            },
+            {
+                path: "group-information",
+                hydrateFallbackElement,
+                lazy: async () => {
+                    const [
+                        { default: DefaultLayout },
+                        { default: GroupInformation },
+                    ] = await Promise.all([
+                        import("@/layouts/DefaultLayout/Index"),
+                        import("@/pages/GroupInformation/Index"),
+                    ])
+                    return {
+                        element: (
+                            <DefaultLayout>
+                                <GroupInformation />
+                            </DefaultLayout>
+                        ),
+                    }
+                },
+            },
+            {
+                path: "dependents",
+                hydrateFallbackElement,
+                lazy: async () => {
+                    const [
+                        { default: DefaultLayout },
+                        { default: Dependents },
+                    ] = await Promise.all([
+                        import("@/layouts/DefaultLayout/Index"),
+                        import("@/pages/Dependents/Index"),
+                    ])
+                    return {
+                        element: (
+                            <DefaultLayout>
+                                <Dependents />
+                            </DefaultLayout>
+                        ),
+                    }
+                },
             },
         ],
     },

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#06b6d4"/>
+      <stop offset="1" stop-color="#22d3ee"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="60" y="60" width="1080" height="510" rx="36" fill="#0b1220" fill-opacity="0.85"/>
+  <text x="120" y="260" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial" font-size="86" font-weight="800" fill="#e5e7eb">
+    Gift Match
+  </text>
+  <text x="120" y="340" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial" font-size="36" font-weight="600" fill="#cbd5e1">
+    Amigo secreto simples e rápido
+  </text>
+  <text x="120" y="430" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial" font-size="28" fill="#94a3b8">
+    Crie grupos • Adicione participantes • Sorteie
+  </text>
+</svg>

@@ -1,0 +1,30 @@
+type EditIconProps = {
+    width?: number
+    height?: number
+    color?: string
+}
+
+const EditIcon = ({
+    width = 18,
+    height = 18,
+    color = "var(--color-primary)",
+}: EditIconProps) => {
+    return (
+        <>
+            <svg
+                width={width}
+                height={height}
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path
+                    d="M23.6133 5.39C24.1333 4.87 24.1333 4.00333 23.6133 3.51L20.4933 0.39C20 -0.13 19.1333 -0.13 18.6133 0.39L16.16 2.83L21.16 7.83M0 19.0033V24.0033H5L19.7467 9.24333L14.7467 4.24333L0 19.0033Z"
+                    fill={color}
+                />
+            </svg>
+        </>
+    )
+}
+
+export default EditIcon

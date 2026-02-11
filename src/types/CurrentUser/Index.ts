@@ -1,0 +1,36 @@
+export type Group = {
+    id: string
+    title: string
+    description: string
+    secretDate: string
+    giftAmount: number
+    users: User[]
+}
+
+export type Dependent = {
+    id: string
+    name: string
+    groupId?: string
+    mySecretFriend?: User
+    chosenGift?: string
+}
+
+export type User = {
+    id: string
+    name: string
+    email?: string
+    chosenGift?: string
+    groupId?: string
+    mySecretFriend?: User
+}
+
+export type CurrentUser = {
+    id: string
+    name: string
+    email: string
+    chosenGift?: string
+    groupId: string
+    isAdmin: boolean
+    mySecretFriend?: User
+    dependents: Dependent[]
+}

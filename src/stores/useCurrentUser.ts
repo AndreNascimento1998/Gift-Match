@@ -1,0 +1,136 @@
+import type {
+    CurrentUser,
+    Dependent,
+    Group,
+    User,
+} from "@/types/CurrentUser/Index"
+import { create } from "zustand"
+
+type CurrentUserState = {
+    currentUser: CurrentUser
+    group: Group
+    setCurrentUser: (currentUserValue: CurrentUser) => void
+    setMySecretFriend: (mySecretFriendValue: User) => void
+    updateGroup: (patch: Partial<Group>) => void
+    setUserGroup: (userGroup: User | Dependent) => void
+    deleteUserGroup: (userId: string) => void
+    setDependent: (dependent: Dependent) => void
+}
+
+export const useCurrentUser = create<CurrentUserState>((set) => ({
+    currentUser: {
+        id: "1",
+        name: "André",
+        email: "andre.ncardoso@hotmail.com",
+        isAdmin: true,
+        groupId: "1",
+        mySecretFriend: {} as User,
+        dependents: [
+            {
+                id: "4",
+                name: "Ana Pereira",
+                groupId: "1",
+                mySecretFriend: {
+                    id: "5",
+                    name: "Carlos Oliveira",
+                },
+            },
+            {
+                id: "5",
+                name: "Carlos Oliveira",
+                groupId: "1",
+                mySecretFriend: {
+                    id: "2",
+                    name: "Maria",
+                    email: "maria@dsa.com",
+                },
+            },
+        ] as CurrentUser[],
+    },
+
+    group: {
+        id: "1",
+        title: "Amigo Secreto da Firma",
+        description: "Descrição do grupo",
+        secretDate: "2026-02-12",
+        giftAmount: 50,
+        users: [
+            {
+                id: "1",
+                name: "Stefanny Joareza",
+                email: "sanfrancisconigthfillalrigth@yahoooutlookhotmail.com",
+            },
+            {
+                id: "2",
+                name: "Maria",
+                email: "maria@dsa.com",
+            },
+            {
+                id: "3",
+                name: "João Souza",
+                email: "joao@hasad.com",
+            },
+            {
+                id: "4",
+                name: "Ana Pereira",
+                email: "ana@sadas.com",
+            },
+            {
+                id: "5",
+                name: "Carlos Oliveira",
+            },
+            {
+                id: "6",
+                name: "Mariana Costa",
+                email: "dasdas@com",
+            },
+        ],
+    } as Group,
+
+    setCurrentUser: (currentUserValue: CurrentUser) =>
+        set({ currentUser: currentUserValue }),
+
+    setMySecretFriend: (mySecretFriendValue: User) =>
+        set((state) => ({
+            currentUser: {
+                ...state.currentUser,
+                mySecretFriend: mySecretFriendValue,
+            },
+        })),
+
+    updateGroup: (patch: Partial<Group>) =>
+        set((state) => ({
+            group: {
+                ...state.group,
+                ...patch,
+            },
+        })),
+
+    setDependent: (dependent: Dependent) =>
+        set((state) => ({
+            currentUser: {
+                ...state.currentUser,
+                dependents: state.currentUser.dependents.map((d) =>
+                    d.id === dependent.id ? dependent : d,
+                ),
+            },
+        })),
+
+    setUserGroup: (userGroup: User | Dependent) =>
+        set((state) => ({
+            group: {
+                ...state.group,
+                users: state.group.users.map((user) =>
+                    user.id === userGroup.id ? userGroup : user,
+                ),
+            },
+        })),
+
+    deleteUserGroup: (userId: string) =>
+        set((state) => ({
+            group: {
+                ...state.group,
+                users: state.group.users.filter((user) => user.id !== userId),
+            },
+        })),
+}))
